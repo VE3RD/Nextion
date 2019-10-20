@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo mount -o remount,rw /
+sudo cp /home/pi-star/NX3224K024.tft /usr/local/etc/
+
