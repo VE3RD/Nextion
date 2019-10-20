@@ -12,12 +12,30 @@ This batchfile requres PUTTY and PSCP which is installed with PUTTY.
 
 Phil VE3RD
 
-[copytft.bat]
+[setrw] - Sets Pi-Star to RW and removes previous NX3224K024.tft - Used by copytft.bat
+sudo mount -o remount,rw /
+sudo rm NX3224K024.tft
+
+[copytft.bat] 
+{1 run putty to run setrw above}
 putty.exe -ssh pi-star@0.0.0.0 -pw "raspberry" -m "C:\Users\WindowsUserName\AppData\Roaming\Nextion Editor\bianyi\setrw.txt"
+{Change to Compiler Output Directory}
 cd "C:\Users\philt_000\AppData\Roaming\Nextion Editor\bianyi\"
+{Delete Old NX3224K024}
 del NX3224K024.tft
-copy Nextion_2019_10_16_A_2-4_Test_Phil.tft NX3224K024.tft
+{Copy new Compiled File to NX3224K024.tft}
+copy CompiledScreenileName.tft NX3224K024.tf   // Modify - Use your own compiled .tft file name
+{2 second delay}
 timeout 2
-pscp -l pi-star -pw raspberry "NX3224K024.tft" pi-star@192.168.4.102:/home/pi-star
+{Copy NX3224K024.tft to pi-star  /local/pi-star }
+pscp -l pi-star -pw raspberry "NX3224K024.tft" pi-star@0.0.0.0:/home/pi-star     //Modify- Your IP Address
+{5 second Delay}
 timeout 5
-putty.exe -ssh pi-star@192.168.4.102 -pw "raspberry" -m "test.txt"
+{Run the command in pi-star /home/pi-star/test.txt }
+putty.exe -ssh pi-star@0.0.0.0 -pw "raspberry" -m "test.txt"                 //Modify- Your IP Address
+
+[test.txt]
+#!/bin/bash
+sudo mount -o remount,rw /                   //Make Drive RW
+sudo cp /home/pi-star/NX3224K024.tft /usr/local/etc/   //copy new NX3224K024.tft  to /usr/local/etc where the Nextion Screen can find it.
+
