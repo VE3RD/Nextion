@@ -3,7 +3,7 @@ This screen wa developed by Mitch EA7KDO and published on www.githud/ea7kdo/next
 I have modified this screen with mainly cosmetic changes to suit myself and no one else.
 This page is currently available only to myself and Mitch EA7KDO
 
-This batch file will transfer your screen tft file from it original compiled directory to your pi-star at /home/pi-star
+This batch file [copytft.bat] will transfer your screen tft file from it original compiled directory to your pi-star at /home/pi-star
 and then move it into /usr/local/etc by folowing instructions in the text.txt file located in /home/pi-star This occurs over wifi and no cable is required to connect the computer to the screen.
 
 ie: after compiling, run copytft.bat and when done, run FLASH on the nextion screen (DO NOT RUN GIT COPY)
