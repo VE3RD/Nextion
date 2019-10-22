@@ -1,0 +1,4 @@
+sudo mount -o remount,rw /
+sudo rm NX3224K024.tft
+
+
