@@ -33,5 +33,3 @@ set -o pipefail
         sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2nxdn
         sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2p25
 
-  sudo /usr/local/sbin/mmdvmhost.service restart
-

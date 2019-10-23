@@ -35,5 +35,5 @@ if [ -z "$1" ]; then
         if [ "$1" = 6 ]; then sudo sed -i '/\[POCSAG\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
                               sudo sed -i '/\[POCSAG Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
         fi
- sudo /usr/local/sbin/mmdvmhost.service restart	
+  sudo su /usr/local/sbin/mmdvmhost.service restart
 fi;
