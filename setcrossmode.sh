@@ -48,12 +48,12 @@ if [ -z "$1" ]; then
              if [ "$2"  = 1 ]; then  
  	         sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"1"'' /etc/dmr2nxdn 
                  sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
-                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Enabled=\).*/\11/m;P;d'  /etc/dmrgate$
-                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Name=\).*/\1DMR2NXDN_Cross-over/m;P;d'$
-                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Address=\).*/\1127.0.0.1/m;P;d'  /etc$
-                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Port=\).*/\162035/m;P;d'  /etc/dmrgat$
-                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Local=\).*/\162036/m;P;d'  /etc/dmrga$
-                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Password=\).*/\1"PASSWORD"/m;P;d'  /e$
+                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Enabled=\).*/\11/m;P;d'  /etc/dmrgateway
+                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Name=\).*/\1DMR2NXDN_Cross-over/m;P;d' /etc/dmrgateway
+                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Address=\).*/\1127.0.0.1/m;P;d'  /etc/dmrgateway
+                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Port=\).*/\162035/m;P;d'  /etc/dmrgateway
+                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Local=\).*/\162036/m;P;d'  /etc/dmrgateway
+                 sudo sed -i '/^\[/h;G;/Network 3/s/\(Password=\).*/\1"PASSWORD"/m;P;d'  /etc/dmrgateway
 	     	 sudo /usr/local/sbin/dmr2nxdn.service restart
 		echo "Setting DMR2NXDN Crossover Mode"
 	     fi             
