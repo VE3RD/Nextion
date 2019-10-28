@@ -10,19 +10,50 @@
 set -o errexit
 set -o pipefail
 
-if [ "$1" = 7 ]; then  sudo cat /etc/dmr2ysf | grep "\[Enabled\]" -A 1 | grep "Enabled=" | cut -b 9-10
+if [ "$1" = 7 ]; then  
+  	if pgrep -x "DMR2YSF" > /dev/null
+        then
+		echo "1"
+	else
+		echo "0"
+	fi
 fi
 
-if [ "$1" = 8 ]; then  sudo cat /etc/dmr2nxdn | grep "\[Enabled\]" -A 1 | grep "Enabled=" | cut -b 9-10
+if [ "$1" = 8 ]; then
+        if pgrep -x "DMR2NXDN" > /dev/null 
+        then
+		echo "1"
+	else
+		echo "0"
+	fi
+fi
+if [ "$1" = 9 ]; then
+        if pgrep -x "YSF2DMR" > /dev/null
+        then
+		echo "1"
+        else
+		echo "0"
+        fi
+fi
+if [ "$1" = 10 ]; then
+        if pgrep -x "YSF2NXDN" > /dev/null
+        then
+               echo "1"
+        else
+		echo "0"
+        fi
+fi
+if [ "$1" = 11 ]; then
+        if pgrep -x "YSF2P25" > /dev/null
+        then
+               echo "1"
+        else
+		echo "0"
+        fi
 fi
 
-if [ "$1" = 9 ]; then  sudo cat /etc/ysf2dmr | grep "\[Enabled\]" -A 1 | grep "Enabled=" | cut -b 9-10
+if pgrep -x "YSF2DMR" > /dev/null
+then
+    killall -9 YSF2DMR
 fi
-
-if [ "$1" = 10 ]; then  sudo cat /etc/ysf2nxdn | grep "\[Enabled\]" -A 1 | grep "Enabled=" | cut -b 9-10
-fi
-
-if [ "$1" = 11 ]; then  sudo cat /etc/ysf2p25 | grep "\[Enabled\]" -A 1 | grep "Enabled=" | cut -b 9-10
-fi
-
 

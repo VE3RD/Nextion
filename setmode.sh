@@ -8,6 +8,7 @@
 set -o errexit
 set -o pipefail
 # Check all six modes and set each one to either 0 or 1
+sudo mount -o remount,rw /
 
 if [ -z "$1" ]; then
         exit
@@ -22,18 +23,30 @@ if [ -z "$1" ]; then
 
         if [ "$1" = 3 ]; then sudo sed -i '/\[System Fusion\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
                               sudo sed -i '/\[System Fusion Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-        fi
+ 		if [ "$2" = 1 ]; then sudo /usr/local/sbin/ysfgateway.service restart
+		fi
+ 		if [ "$2" = 0 ]; then sudo /usr/local/sbin/ysfgateway.service stop
+		fi
+	fi
 
         if [ "$1" = 4 ]; then sudo sed -i '/\[P25\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
                               sudo sed -i '/\[P25 Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-        fi
+ 		if [ "$2" = 1 ]; then sudo /usr/local/sbin/p25gateway.service restart 
+		fi
+ 		if [ "$2" = 0 ]; then sudo /usr/local/sbin/p25gateway.service stop
+         	fi
+	fi
 
         if [ "$1" = 5 ]; then sudo sed -i '/\[NXDN\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
                               sudo sed -i '/\[NXDN Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
+ 		if [ "$2" = 1 ]; then sudo /usr/local/sbin/nxdngateway.service restart
+ 		fi
+		if [ "$2" = 1 ]; then sudo /usr/local/sbin/nxdngateway.service restart
+		fi
         fi
 
         if [ "$1" = 6 ]; then sudo sed -i '/\[POCSAG\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
                               sudo sed -i '/\[POCSAG Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
         fi
-  sudo su /usr/local/sbin/mmdvmhost.service restart
+#  sudo /usr/local/sbin/mmdvmhost.service restart
 fi;
