@@ -42,6 +42,8 @@ elif [ "$1" = 33 ]; then
 elif [ "$1" = 34 ]; then 	
                         sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
                          sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162035/m;P;d'  /etc/mmdvmhost
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1tgif.network/m;P;d'  /etc/mmdvmhost
 #			echo "34-TGIF_Network"
 elif [ "$1" = 35 ]; then 
@@ -52,17 +54,20 @@ elif [ "$1" = 35 ]; then
 elif [ "$1" = 36 ]; then 
 			echo "36-BM Network 3101"  #3101 
                         sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
                          sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1107.191.99.14/m;P;d'  /etc/mmdvmhost
 elif [ "$1" = 37 ]; then 
 #			echo "37-BM Network 3102"  #3101 
                         sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
                          sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
-           		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\174.91.114.19/m;P;d'  /etc/mmdvmhost
+        		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
+	   		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\174.91.114.19/m;P;d'  /etc/mmdvmhost
 elif [ "$1" = 38 ]; then
                         echo "38-FDARN Network"  
                         sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
-                         sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
+        		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
+	                 sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1primary.fdarn.com/m;P;d'  /etc/mmdvmhost
 fi
 sudo /usr/local/sbin/mmdvmhost.service restart >null
