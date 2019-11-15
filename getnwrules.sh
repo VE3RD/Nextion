@@ -1,11 +1,11 @@
 #!/bin/bash
 ############################################################
-#  Get  Mode from /etc/dmrgateway                           #
+#  Get  Mode from /etc/dmrgateway                          #
 #  $1 1-6 Select Mode to get status of                     #
 #                                                          #
-#  Returns the status Enable=0 or 1                        #
+#  Returns a Binary Coded Number as a String               #
 #                                                          #
-#  KF6S                                        09-01-2019  #
+#  VE3RD                                     2019-11-14    #
 ############################################################
 set -o errexit
 set -o pipefail

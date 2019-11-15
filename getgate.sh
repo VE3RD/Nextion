@@ -1,11 +1,10 @@
 #!/bin/bash
 ############################################################
-#  Get  Mode from /etc/dmrgateway                           #
-#  $1 1-6 Select Mode to get status of                     #
+#  Get  Network Detail from /etc/dmrgateway                #
 #                                                          #
-#  Returns the status Enable=0 or 1                        #
+#  Returns the status Binary Coded Value                   #
 #                                                          #
-#  KF6S                                        09-01-2019  #
+#  VE3RD                                      2019-11-14   #
 ############################################################
 set -o errexit
 set -o pipefail
@@ -44,11 +43,6 @@ else
   			m14=na
 		fi
 
-#		m10=$(sudo expr length $m10):$m10 
-#		m11=$(sudo expr length $m11):$m11 
-#		m12=$(sudo expr length $m12):$m12 
-#		m13=$(sudo expr length $m13):$m1 
-#		m14=$(sudo expr length $m14):$m14 
 		mts="$m10|$m11|$m12|$m13|$m14"
 		echo "$mts"
 	fi
@@ -67,11 +61,6 @@ else
                         m14=na
                 fi
 
-#                m10=$(sudo expr length $m10):$m10
-#                m11=$(sudo expr length $m11):$m11
-#                m12=$(sudo expr length $m12):$m12
-#                m13=$(sudo expr length $m13):$m13
-#                m14=$(sudo expr length $m14):$m14
                 mts="$m10|$m11|$m12|$m13|$m14"
                 echo "$mts"
         fi

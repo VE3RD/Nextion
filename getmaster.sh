@@ -1,11 +1,10 @@
 #!/bin/bash
 ############################################################
 #  Get Master Server 			                   #
-#  $1 7-11 Select Mode to get status of                    #
 #                                                          #
-#  Returns a string		                           #
+#  Returns a string representing the Master Server         #
 #                                                          #
-#  KF6S                                        09-01-2019  #
+#  VE3RD                                     2019-11-14    #
 ############################################################
 set -o errexit
 set -o pipefail

@@ -3,7 +3,7 @@
 #  Set or Reset Cross Mode Toggles                         #
 #  $1 7-11  Select Mode to change  $2 enable= 0 or 1       #
 #  Also enable corresponding network                       #
-#  KF6S                                        09-14-2019  #
+#  VE3RD                                      2019-11-14   #
 ############################################################
 set -o errexit
 set -o pipefail

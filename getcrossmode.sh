@@ -1,11 +1,11 @@
 #!/bin/bash
 ############################################################
-#  Get Master Server 			                   #
-#  $1 7-11 Select Mode to get status of                    #
+#  Get Cross Mode 			                   #
+#  Build Binary Bit Pattern                                #
 #                                                          #
-#  Returns a string		                           #
+#  Returns a number as a string		                   #
 #                                                          #
-#  KF6S                                        09-01-2019  #
+#  VE3RD                                        2019-11-14 #
 ############################################################
 set -o errexit
 set -o pipefail

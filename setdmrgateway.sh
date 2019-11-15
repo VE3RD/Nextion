@@ -1,7 +1,7 @@
 #!/bin/bash
 ############################################################
 #  Set or DMR Gateway Configuration                        #
-#  VE3RD                                      2019/10/28   #
+#  VE3RD                                      2019/11/14   #
 ############################################################
 set -o errexit
 set -o pipefail
@@ -15,9 +15,6 @@ if [ -z "$1" ]; then
              if [ "$2"  = 1 ]; then  
   		 sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
   		 sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
-#		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
-#		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1127.0.0.1/m;P;d'  /etc/mmdvmhost #30231
-#		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1passw0rd/m;P;d'  /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/Network 1/s/\(Enabled=\).*/\11/m;P;d'  /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/Network 1/s/\(Name=\).*/\1TGIF_Network/m;P;d'  /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/Network 1/s/\(Address=\).*/\1158.69.203.89/m;P;d'  /etc/dmrgateway

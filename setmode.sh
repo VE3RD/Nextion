@@ -7,46 +7,43 @@
 ############################################################
 set -o errexit
 set -o pipefail
-# Check all six modes and set each one to either 0 or 1
 sudo mount -o remount,rw /
+
+# Check all six modes and set each one to either 0 or 1
 
 if [ -z "$1" ]; then
         exit
         else
-        if [ "$1" = 1 ]; then sudo sed -i '/\[D-Star\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-                              sudo sed -i '/\[D-Star Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
+        if [ "$1" = 1 ]; then 
+               sudo sed -i '/^\[/h;G;/D-Star/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/D-Star Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
         fi
 
-        if [ "$1" = 2 ]; then sudo sed -i '/\[DMR\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-                              sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
+        if [ "$1" = 2 ]; then 
+               sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
         fi
 
-        if [ "$1" = 3 ]; then sudo sed -i '/\[System Fusion\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-                              sudo sed -i '/\[System Fusion Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
- 		if [ "$2" = 1 ]; then sudo /usr/local/sbin/ysfgateway.service restart
-		fi
- 		if [ "$2" = 0 ]; then sudo /usr/local/sbin/ysfgateway.service stop
-		fi
-	fi
-
-        if [ "$1" = 4 ]; then sudo sed -i '/\[P25\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-                              sudo sed -i '/\[P25 Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
- 		if [ "$2" = 1 ]; then sudo /usr/local/sbin/p25gateway.service restart 
-		fi
- 		if [ "$2" = 0 ]; then sudo /usr/local/sbin/p25gateway.service stop
-         	fi
-	fi
-
-        if [ "$1" = 5 ]; then sudo sed -i '/\[NXDN\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-                              sudo sed -i '/\[NXDN Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
- 		if [ "$2" = 1 ]; then sudo /usr/local/sbin/nxdngateway.service restart
- 		fi
-		if [ "$2" = 1 ]; then sudo /usr/local/sbin/nxdngateway.service restart
-		fi
+        if [ "$1" = 3 ]; then 
+               sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
         fi
 
-        if [ "$1" = 6 ]; then sudo sed -i '/\[POCSAG\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
-                              sudo sed -i '/\[POCSAG Network\]/!b;n;cEnable='"$2"'' /etc/mmdvmhost
+        if [ "$1" = 4 ]; then
+               sudo sed -i '/^\[/h;G;/NXDN/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
         fi
-#  sudo /usr/local/sbin/mmdvmhost.service restart
+
+        if [ "$1" = 5 ]; then 
+                  sudo sed -i '/^\[/h;G;/P25/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/P25 Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+     fi
+
+        if [ "$1" = 6 ]; then 
+               sudo sed -i '/^\[/h;G;/POCSAG/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/POCSAG Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+        fi
 fi;
+sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
+sudo mount -o remount,ro /
+
