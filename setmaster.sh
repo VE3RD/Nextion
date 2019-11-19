@@ -41,8 +41,6 @@ elif [ "$1" = 33 ]; then
 #			echo "33-DMR2NXDN"
 
 elif [ "$1" = 34 ]; then 	
-#                        sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
-#                         sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
@@ -50,6 +48,9 @@ elif [ "$1" = 34 ]; then
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1passw0rd/m;P;d'  /etc/mmdvmhost
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1tgif.network/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\10/m;P;d'  /etc/dmr2ysf
+			 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enable=\).*/\10/m;P;d'  /etc/dmr2nxdn
 #			echo "34-TGIF_Network"
 
 elif [ "$1" = 35 ]; then 
@@ -85,4 +86,4 @@ elif [ "$1" = 38 ]; then
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1passw0rd/m;P;d'  /etc/mmdvmhost
 #                        echo "38-FDARN Network"  
 fi
-sudo /usr/local/sbin/mmdvmhost.service restart >null
+sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null

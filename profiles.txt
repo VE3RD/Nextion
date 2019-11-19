@@ -1,0 +1,39 @@
+[Profile 1]
+RXOffset=-400
+TXOffset=-450
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+DMRId=302073304
+
+[Profile 2]]
+RXOffset=-343
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+DMRId=302073304
+
+[Profile 3]
+RXOffset=-400
+TXOffset=-333
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+DMRId=302073304
+
+[Profile 4]
+RXOffset=-400
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+CallSign=VE3RD
+DMRId=302073304
+
+[Profile 5]
+RXOffset=-400
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+DMRId=302073304
