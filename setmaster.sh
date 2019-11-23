@@ -67,7 +67,8 @@ elif [ "$1" = 36 ]; then
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1passw0rd/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162035/m;P;d'  /etc/mmdvmhost
-           		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1107.191.99.14/m;P;d'  /etc/mmdvmhost
+                          m1=$(sudo /usr/local/etc/Nextion_Support/getdmrhostip.sh 3101)
+          		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$m1"'/m;P;d'  /etc/mmdvmhost
 #			echo "36-BM Network 3101"  #3101 
 elif [ "$1" = 37 ]; then 
 			 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
@@ -75,9 +76,20 @@ elif [ "$1" = 37 ]; then
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162035/m;P;d'  /etc/mmdvmhost
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1passw0rd/m;P;d'  /etc/mmdvmhost
         		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
-	   		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\174.91.114.19/m;P;d'  /etc/mmdvmhost
+                         m1=$(sudo /usr/local/etc/Nextion_Support/getdmrhostip.sh 3102)
+	   		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$m1"'/m;P;d'  /etc/mmdvmhost
 #			echo "37-BM Network 3102"  #3102 
-elif [ "$1" = 38 ]; then
+elif [ "$1" = 38 ]; then 
+			 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162035/m;P;d'  /etc/mmdvmhost
+           		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1passw0rd/m;P;d'  /etc/mmdvmhost
+        		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
+                         m1=$(sudo /usr/local/etc/Nextion_Support/getdmrhostip.sh 3103)
+	   		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$m1"'/m;P;d'  /etc/mmdvmhost
+			echo "$m1"
+#			echo "37-BM Network 3103"  #3103 
+elif [ "$1" = 39 ]; then
 			 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
         		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost

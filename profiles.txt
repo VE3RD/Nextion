@@ -1,6 +1,6 @@
 [Profile 1]
 RXOffset=-400
-TXOffset=-450
+TXOffset=-334
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
