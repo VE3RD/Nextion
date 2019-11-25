@@ -16,8 +16,14 @@ if [ -z "$1" ]; then
 else
 	HN="$1"
 fi
+#'/^#/!s/
 
-mt=$(sudo sed -n '/'"$HN"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
+#sed -n '/^\s*[^#]\|^$/!'p filename
+mt=$(sudo sed -n '/^[^#]*'"$HN"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
+#mt=$(sudo sed -n '/'"$HN"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
+#var="${u:10:4}"
+#echo "${var}"
+#sed 's/^[^#]*DMRGateway \=.*/server string = '"$variable"' SAMBA/g' /usr/local/etc/DMR_Hosts.txt/usr/local/etc/DMR_Hosts.txt
 
 if [ -z $mt ]; then
 	echo "Nothing|Found|Try|Another|Search"
