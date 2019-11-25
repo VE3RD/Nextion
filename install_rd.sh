@@ -14,5 +14,6 @@ ddrive2=/usr/local/etc/Nextion_Support/
 sudo cp NX*.tft $ddrive1 
 echo "   tft file coppied to $ddrive1"
 sudo cp *.sh $ddrive2		
+sudo cp *.txt $ddrive2		
 echo "   Script files copied to $ddrive2"
 
