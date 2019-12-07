@@ -4,23 +4,26 @@ TXOffset=-334
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
-DMRId=302073304
+Id=3020733
+Mode=DMR
 
-[Profile 2]]
+[Profile 2]
 RXOffset=-343
 TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
-DMRId=302073304
+Id=3020733
+Mode=DMR
 
 [Profile 3]
 RXOffset=-400
 TXOffset=-333
-RXFrequency=445100000
-TXFrequency=445100000
+RXFrequency=442037500
+TXFrequency=447037500
 Callsign=VE3RD
-DMRId=302073304
+Id=302073304
+Mode=YSF
 
 [Profile 4]
 RXOffset=-400
@@ -28,7 +31,8 @@ TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 CallSign=VE3RD
-DMRId=302073304
+Id=302073304
+Mode=DMR
 
 [Profile 5]
 RXOffset=-400
@@ -36,4 +40,5 @@ TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
-DMRId=302073304
+Id=3020733
+Mode=DMR

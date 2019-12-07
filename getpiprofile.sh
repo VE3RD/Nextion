@@ -17,6 +17,6 @@ dirn=/etc/mmdvmhost
 		m4=$(sed -nr "/^\[Info\]/ { :l /^TXFrequency[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 		m5=$(sed -nr "/^\[General\]/ { :l /^Callsign[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 		m6=$(sed -nr "/^\[General\]/ { :l /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
-               	mt="$m1|$m2|$m3|$m4|$m5|$m6"
+               	mt="$m1|$m2|$m3|$m4|$m5|$m6|TBA"
 		echo "$mt"
 
