@@ -8,7 +8,7 @@ Id=3020733
 Mode=DMR
 
 [Profile 2]
-RXOffset=-343
+RXOffset=-400
 TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
