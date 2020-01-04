@@ -12,7 +12,9 @@ set -o pipefail
 #if [ -z "$1" ]; then
 #        exit
 #	else
-		m17=$(sed -nr "/^\[Voice\]/ { :1 /^Enabled[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/dmrgateway)
+
+D: 2019-12-15 05:12:22.984 0000:  44 4D 52 44 50 10 F9 CE 00 7B B1 00 2E 17 BD 83    *DMRDP....{......*
+		m17=$(sed -nr "/^\[Voice\]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/dmrgateway)
                 m18=$(sed -nr "/^\[Voice\]/ { :l /^Language[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/dmrgateway)
                 m19=$(sed -nr "/^\[Voice\]/ { :l /^Directory[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/dmrgateway)
 		echo "$m17|$m18|$m19"
