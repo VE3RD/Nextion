@@ -1,7 +1,7 @@
 #!/bin/bash
 ############################################################
-#  Lookup YSF Host /usr/local/etc/YSFHosts.txt 		   #
-#  Return IP Address.                                      #
+#  Lookup P25 Host /usr/local/etc/YSFHosts.txt 		   #
+#  Return Multi Parameter String                           #
 #                                                          #
 #                                                          #
 #  VE3RD                                      2020-01-11   #
