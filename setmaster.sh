@@ -5,6 +5,8 @@
 ############################################################
 set -o errexit
 set -o pipefail
+fromfile="/usr/local/etc/Nextion_Support/profiles.txt"
+
 sudo mount -o remount,rw /
 #echo "Set DMR Master Server"
 #sudo mount -o remount,ro /
@@ -17,7 +19,15 @@ fi
        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2dmr
        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2nxdn
        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2p25
+
+                m6=$(sed -nr "/^\[Profile 0\]/ { :l /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m7=$(sed -nr "/^\[Profile 0\]/ { :l /^Mode[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m8=$(sed -nr "/^\[Profile 0\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+#                m9=$(sed -nr "/^\[Profile 0\]/ { :l /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m10=$(sed -nr "/^\[Profile 0\]/ { :l /^Port[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
  
+#echo "$m6|$m7|$m8|$10"
+
 if [ "$1" = 31 ]; then 
   		 sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
   		 sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
@@ -30,10 +40,10 @@ fi
 if [ "$1" = 32 ]; then 
 		 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
-
+ 
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Enabled=\).*/\10/m;P;d'  /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Name=\).*/\1DMR2YSF_Cross-over/m;P;d'  /etc/dmrgateway
-		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Id=\).*/\1302073304/m;P;d'  /etc/dmrgateway
+		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Id=\).*/\1'"$m6"'/m;P;d'  /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Address=\).*/\1127.0.0.2/m;P;d'  /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Port=\).*/\162033/m;P;d'  /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Local=\).*/\162034/m;P;d'  /etc/dmrgateway
@@ -45,8 +55,6 @@ if [ "$1" = 32 ]; then
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1127.0.0.2/m;P;d'  /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\10/m;P;d'  /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\10/m;P;d'  /etc/mmdvmhost
-
-
                   sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"1"'' /etc/dmr2ysf
 #		echo "32-DMR2YSF"
 fi
@@ -72,13 +80,15 @@ if [ "$1" = 33 ]; then
 #		echo "33-DMR2NXDN"
 fi
 if [ "$1" = 34 ]; then 	
+
 			 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
-			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\1'"$m10"'/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162035/m;P;d'  /etc/mmdvmhost
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1"passw0rd"/m;P;d'  /etc/mmdvmhost
-           		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1tgif.network/m;P;d'  /etc/mmdvmhost
+           		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$m8"'/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\110/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR/s/\(Id=\).*/\1'"$m6"'/m;P;d'  /etc/mmdvmhost
 #			echo "34-TGIF_Network"
 fi
 if [ "$1" = 35 ]; then 

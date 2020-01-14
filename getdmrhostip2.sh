@@ -1,10 +1,10 @@
 #!/bin/bash
 ############################################################
-#  Lookup DMR Master IP in /usr/local/etc/DMR_Hosts.txt    #
+#  Lookup DMR Host in /usr/local/etc/DMR_Hosts.txt         #
 #  Return IP Address.                                      #
 #                                                          #
 #                                                          #
-#  KF6S                                        05-20-2019  #
+#  VE3RD                                        2019-01-11 #
 ############################################################
 set -o errexit
 set -o pipefail
@@ -29,3 +29,5 @@ else
 	echo "$mt"
 
 fi
+#TGIF_Network|0000|tgif.network|passw0rd|62031
+

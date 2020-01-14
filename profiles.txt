@@ -1,11 +1,27 @@
+[Profile 0]
+RXOffset=-350
+TXOffset=-350
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=302073304
+Mode=DMR
+Address=tgif.network
+StartupDstId=31665
+Port=62031
+
 [Profile 1]
 RXOffset=-400
 TXOffset=-334
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
-Id=3020733
+Id=302073304
 Mode=DMR
+Address=tgif.network
+StartupDstId=31665
+Port=62031
+
 
 [Profile 2]
 RXOffset=-400
@@ -37,8 +53,12 @@ Mode=DMR
 [Profile 5]
 RXOffset=-400
 TXOffset=-400
-RXFrequency=445100000
-TXFrequency=445100000
+RXFrequency=433900000
+TXFrequency=433900000
 Callsign=VE3RD
-Id=3020733
-Mode=DMR
+Id=302073304
+Mode=YSF2DMR
+Address=tgif.network
+StartupDstId=31665
+Port=62031
+
