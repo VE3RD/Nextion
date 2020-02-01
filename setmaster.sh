@@ -23,10 +23,11 @@ fi
                 m6=$(sed -nr "/^\[Profile 0\]/ { :l /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m7=$(sed -nr "/^\[Profile 0\]/ { :l /^Mode[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m8=$(sed -nr "/^\[Profile 0\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
-#                m9=$(sed -nr "/^\[Profile 0\]/ { :l /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m9=$(sed -nr "/^\[Profile 0\]/ { :l /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m10=$(sed -nr "/^\[Profile 0\]/ { :l /^Port[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m11=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
  
-#echo "$m6|$m7|$m8|$10"
+#echo "$m6|$m7|$m8|m$10|$m11"
 
 if [ "$1" = 31 ]; then 
   		 sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
@@ -88,7 +89,8 @@ if [ "$1" = 34 ]; then
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1"passw0rd"/m;P;d'  /etc/mmdvmhost
            		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$m8"'/m;P;d'  /etc/mmdvmhost
 			 sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\110/m;P;d'  /etc/mmdvmhost
-			 sudo sed -i '/^\[/h;G;/DMR/s/\(Id=\).*/\1'"$m6"'/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/General/s/\(Id=\).*/\1'"$m6"'/m;P;d'  /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/DMR/s/\(Id=\).*/\1'"$m11"'/m;P;d'  /etc/mmdvmhost
 #			echo "34-TGIF_Network"
 fi
 if [ "$1" = 35 ]; then 

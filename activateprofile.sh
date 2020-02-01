@@ -14,6 +14,7 @@ tofile="/etc/mmdvmhost"
 if [ -z "$1" ]; then
    exit
 else
+
                 m1=$(sed -nr "/^\[Profile $1\]/ { :l /^RXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m2=$(sed -nr "/^\[Profile $1\]/ { :l /^TXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m3=$(sed -nr "/^\[Profile $1\]/ { :l /^RXFrequency[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
@@ -24,6 +25,10 @@ else
                 m8=$(sed -nr "/^\[Profile $1\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m9=$(sed -nr "/^\[Profile $1\]/ { :l /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m10=$(sed -nr "/^\[Profile $1\]/ { :l /^Port[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m11=$(sed -nr "/^\[Profile 0\]/ { :l /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m12=$(sed -nr "/^\[Profile $1\]/ { :l /^Password[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+                m13=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+	
 		 sudo sed -i '/^\[/h;G;/Modem/s/\(RXOffset=\).*/\1'"$m1"'/m;P;d' $tofile 
 		 sudo sed -i '/^\[/h;G;/Modem/s/\(TXOffset=\).*/\1'"$m2"'/m;P;d' $tofile 
 		 sudo sed -i '/^\[/h;G;/Info/s/\(RXFrequency=\).*/\1'"$m3"'/m;P;d' $tofile 
@@ -31,27 +36,105 @@ else
 		 sudo sed -i '/^\[/h;G;/General/s/\(Callsign=\).*/\1'"$m5"'/m;P;d' $tofile 
 		 sudo sed -i '/^\[/h;G;/General/s/\(Id=\).*/\1'"$m6"'/m;P;d' $tofile 
 		 sudo sed -i '/^\[/h;G;/DMR/s/\(Id=\).*/\1'"$m6"'/m;P;d' $tofile
-if [ "$m7" = 'YSF2DMR' ]; then
+	
+		echo "Processing Profile = $1,  Mode = $m7"
+
+
+	if [ "$m7" = 'YSF2DMR' ]; then
 		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\11/m;P;d' /etc/ysf2dmr
-		 sudo sed -i '/^\[/h;G;/Network/s/\(Startup=\).*/\1YSF2DMR/m;P;d' /etc/ysfgateway
-		 sudo sed -i '/^\[/h;G;/System Fusion/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
-		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
-		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Enable=\).*/\10/m;P;d' /etc/mmdvmhost
-
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(StartupDstId=\).*/\1'"$m9"'/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$m8"'/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\1'"$m10"'/m;P;d' /etc/ysf2dmr
-		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$m6"'/m;P;d' /etc/ysf2dmr
-
-
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1'"$m12"'/m;P;d' /etc/ysf2dmr
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$m13"'/m;P;d' /etc/ysf2dmr
                 sudo sed -i '/\[DMR Network\]/!b;n;cEnabled='"1"'' /etc/ysf2dmr
+
+		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/Network/s/\(Startup=\).*/\1YSF2DMR/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m6"'/m;P;d' /etc/ysfgateway
+
+		 sudo sed -i '/^\[/h;G;/System Fusion/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
+
                 sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
                 sudo /usr/local/sbin/ysf2dmr.service restart  > /dev/null
+	fi
+	if [ "$m7" = 'YSF2NXDN' ]; then
+		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/ysf2nxdn
+		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\11/m;P;d' /etc/ysf2nxdn
+		 sudo sed -i '/^\[/h;G;/NXDN Network/s/\(StartupDstId=\).*/\1'"$m9"'/m;P;d' /etc/ysf2nxdn
+		 sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Address=\).*/\1'"$m8"'/m;P;d' /etc/ysf2nxdn
+		 sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Port=\).*/\1'"$m10"'/m;P;d' /etc/ysf2nxdn
+		 sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Password=\).*/\1'"$m10"'/m;P;d' /etc/ysf2nxdn
+
+		 sudo sed -i '/^\[/h;G;/NXDN Network/s/\(^Id=\).*/\1'"$m6"'/m;P;d' /etc/ysf2nxdn
+		 sudo sed -i '/^\[/h;G;/NXDN Network/s/\(^Enabled=\).*/\11/m;P;d' /etc/ysf2nxdn
+
+		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/Network/s/\(Startup=\).*/\1YSF2NXDN/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m6"'/m;P;d' /etc/ysfgateway
+
+		 sudo sed -i '/^\[/h;G;/System Fusion/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
+
+                sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
+                sudo /usr/local/sbin/ysf2nxdn.service restart  > /dev/null
+	fi
+
+	if [ "$m7" = 'YSF2P25' ]; then
+		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\11/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(StartupDstId=\).*/\1'"$m9"'/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(Address=\).*/\1'"$m8"'/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(Port=\).*/\1'"$m10"'/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(^Id=\).*/\1'"$m6"'/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(Enabled=\).*/\11/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(Enabled=\).*/\11/m;P;d' /etc/ysf2p25
+		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(Password=\).*/\1'"$m12"'/m;P;d' /etc/ysf2p25
+
+		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/Network/s/\(Startup=\).*/\1YSF2P25/m;P;d' /etc/ysfgateway
+		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m6"'/m;P;d' /etc/ysfgateway
+
+		 sudo sed -i '/^\[/h;G;/System Fusion/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
+
+
+
+                sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
+                sudo /usr/local/sbin/ysf2p25.service restart  > /dev/null
     
-fi 
-        mt="$m1|$m2|$m3|$m4|$m5|$m6"
-       echo "$mt"
- fi
+	fi
+
+
+
+	if [ "$m7" = "TGIF" ]; then 
+
+                         sudo sed -i '/^\[/h;G;/DMR]/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162035/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1"passw0rd"/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1tgif.network/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\110/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d'  /etc/mmdvmhost
+                         sudo sed -i '/^\[/h;G;/DMR]/s/\(^Id=\).*/\1'"$m13"'/m;P;d'  /etc/mmdvmhost
+                        sudo sed -i '/^\[/h;G;/DMR]/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
+
+echo "$m7"
+
+	fi 
+ 
+fi
 
 sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null

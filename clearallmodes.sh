@@ -9,44 +9,44 @@ set -o pipefail
 sudo mount -o remount,rw /
 
 #echo "D-Star"
-        sudo sed -i '/\[D-Star\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-        sudo sed -i '/\[D-Star Network\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
+        sudo sed -i '/\[D-Star\]/!b;n;cEnable=0' /etc/mmdvmhost
+        sudo sed -i '/\[D-Star Network\]/!b;n;cEnable=0' /etc/mmdvmhost
 #	sudo dstarrepeater.service stop
 
 #echo  "YSF"
 
-        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2dmr
-        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2nxdn
-        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2p25
- 	sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysfgateway
-        sudo sed -i '/\[System Fusion\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-	sudo sed -i '/\[System Fusion Network\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-	sudo sed -i '/\[YSF Network\]/!b;n;cEnable='"0"'' /etc/ysfgateway
-	sudo sed -i '/\[FCS Network\]/!b;n;cEnable='"0"'' /etc/ysfgateway
+        sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/ysf2dmr
+        sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/ysf2nxdn
+        sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/ysf2p25
+ 	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/ysfgateway
+        sudo sed -i '/\[System Fusion\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[System Fusion Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[YSF Network\]/!b;n;cEnable=0' /etc/ysfgateway
+	sudo sed -i '/\[FCS Network\]/!b;n;cEnable=0' /etc/ysfgateway
 
 
 
 #echo "P25"
-        sudo sed -i '/\[P25\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-	sudo sed -i '/\[P25 Network\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-	sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/p25gateway
+        sudo sed -i '/\[P25\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[P25 Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/p25gateway
 
 #echo  "NXDN"
-         sudo sed -i '/\[NXDN\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-	sudo sed -i '/\[NXDN Network\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
+         sudo sed -i '/\[NXDN\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[NXDN Network\]/!b;n;cEnable=0' /etc/mmdvmhost
 
 #echo "POCSAG"
 
-        sudo sed -i '/\[POCSAG\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-	sudo sed -i '/\[POCSAG Network\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
+        sudo sed -i '/\[POCSAG\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[POCSAG Network\]/!b;n;cEnable=0' /etc/mmdvmhost
 
 #echo "DMR"
 
-        sudo sed -i '/\[DMR\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
-	sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"0"'' /etc/mmdvmhost
+        sudo sed -i '/\[DMR\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[DMR Network\]/!b;n;cEnable=0' /etc/mmdvmhost
       #  sudo sed  -i 's/tgif.network/127.0.0.2/g' /etc/mmdvmhost
-        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/dmr2ysf
-        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/dmr2nxdn
+        sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/dmr2ysf
+        sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/dmr2nxdn
 
 
    if pgrep -x DMR2YSF > /dev/null

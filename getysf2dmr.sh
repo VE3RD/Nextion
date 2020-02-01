@@ -1,9 +1,8 @@
 #!/bin/bash
 ############################################################
-#  Get Cross Mode 			                   #
-#  Build Binary Bit Pattern                                #
+#  Get YSF2DMR Cross Mode Parameters 		           #
+#  Build a | separated String                              #
 #                                                          #
-#  Returns a number as a string		                   #
 #                                                          #
 #  VE3RD                                        2019-11-14 #
 ############################################################
