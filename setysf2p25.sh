@@ -10,6 +10,8 @@
 set -o errexit
 set -o pipefail
 sudo mount -o remount,rw /
+sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
+
 echo "$1|$2|$3|$4|$5|$6" > /home/pi-star/ysf2p25.txt
 
 if [ -z "$6" ]; then

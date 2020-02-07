@@ -12,14 +12,14 @@ set -o pipefail
 # Check all five cross modes and set each one to either 0 or 1
 #Clear all Main Modes
 sudo mount -o remount,rw /
-
+sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 if [ -z "$6" ]; then
     exit
 else
 
                         sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
-                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
-                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(EnableWiresX=\).*/\10/m;P;d' /etc/ysf2nxdn
+#                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
+                        sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\1'"$2"'/m;P;d' /etc/ysf2nxdn
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\1'"$3"'/m;P;d' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$4"'/m;P;d' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/NXDN Network/s/\(StartupDstId=\).*/\1'"$5"'/m;P;d' /etc/ysf2nxdn
