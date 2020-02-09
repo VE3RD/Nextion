@@ -17,7 +17,7 @@ sudo $1 $2
 duration=$(echo "$(date +%s.%N) - $start" | bc)
 execution_time=`printf "%.2f seconds" $duration`
 
-echo "Script Execution Time: $execution_time"
+echo "Script Completed: $execution_time"
 
 
 
