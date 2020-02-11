@@ -1,8 +1,9 @@
 #!/bin/bash
 ############################################################
 #  Clear Modes in /etc/mmdvmhost                           #
-#  Also disable corresponding network                       #
-#  KF6S                                        09-14-2019  #
+#  Also disable corresponding network                      #
+#							   #
+#  VE3RD                                        2019-12-04 #
 ############################################################
 set -o errexit
 set -o pipefail
@@ -39,8 +40,6 @@ if [ -z "$1" ]; then
                 sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
 		sudo sed -i '/^\[/h;G;/Network 2/s/\(Enabled=\).*/\11/m;P;d'  /etc/dmrgateway
 	fi
-
-
 
 	#if [ "$1" = "QRM" ]; then
 	 # Future

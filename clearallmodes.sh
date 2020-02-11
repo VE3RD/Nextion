@@ -1,8 +1,8 @@
 #!/bin/bash
 ############################################################
 #  Clear Modes in /etc/mmdvmhost                           #
-#  Also disable corresponding network                       #
-#  KF6S                                        09-14-2019  #
+#  Also disable corresponding network                      #
+#  KF6S/VE3RD                                  09-14-2019  #
 ############################################################
 set -o errexit
 set -o pipefail

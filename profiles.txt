@@ -120,9 +120,9 @@ Callsign=VEZ3RD
 Id=302048219
 Mode=YSF2DMR
 Address=tgif.network
-StartupDstId=31665
+StartupDstId=3023
 Port=62031
-Password=none
+Password="passw0rd"
 
 [Profile 9]
 Name=YSF2NXDN
