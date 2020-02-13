@@ -40,6 +40,6 @@ mt="$m1 + ($m2*2) + ($m3*4) + ($m4*8) + ($m5*16) + ($m6*32)"
 echo "$mt"
 
 
-m7=$(sed -nr "/^\[DMR]/ { :1 /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
+##m7=$(sed -nr "/^\[DMR]/ { :1 /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
 
 

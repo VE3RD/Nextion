@@ -42,7 +42,6 @@ else
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$5"'/m;P;d' /etc/dmr2nxdn
         		sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(^Enabled=\).*/\11/m;P;d' /etc/dmrgateway
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
-        		sudo sed -i '/^\[/h;G;/NXDN]/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/NXDN Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
 			sudo /usr/local/sbin/dmr2nxdn.service restart > /dev/null
 			sudo /usr/local/sbin/nxdngateway.service restart > /dev/null
