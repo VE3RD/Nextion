@@ -38,6 +38,7 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\10/m;P;d' /etc/mmdvmhost
                         sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
                         sudo /usr/local/sbin/ysf2p25.service restart  > /dev/null
+                        sudo /usr/local/sbin/p25gateway.service restart  > /dev/null
         fi
         if [ "$1" = 0 ]; then
                         sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2p25
@@ -50,6 +51,7 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$4"'/m;P;d' /etc/mmdvmhost
                         sudo /usr/local/sbin/ysfgateway.service stop > /dev/null
                         sudo /usr/local/sbin/ysf2p25.service stop  > /dev/null
+                        sudo /usr/local/sbin/p25gateway.service stop  > /dev/null
 
         fi
 

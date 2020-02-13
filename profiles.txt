@@ -41,7 +41,7 @@ Port=62031
 Password=passw0rd
 
 [Profile 3]
-Name=BM 3201
+Name=BM 3021
 RXOffset=-400
 TXOffset=-333
 RXFrequency=445100000

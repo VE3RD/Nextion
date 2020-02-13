@@ -32,10 +32,13 @@ else
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1127.0.0.2/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Password=\).*/\1'"none"'/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
+        		sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
+        		sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$5"'/m;P;d' /etc/mmdvmhost
 
                         sudo /usr/local/sbin/dmr2ysf.service restart > /dev/null
+                        sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
 	fi
 # If Disabled
 	if [ "$1" = 0 ]; then
@@ -50,6 +53,10 @@ else
         		sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$5"'/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1tgif.network/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Password=\).*/\1'"passw0rd"'/m;P;d' /etc/mmdvmhost
+        		sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
+        		sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
+                        sudo /usr/local/sbin/dmr2ysf.service stop > /dev/null
+                        sudo /usr/local/sbin/ysfgateway.service stop > /dev/null
   
 	fi
 

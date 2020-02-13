@@ -36,6 +36,7 @@ else
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\10/m;P;d' /etc/mmdvmhost
                         sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
                         sudo /usr/local/sbin/ysf2nxdn.service restart  > /dev/null
+                        sudo /usr/local/sbin/nxdngateway.service restart  > /dev/null
         fi
         if [ "$1" = 0 ]; then
                         sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2nxdn
@@ -48,6 +49,7 @@ else
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$4"'/m;P;d' /etc/mmdvmhost
                         sudo /usr/local/sbin/ysfgateway.service stop > /dev/null
                         sudo /usr/local/sbin/ysf2nxdn.service stop  > /dev/null
+                        sudo /usr/local/sbin/nxdngateway.service restart  > /dev/null
 
         fi
 
