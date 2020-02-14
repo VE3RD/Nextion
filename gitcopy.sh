@@ -11,16 +11,17 @@
 #########################################################
 # Use screen model from command $1
 if [ -z "$2" ]; then
-echo " Syntax: copyrd.sh tft 1 or 2"
-        exit
+	echo " Syntax: copyrd.sh NX????K??? 1 or 2"
+	echo " 1 Copies EA7KDO Files,   2 Copies VE3RD Files"
+   	exit
 fi
 
 start=$(date +%s.%N)
 
 
 #Disable all command feedback
-#exec 3>&2
-#exec 2> /dev/null 
+exec 3>&2
+exec 2> /dev/null 
 
 model=$1
 tft='.tft' gz='.gz'
@@ -49,7 +50,7 @@ if [ "$2" = 2 ]; then
 	if [ -d /home/pi-star/Nextion ]; then
   		sudo rm -R /home/pi-star/Nextion
 	fi
-echo "Starting VE3RD Git Clone"
+ echo "Starting VE3RD Git Clone"
   	  sudo git clone https://github.com/VE3RD/Nextion /home/pi-star/Nextion
  	  sudo chmod +x /home/pi-star/Nextion/*.sh
    	  if [ ! -d /usr/local/etc/Nextion_Support ]; then
@@ -58,7 +59,7 @@ echo "Starting VE3RD Git Clone"
 
           sudo cp /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/
 fi
-echo "Git Clone Complete"
+ echo "Git Clone Complete"
 #Check to make sure that NO TFT file exists at the destination
 #Then copy in the new one
 
@@ -68,19 +69,20 @@ fi
 	cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
 
 FILE=/usr/local/etc/$model$tft
-if [ -f "$FILE" ]; then
-        echo "Nextion tft file successfully copied!"
+#if [ -f "$FILE" ]; then
+#        echo "Nextion tft file successfully copied!"
 # Copy OK do not echo to screen
-else
+#else
 # Copy failed 
-	echo "No TFT File Available to Flash - Try Again"
-fi
+#	echo "No TFT File Available to Flash - Try Again"
+#fi
 
 sudo systemctl start cron.service  > /dev/null
-#exec 2>&3 
 
 duration=$(echo "$(date +%s.%N) - $start" | bc)
 execution_time=`printf "%.2f seconds" $duration`
+
+exec 2>&3 
 
 echo "Script Completed: $execution_time"
 
