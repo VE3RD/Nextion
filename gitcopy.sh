@@ -11,8 +11,9 @@
 #########################################################
 # Use screen model from command $1
 if [ -z "$2" ]; then
-	echo " Syntax: copyrd.sh NX????K??? 1 or 2"
+	echo " Syntax: copyrd.sh NX????K??? 1 or 2  ?"
 	echo " 1 Copies EA7KDO Files,   2 Copies VE3RD Files"
+	echo " Third parameter disables command feedback inhibit" 
    	exit
 fi
 
@@ -20,8 +21,10 @@ start=$(date +%s.%N)
 
 
 #Disable all command feedback
-exec 3>&2
-exec 2> /dev/null 
+if [ ! "$3" ]; then
+	exec 3>&2
+	exec 2> /dev/null 
+fi
 
 model=$1
 tft='.tft' gz='.gz'
@@ -34,54 +37,44 @@ sudo systemctl stop cron.service  > /dev/null
 
 #Test for /tmp/Nextion.Images and remove it, if it exists
 
+if [ -d /tmp/Nextion.Images ]; then
+  	sudo rm -R /tmp/Nextion.Images
+fi
 
   # Get Nextion Screen/Scripts and support files from github
+  # Get EA7KDO File Set
 if [ "$2" = 1 ]; then
-	if [ -d /usr/local/etc/Nextion_Support ]; then
-  		sudo rm -R /usr/local/etc/Nextion_Support
-	fi
-	  sudo git clone https://github.com/EA7KDO/Nextion.Images /usr/local/etc/Nextion_Support
-          sudo chmod +x /usr/local/etc/Nextion_Support/*.sh
+	  sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /tmp/Nextion.Images
 fi
+  # Get VE3RD File Set
 if [ "$2" = 2 ]; then
-	if [ -d /usr/local/etc/Nextion_Support ]; then
-  		sudo rm -R /usr/local/etc/Nextion_Support
-	fi
-	if [ -d /home/pi-star/Nextion ]; then
-  		sudo rm -R /home/pi-star/Nextion
-	fi
-
-  	  sudo git clone https://github.com/VE3RD/Nextion /home/pi-star/Nextion
- 	  sudo chmod +x /home/pi-star/Nextion/*.sh
-   	  if [ ! -d /usr/local/etc/Nextion_Support ]; then
-		sudo mkdir /usr/local/etc/Nextion_Support
-	  fi
-
-          sudo cp /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/
+  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /tmp/Nextion.Images
 fi
-#Check to make sure that NO TFT file exists at the destination
-#Then copy in the new one
+
+sudo chmod +x /tmp/Nextion.Images/*.sh
+sudo rsync -avq /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX*
 
 if [ -f /usr/local/etc/$model$tft ]; then
 	rm /usr/local/etc/$model$tft
 fi
-	cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
-	rm /usr/local/etc/Nextion_Support/NX*
-#FILE=/usr/local/etc/$model$tft
-#if [ -f "$FILE" ]; then
-#        echo "Nextion tft file successfully copied!"
-# Copy OK do not echo to screen
-#else
-# Copy failed 
-#	echo "No TFT File Available to Flash - Try Again"
-#fi
+cp /tmp/Nextion.Images/$model$tft /usr/local/etc/
+
+
+ FILE=/usr/local/etc/$model$tft
+ if [ ! -f "$FILE" ]; then
+        # Copy failed
+      echo "No TFT File Available to Flash - Try Again"
+	exit
+ fi
 
 sudo systemctl start cron.service  > /dev/null
 
 duration=$(echo "$(date +%s.%N) - $start" | bc)
 execution_time=`printf "%.2f seconds" $duration`
 
-exec 2>&3 
+if [ ! "$3" ]; then
+ exec 2>&3
+fi 
 
 echo "Script Completed: $execution_time"
 
