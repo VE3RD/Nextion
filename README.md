@@ -1,9 +1,11 @@
 # Nextion Screen  2.4"
-This screen wa developed by Mitch EA7KDO and published on www.githud/ea7kdo/nextion.images
+This screen was developed by Mitch EA7KDO and published on www.githud/ea7kdo/nextion.images
 I have modified this screen with mainly cosmetic changes to suit myself and no one else.
-This page is currently available only to myself and Mitch EA7KDO
 
-This batch file [copytft.bat] will transfer your screen tft file from it original compiled directory to your pi-star at /home/pi-star
+The script [gitcopy.sh] will copy the source files for the Nextion Screen from github and place them in their appropriate directories ready to flash from the flash page on your hotspot(Assuming you have the EA7KDO File set installed in your screen.
+On a new install, copy the NX3224K024.tft file to a clean microsd card, Powsedr off your hotspot, insert the card into your screen and reboot. On completion, shut off the screen, remove the microsd card and reboot.
+
+This batch file [copytft.bat] will transfer your screen tft file from it's original compiled directory to your pi-star at /home/pi-star
 and then move it into /usr/local/etc by folowing instructions in the text.txt file located in /home/pi-star This occurs over wifi and no cable is required to connect the computer to the screen.
 
 ie: after compiling, run copytft.bat and when done, run FLASH on the nextion screen (DO NOT RUN GIT COPY)
