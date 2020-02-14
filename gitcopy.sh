@@ -50,7 +50,7 @@ if [ "$2" = 2 ]; then
 	if [ -d /home/pi-star/Nextion ]; then
   		sudo rm -R /home/pi-star/Nextion
 	fi
- echo "Starting VE3RD Git Clone"
+
   	  sudo git clone https://github.com/VE3RD/Nextion /home/pi-star/Nextion
  	  sudo chmod +x /home/pi-star/Nextion/*.sh
    	  if [ ! -d /usr/local/etc/Nextion_Support ]; then
@@ -59,7 +59,6 @@ if [ "$2" = 2 ]; then
 
           sudo cp /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/
 fi
- echo "Git Clone Complete"
 #Check to make sure that NO TFT file exists at the destination
 #Then copy in the new one
 
@@ -68,7 +67,7 @@ if [ -f /usr/local/etc/$model$tft ]; then
 fi
 	cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
 
-FILE=/usr/local/etc/$model$tft
+#FILE=/usr/local/etc/$model$tft
 #if [ -f "$FILE" ]; then
 #        echo "Nextion tft file successfully copied!"
 # Copy OK do not echo to screen
