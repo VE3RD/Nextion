@@ -52,7 +52,12 @@ if [ "$2" = 2 ]; then
 fi
 
 sudo chmod +x /tmp/Nextion.Images/*.sh
-sudo rsync -avq /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX*
+sudo rsync -avq /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
+if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
+        echo "Replacing Missing Profiles.txt"
+        cp  /tmp/Nextion.Images/profiles.txt /usr/local/etc/Nextion_Support/
+fi
+
 
 if [ -f /usr/local/etc/$model$tft ]; then
 	rm /usr/local/etc/$model$tft
