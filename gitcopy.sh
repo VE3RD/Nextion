@@ -54,8 +54,11 @@ fi
 sudo chmod +x /tmp/Nextion.Images/*.sh
 sudo rsync -avq /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
 if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
-        echo "Replacing Missing Profiles.txt"
+        if [ "$3" ]; then
+                echo "Replacing Missing Profiles.txt"
+        fi
         cp  /tmp/Nextion.Images/profiles.txt /usr/local/etc/Nextion_Support/
+
 fi
 
 
