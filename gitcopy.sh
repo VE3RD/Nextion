@@ -52,7 +52,7 @@ if [ "$2" = 2 ]; then
 fi
 
 sudo chmod +x /tmp/Nextion.Images/*.sh
-sudo rsync -avq /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
+sudo rsync -avq /tmp/Nextion.Images/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
 if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
         if [ "$3" ]; then
                 echo "Replacing Missing Profiles.txt"
