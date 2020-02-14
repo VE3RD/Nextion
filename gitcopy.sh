@@ -66,7 +66,7 @@ if [ -f /usr/local/etc/$model$tft ]; then
 	rm /usr/local/etc/$model$tft
 fi
 	cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
-
+	rm /usr/local/etc/Nextion_Support/NX*
 #FILE=/usr/local/etc/$model$tft
 #if [ -f "$FILE" ]; then
 #        echo "Nextion tft file successfully copied!"
