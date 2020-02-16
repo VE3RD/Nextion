@@ -17,6 +17,7 @@ if [ -z "$2" ]; then
    	exit
 fi
 
+#Start Duration Timer
 start=$(date +%s.%N)
 
 
@@ -51,6 +52,10 @@ if [ "$2" = 2 ]; then
   	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /tmp/Nextion.Images
 fi
 
+if [ ! -d /usr/local/etc/Nextion_Support ]; then
+	sudo mkdir /usr/local/etc/Nextion_Support
+fi
+
 sudo chmod +x /tmp/Nextion.Images/*.sh
 sudo rsync -avq /tmp/Nextion.Images/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
 if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
@@ -61,6 +66,9 @@ if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
 
 fi
 
+if [ "$3" ]; then
+    echo "Remove Existing $model$tft and copy in the new one"
+fi
 
 if [ -f /usr/local/etc/$model$tft ]; then
 	rm /usr/local/etc/$model$tft
