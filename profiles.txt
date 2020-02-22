@@ -35,7 +35,7 @@ TXFrequency=445100000
 Callsign=VE3RD
 Id=3020733
 Mode=DMR
-Address=30231
+Address=158.69.203.89
 StartupDstId=310
 Port=62031
 Password=passw0rd
@@ -50,9 +50,10 @@ Callsign=VE3RD
 Id=302073304
 Mode=DMR
 Address=158.69.203.89
-StartupDstId=3112
+StartupDstId=31402
 Port=62031
-Password=passw0rd
+Local=62035
+Password="passw0rd"
 
 [Profile 4]
 Name=DMRGate 7D
@@ -80,6 +81,7 @@ Mode=YSF2DMR
 Address=tgif.network
 StartupDstId=3023
 Port=62031
+Local=62037
 Password="passw0rd"
 
 [Profile 6]
@@ -92,7 +94,7 @@ Callsign=VE3RD
 Id=302073304
 Mode=DMR2YSF
 Address=tgif.network
-StartupDstId=30232
+StartupDstId=74036
 Port=62031
 Password=none
 
@@ -114,15 +116,15 @@ Password=none
 Name=YSF2DMR
 RXOffset=-400
 TXOffset=-400
-RXFrequency=442037500
-TXFrequency=442037500
+RXFrequency=445100000
+TXFrequency=445100000
 Callsign=VEZ3RD
 Id=302048219
 Mode=YSF2DMR
 Address=tgif.network
 StartupDstId=3023
 Port=62031
-Password="passw0rd"
+Password=passw0rd
 
 [Profile 9]
 Name=YSF2NXDN

@@ -44,6 +44,9 @@ fi
 
   # Get Nextion Screen/Scripts and support files from github
   # Get EA7KDO File Set
+
+mount -o remount,size=128M /tmp/
+
 if [ "$2" = 1 ]; then
 	  sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /tmp/Nextion.Images
 fi

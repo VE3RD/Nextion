@@ -28,6 +28,9 @@ dirn=/etc/mmdvmhost
 		m8=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 		m9=$(sed -nr "/^\[DMR Network\]/ { :l /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/ysf2dmr)
 
+mt=$(sudo sed -n '/^[^#]*'"$m8"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
+m8=$( echo "$mt" | cut -d'|' -f1)
+
 
 if [ ysfnet == 1 ]; then
  	if [ ysf2dmr == 1 ]; then 

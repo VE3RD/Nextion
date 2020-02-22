@@ -21,11 +21,15 @@ else
         		sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\1'"$2"'/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\1'"$3"'/m;P;d' /etc/ysf2dmr
+        		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162037/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$4"'/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(StartupDstId=\).*/\1'"$5"'/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$6"'/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
-        		sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
+        		sudo sed -i '/^\[/h;G;/YSF Network/s/\(DstPort=\).*/\13200/m;P;d' /etc/ysf2dmr
+        		sudo sed -i '/^\[/h;G;/YSF Network/s/\(LocalPort=\).*/\14200/m;P;d' /etc/ysf2dmr
+        		sudo sed -i '/^\[/h;G;/General/s/\(WiresXCommandPassthrough=\).*/\1'"$2"'/m;P;d' /etc/ysfgateway
+        		sudo sed -i '/^\[/h;G;/YSF Network]/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
         		sudo sed -i '/^\[/h;G;/System Fusion]/s/\(Enable=\).*/\11/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\11/m;P;d' /etc/mmdvmhost
 
