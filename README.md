@@ -17,3 +17,6 @@ This batchfile requres PUTTY and PSCP which is installed with PUTTY.
 Phil VE3RD
 
 
+Comming Soon
+1) The profiles are still causing a few hiccups in the screen.Resoving this issue is my current project
+2) Just added but noy yet published. The idle screen now shows the server listed as the DMR Address in the mmdvmhost file.
