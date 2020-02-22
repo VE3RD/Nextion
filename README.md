@@ -2,6 +2,8 @@
 This screen was developed by Mitch EA7KDO and published on www.githud/ea7kdo/nextion.images
 I have modified this screen with mainly cosmetic changes to suit myself and no one else.
 
+This is NOT a production Packge. It is my backup as I develope. When I add new features, smetimes it breaks old ones. So use this at your own discretion.
+
 The script [gitcopy.sh] will copy the source files for the Nextion Screen from github and place them in their appropriate directories ready to flash from the flash page on your hotspot(Assuming you have the EA7KDO File set installed in your screen.
 On a new install, copy the NX3224K024.tft file to a clean microsd card, Powsedr off your hotspot, insert the card into your screen and reboot. On completion, shut off the screen, remove the microsd card and reboot.
 
