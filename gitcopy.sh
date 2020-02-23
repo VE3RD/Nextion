@@ -11,10 +11,27 @@
 #########################################################
 # Use screen model from command $1
 if [ -z "$2" ]; then
-	echo " Syntax: copyrd.sh NX????K??? 1 or 2  ?"
-	echo " 1 Copies EA7KDO Files,   2 Copies VE3RD Files"
-	echo " Third parameter disables command feedback inhibit" 
+	echo " "
+	echo " Syntax: gitcopy.sh Param1 Param2 Param3"
+	echo " Param1 = NX????K??? "
+	echo " Param2 =  1 or 2 "
+	echo " Param3 =  anything at all"
+	echo "-----------------------------------------"
+	echo " Param2=1 Copies EA7KDO Files"
+	echo " Param2=2 Copies VE3RD Files"
+	echo " Param3=? Disables command feedback inhibit.  Use Only from the Commansd Line" 
    	exit
+fi
+
+if [  "$2" != "1" ] && [ "$2" != "2" ]; then
+	echo " "
+	echo "Invalid  command syntax"
+        echo " Syntax: gitcopy.sh NX????K??? 2  ?"
+        echo " P2=1 Copies EA7KDO Files,   P2=2 Copies VE3RD Files"
+        echo " P3=Anything - Disables command feedback inhibit Use Only from the Commansd Line"
+       echo  "Param2 = $2"
+        exit
+
 fi
 
 #Start Duration Timer
