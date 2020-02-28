@@ -26,11 +26,11 @@ m2=$(sed -nr "/^\[DMR]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /et
 #m3=$(sudo cat /etc/mmdvmhost | grep "\[System Fusion\]" -A 1 | grep "Enable=" | cut -b 8-9)
 m3=$(sed -nr "/^\[System Fusion]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
 
-#m4=$(sudo cat /etc/mmdvmhost | grep "\[P25\]" -A 1 | grep "Enable=" | cut -b 8-9)
-m4=$(sed -nr "/^\[P25]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
+#m4=$(sudo cat /etc/mmdvmhost | grep "\[NXDN\]" -A 1 | grep "Enable=" | cut -b 8-9)
+m4=$(sed -nr "/^\[NXDN]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
 
-#m5=$(sudo cat /etc/mmdvmhost | grep "\[NXDN\]" -A 1 | grep "Enable=" | cut -b 8-9)
-m5=$(sed -nr "/^\[NXDN]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
+#m5=$(sudo cat /etc/mmdvmhost | grep "\[P25\]" -A 1 | grep "Enable=" | cut -b 8-9)
+m5=$(sed -nr "/^\[P25]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
 
 #m6=$(sudo cat /etc/mmdvmhost | grep "\[POCSAG\]" -A 1 | grep "Enable=" | cut -b 8-9)
 m6=$(sed -nr "/^\[POCSAG]/ { :1 /^Enable[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)

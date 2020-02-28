@@ -56,18 +56,18 @@ Local=62035
 Password="passw0rd"
 
 [Profile 4]
-Name=DMRGate 7D
+Name=DMRGateway
 RXOffset=-400
 TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 CallSign=VE3RD
 Id=302073304
-Mode=DMR
+Mode=DMRGateway
 Address=127.0.0.1
 StartupDstId=31665
 Port=62031
-Password=none
+Password="Passp0rt"
 
 [Profile 5]
 Name=BARC-R
