@@ -20,18 +20,17 @@ else
                         sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
 #                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
                         sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\1'"$2"'/m;P;d' /etc/ysf2nxdn
-                        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\1'"$3"'/m;P;d' /etc/mmdvmhost
-                        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$4"'/m;P;d' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/NXDN Network/s/\(StartupDstId=\).*/\1'"$5"'/m;P;d' /etc/ysf2nxdn
-                        sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$6"'/m;P;d' /etc/mmdvmhost
+                        sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$7"'/m;P;d' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
+                        sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/ysfgateway
                         sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
+			 sudo sed -i '/^\[/h;G;/YSF Network/s/\(Startup=\).*/\1'"$6"'/m;P;d' /etc/ysfgateway
 
                         sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/ysfgateway
 
 # If Enabled
         if [ "$1" = 1 ]; then
-                        sudo sed -i '/^\[/h;G;/Network/s/\(Startup=\).*/\1YSF2NXDN/m;P;d' /etc/ysfgateway
                         sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\10/m;P;d' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\10/m;P;d' /etc/mmdvmhost
                         sudo /usr/local/sbin/ysfgateway.service restart > /dev/null

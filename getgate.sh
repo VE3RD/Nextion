@@ -19,7 +19,7 @@ declare -i mt
 if [ -z "$1" ]; then
         exit
 else
-	if [ "$1" = 21 ]; then
+	if [ "$1" = "21" ]; then
 		m1=$(sudo sed -n '/^[ \t]*\[DMR Network 1\]/,/\[/s/^[ \t]*Enabled[ \t]*=[ \t]*//p' /etc/dmrgateway)
 		m2=$(sudo sed -n '/^[ \t]*\[DMR Network 2\]/,/\[/s/^[ \t]*Enabled[ \t]*=[ \t]*//p' /etc/dmrgateway)
 		m3=$(sudo sed -n '/^[ \t]*\[DMR Network 3\]/,/\[/s/^[ \t]*Enabled[ \t]*=[ \t]*//p' /etc/dmrgateway)
@@ -30,7 +30,7 @@ else
 	fi
 
        
-	if [ "$1" = 26 ]; then
+	if [ "$1" = "26" ]; then
 		m10=$(sudo sed -n '/^[ \t]*\[DMR Network 1\]/,/\[/s/^[ \t]*Name[ \t]*=[ \t]*//p' /etc/dmrgateway)
        	 	m11=$(sudo sed -n '/^[ \t]*\[DMR Network 2\]/,/\[/s/^[ \t]*Name[ \t]*=[ \t]*//p' /etc/dmrgateway)
         	m12=$(sudo sed -n '/^[ \t]*\[DMR Network 3\]/,/\[/s/^[ \t]*Name[ \t]*=[ \t]*//p' /etc/dmrgateway)
@@ -48,7 +48,7 @@ else
 	fi
 
 
-        if [ "$1" = 31 ]; then
+        if [ "$1" = "31" ]; then
                 m10=$(sudo sed -n '/^[ \t]*\[DMR Network 1\]/,/\[/s/^[ \t]*Address[ \t]*=[ \t]*//p' /etc/dmrgateway)
                 m11=$(sudo sed -n '/^[ \t]*\[DMR Network 2\]/,/\[/s/^[ \t]*Address[ \t]*=[ \t]*//p' /etc/dmrgateway)
                 m12=$(sudo sed -n '/^[ \t]*\[DMR Network 3\]/,/\[/s/^[ \t]*Address[ \t]*=[ \t]*//p' /etc/dmrgateway)

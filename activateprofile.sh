@@ -14,11 +14,13 @@ tofile="/etc/mmdvmhost"
 declare -i pnum
 
 echo "Processing Profile = $1" > /home/pi-star/ActivateProfile.txt
+sudo mount -o remount,rw /
 
 if [ -z "$1" ]; then
    exit
 else
-pnum=$1
+#pnum="$1"
+pnum=$(echo $1 | sed 's/^0*//')
 
                 m1=$(sed -nr "/^\[Profile $pnum\]/ { :l /^RXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m2=$(sed -nr "/^\[Profile $pnum\]/ { :l /^TXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
@@ -34,6 +36,7 @@ pnum=$1
                 m12=$(sed -nr "/^\[Profile $pnum\]/ { :l /^Password[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m13=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
 
+m8a="$m8"
 mt=$(sudo sed -n '/^[^#]*'"$m8"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
 m8=$( echo "$mt" | cut -d'|' -f3)
 
@@ -237,3 +240,4 @@ echo "YSF2NXDN"
 fi
 
 sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
+echo "Profile $pnum - Loaded  - $m8a"

@@ -15,7 +15,7 @@ sudo mount -o remount,rw /
 
 sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 #echo "All Modes Cleared"
-if [ -z "$6" ]; then
+if [ -z "$5" ]; then
     exit
 else
         		sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2dmr
@@ -24,7 +24,7 @@ else
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162037/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$4"'/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(StartupDstId=\).*/\1'"$5"'/m;P;d' /etc/ysf2dmr
-        		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$6"'/m;P;d' /etc/ysf2dmr
+        		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$7"'/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
         		sudo sed -i '/^\[/h;G;/YSF Network/s/\(DstPort=\).*/\13200/m;P;d' /etc/ysf2dmr
         		sudo sed -i '/^\[/h;G;/YSF Network/s/\(LocalPort=\).*/\14200/m;P;d' /etc/ysf2dmr
@@ -32,6 +32,7 @@ else
         		sudo sed -i '/^\[/h;G;/YSF Network]/s/\(Enable=\).*/\11/m;P;d' /etc/ysfgateway
         		sudo sed -i '/^\[/h;G;/System Fusion]/s/\(Enable=\).*/\11/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\11/m;P;d' /etc/mmdvmhost
+ 			sudo sed -i '/^\[/h;G;/YSF Network/s/\(Startup=\).*/\1'"$6"'/m;P;d' /etc/ysfgateway
 
 # If Enabled
 	if [ "$1" = 1 ]; then
