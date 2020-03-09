@@ -15,6 +15,8 @@ m3=$(sed -nr "/^\[DMR Network\]/ { :1 /^Port]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}
 m4=$(sed -nr "/^\[DMR Network\]/ { :1 /^Address]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/ysf2dmr)
 m5=$(sed -nr "/^\[DMR Network\]/ { :1 /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/ysf2dmr)
 m6=$(sed -nr "/^\[DMR Network\]/ { :1 /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/ysf2dmr)
-mt="$m1|$m2|$m3|$m4|$m5|$m6"
+m7=$(sed -nr "/^\[DMR Network\]/ { :1 /^EnableUnlink]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/ysf2dmr)
+
+mt="$m1|$m2|$m3|$m4|$m5|$m6|$m7"
 echo "$mt"
 

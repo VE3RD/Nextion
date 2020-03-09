@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################################################
-#  Get Cross Mode 			                   #
+#  Get DMR2YSF Cross Mode 			                   #
 #  Build Binary Bit Pattern                                #
 #                                                          #
 #  Returns a number as a string		                   #
@@ -15,6 +15,7 @@ m2=$(sed -nr "/^\[DMR Network\]/ { :1 /^Port[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1
 m3=$(sed -nr "/^\[DMR Network\]/ { :1 /^Address]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/mmdvmhost)
 m4=$(sed -nr "/^\[DMR Network\]/ { :1 /^DefaultDstTG[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/dmr2ysf)
 m5=$(sed -nr "/^\[DMR Network\]/ { :1 /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/dmr2ysf)
+m3=127.0.0.2
 mt="$m1|$m2|$m3|$m4|$m5"
 echo "$mt"
 

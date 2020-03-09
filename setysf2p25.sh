@@ -12,9 +12,9 @@ set -o pipefail
 sudo mount -o remount,rw /
 sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 
-echo "$1|$2|$3|$4|$5|$6" > /home/pi-star/ysf2p25.txt
+echo "$1|$2|$3|$4|$5|$6|$7" > /home/pi-star/ysf2p25.txt
 
-if [ -z "$6" ]; then
+if [ -z "$7" ]; then
     echo "Insufficient Number of Parameters"
     exit
 else
@@ -22,7 +22,7 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
                         sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2p25
                         sudo sed -i '/^\[/h;G;/P25 Network/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2p25
                         sudo sed -i '/^\[/h;G;/P25 Network/s/\(EnableWiresX=\).*/\10/m;P;d' /etc/ysf2p25
-                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(StartupDstId=\).*/\1'"$5"'/m;P;d' /etc/ysf2p25
+                        sudo sed -i '/^\[/h;G;/P25 Network/s/\(StartupDstId=\).*/\1'"$5"'/m;P;d' /etc/ysf2p25
                         sudo sed -i '/^\[/h;G;/P25 Network/s/\(^Id=\).*/\1'"$7"'/m;P;d' /etc/ysf2p25
                         sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$7"'/m;P;d' /etc/ysfgateway
                         sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost

@@ -21,7 +21,7 @@ else
 #                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
                         sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\1'"$2"'/m;P;d' /etc/ysf2nxdn
                         sudo sed -i '/^\[/h;G;/NXDN Network/s/\(StartupDstId=\).*/\1'"$5"'/m;P;d' /etc/ysf2nxdn
-                        sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$7"'/m;P;d' /etc/mmdvmhost
+                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(^Id=\).*/\1'"$7"'/m;P;d' /etc/ysf2nxdn
                         sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/ysfgateway
                         sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
