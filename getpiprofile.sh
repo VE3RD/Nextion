@@ -24,7 +24,7 @@ dirn=/etc/mmdvmhost
 		m6=$(sed -nr "/^\[General\]/ { :l /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 
 		m7=$(sed -nr "/^\[Network\]/ { :l /^Mode[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/ysfgateway)
-
+m7="Current"
 		m8=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 		m9=$(sed -nr "/^\[DMR Network\]/ { :l /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/ysf2dmr)
 
