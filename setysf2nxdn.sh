@@ -25,7 +25,7 @@ else
                         sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
                         sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/ysfgateway
                         sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/mmdvmhost
-			 sudo sed -i '/^\[/h;G;/YSF Network/s/\(Startup=\).*/\1'"$6"'/m;P;d' /etc/ysfgateway
+			 sudo sed -i '/^\[/h;G;/YSF Network/s/\(Startup=\).*/\1YSF2NXDN/m;P;d' /etc/ysfgateway
 
                         sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/ysfgateway
 

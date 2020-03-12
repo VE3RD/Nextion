@@ -16,6 +16,7 @@ m4=$(sed -nr "/^\[YSF Network\]/ { :1 /^YSF2NXDNAddress]*=/ { s/.*=[ ]*//; p; q;
 m5=$(sed -nr "/^\[NXDN Network\]/ { :1 /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/ysf2nxdn)
 m6=$(sed -nr "/^\[Network\]/ { :1 /^Startup[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/ysfgateway)
 m7=$(sed -nr "/^\[NXDN Network]/ { :1 /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b 1;}" /etc/ysf2nxdn)
+m6="YSF2NXDN"
 mt="$m1|$m2|$m3|$m4|$m5|$m6|$m7"
 echo "$mt"
 
