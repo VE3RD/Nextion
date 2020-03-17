@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################################################
-#  Set YSF2DMR Parameters                                  #
+#  Set DMR2YSF Parameters                                  #
 #							   #
 #  Enable "$1" = 1 Sets YSF2DMR Mode			   #
 #  Enable "$1" = 0 Clears YSF2DMR Mode & Sets DMR Master   #
@@ -45,7 +45,7 @@ else
  	        	sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/dmr2ysf
  	        	sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\10/m;P;d' /etc/mmdvmhost
-			## Ser DMR Masterysf2dmr
+			## Ser DMR Master ysf2dmr
 
         		sudo sed -i '/^\[/h;G;/DMR/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
         		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
@@ -61,7 +61,7 @@ else
 	fi
 
 fi;
-sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
+#sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
 sudo mount -o remount,ro /
 
 

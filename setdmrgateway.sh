@@ -22,5 +22,5 @@ fi
 	sudo sed -i '/^\[/h;G;/Network '"$1"'/s/\(Enabled=\).*/\1'"$2"'/m;P;d'  /etc/dmrgateway
 
 sudo /usr/local/sbin/dmrgateway.service restart
-sudo /usr/local/sbin/mmdvmhost.service restart
+#sudo /usr/local/sbin/mmdvmhost.service restart
 sudo mount -o remount,ro /

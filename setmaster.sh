@@ -143,4 +143,4 @@ if [ "$1" = 39 ]; then
 #                        echo "38-FDARN Network"  
 fi;
 
-sudo /usr/local/sbin/mmdvmhost.service restart 
+#sudo /usr/local/sbin/mmdvmhost.service restart 

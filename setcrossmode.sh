@@ -130,5 +130,5 @@ else
                  fi
 	fi
 fi;
-sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
+#sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
 sudo mount -o remount,ro /

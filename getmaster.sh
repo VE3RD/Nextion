@@ -16,7 +16,11 @@ echo "DMR OFF"
 exit
 fi
 	Addr=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/mmdvmhost)
+mtf=$(sudo sed -n '/^[^#]*'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | cut -d'|' -f1)
+echo "$mtf"
 
+exit
+###No Longer Used
 	if [ $Addr = tgif.network ]; then
 		echo "TGIF_Network"
 	elif [ $Addr = 127.0.0.1 ]; then

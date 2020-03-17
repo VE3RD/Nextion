@@ -239,5 +239,5 @@ echo "YSF2NXDN"
  
 fi
 
-sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
+#sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
 echo "Profile $pnum - Loaded  - $m8a"

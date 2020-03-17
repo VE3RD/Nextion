@@ -44,6 +44,6 @@ if [ -z "$1" ]; then
                sudo sed -i '/^\[/h;G;/POCSAG Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
         fi
 fi;
-sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
+#sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
 sudo mount -o remount,ro /
 

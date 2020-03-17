@@ -25,7 +25,7 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 
                         sudo sed -i '/^\[/h;G;/YSF Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/ysfgateway
                         sudo sed -i '/^\[/h;G;/FCS Network/s/\(Enable=\).*/\1'"$1"'/m;P;d' /etc/ysfgateway
-                        sudo sed -i '/^\[/h;G;/YSF Network/s/\(Startup=\).*/\100004/m;P;d' /etc/ysfgateway
+                        sudo sed -i '/^\[/h;G;/Network/s/\(Startup=\).*/\1YSF2P25/m;P;d' /etc/ysfgateway
                         sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$7"'/m;P;d' /etc/ysfgateway
 
                         sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2p25
