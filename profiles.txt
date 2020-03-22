@@ -94,9 +94,9 @@ Callsign=VE3RD
 Id=302073304
 Mode=DMR2YSF
 Address=tgif.network
-StartupDstId=74036
+StartupDstId=31665
 Port=62031
-Password=none
+Password="passw0rd"
 
 [Profile 7]
 Name=DMR2NXDN
@@ -108,28 +108,28 @@ Callsign=VE3RD
 Id=302073304
 Mode=DMR2NXDN
 Address=tgif.network
-StartupDstId=65000
+StartupDstId=31665
 Port=62031
-Password=none
+Password="passw0rd"
 
 [Profile 8]
 Name=YSF2DMR
-RXOffset=-400
-TXOffset=-400
+RXOffset=-250
+TXOffset=-250
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VEZ3RD
 Id=302048219
 Mode=YSF2DMR
 Address=tgif.network
-StartupDstId=3023
+StartupDstId=31665
 Port=62031
-Password=passw0rd
+Password="passw0rd"
 
 [Profile 9]
 Name=YSF2NXDN
-RXOffset=-400
-TXOffset=-400
+RXOffset=-250
+TXOffset=-250
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
@@ -138,12 +138,12 @@ Mode=YSF2NXDN
 Address=tgif.network
 StartupDstId=31665
 Port=62031
-Password=none
+Password="password"
 
 [Profile 10]
 Name=YSF2P25
-RXOffset=-400
-TXOffset=-400
+RXOffset=-250
+TXOffset=-250
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
@@ -152,5 +152,5 @@ Mode=YSF2P25
 Address=tgif.network
 StartupDstId=31665
 Port=62031
-Password=none
+Password="passw0rd"
 

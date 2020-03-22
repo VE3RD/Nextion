@@ -14,7 +14,7 @@ declare LEN number
 fromfile=/usr/local/etc/Nextion_Support/profiles.txt
        
 Addr=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/mmdvmhost)
-Addr="$1"
+#Addr="$1"
  
 mt=$(sudo sed -n '/^[^#]*'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
 
@@ -30,6 +30,6 @@ if [ -z $mt ]; then
 	echo "Nothing|Found|Try|Another|Search"
 else
 	echo "$mt1"
-	echo "$mt"
+#	echo "$mt"
 fi
 
