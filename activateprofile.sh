@@ -5,11 +5,18 @@
 ############################################################
 set -o errexit
 set -o pipefail
+
+if [ -z "$1" ]; then
+echo "No Profile Number"
+   exit
+else
+
+
 sudo mount -o remount,rw /
 #echo "Save to Profile"
 sudo /usr/local/sbin/mmdvmhost.service stop > /dev/null
 
-sudo /usr/local/etc/Nextion_Support/clearallmodes.sh 1
+sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 fromfile="/usr/local/etc/Nextion_Support/profiles.txt"
 tofile="/etc/mmdvmhost"
 
@@ -19,9 +26,6 @@ declare -i pnum
 echo "Processing Profile = $1" > /home/pi-star/ActivateProfile.txt
 sudo mount -o remount,rw /
 
-if [ -z "$1" ]; then
-   exit
-else
 #pnum="$1"
 pnum=$(echo $1 | sed 's/^0*//')
 
