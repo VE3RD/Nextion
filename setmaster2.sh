@@ -6,13 +6,17 @@
 ############################################################
 set -o errexit
 set -o pipefail
+
+if [ -z "$2" ]; then
+        exit
+fi
+
+
+sudo /usr/local/sbin/mmdvmhost.service stop  > /dev/null
 sudo mount -o remount,rw /
 #echo "Set DMR Master Server"
 #sudo mount -o remount,ro /
 sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
-if [ -z "$2" ]; then
-        exit
-fi
 #      m1=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /usr/local/etc/Nextion_Support)
  	m6=$(sed -nr "/^\[Profile 0\]/ { :l /^Id[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /usr/local/etc/Nextion_Support/profiles.txt)
 
@@ -22,4 +26,4 @@ fi
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$1"'/m;P;d'  /etc/mmdvmhost
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$m6"'/m;P;d'  /etc/mmdvmhost
 
-#	sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
+	sudo /usr/local/sbin/mmdvmhost.service start > /dev/null

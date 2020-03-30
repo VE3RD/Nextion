@@ -7,9 +7,12 @@ set -o errexit
 set -o pipefail
 sudo mount -o remount,rw /
 #echo "Save to Profile"
-sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
+sudo /usr/local/sbin/mmdvmhost.service stop > /dev/null
+
+sudo /usr/local/etc/Nextion_Support/clearallmodes.sh 1
 fromfile="/usr/local/etc/Nextion_Support/profiles.txt"
 tofile="/etc/mmdvmhost"
+
 
 declare -i pnum
 
@@ -246,5 +249,5 @@ echo "YSF2NXDN"
  
 fi
 
-#sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
+sudo /usr/local/sbin/mmdvmhost.service start > /dev/null
 echo "Profile $pnum - Loaded  - $m8a"

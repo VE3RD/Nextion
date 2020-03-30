@@ -12,10 +12,11 @@ set -o pipefail
 # Check all five cross modes and set each one to either 0 or 1
 #Clear all Main Modes
 #echo "All Modes Cleared"
+
 if [ -z "$7" ]; then
     exit
 else
-
+sudo /usr/local/sbin/mmdvmhost.service stop  > /dev/null
 sudo mount -o remount,rw /
 sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 # If Enabled
@@ -64,7 +65,7 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 	fi
 
 fi;
-#sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
+sudo /usr/local/sbin/mmdvmhost.service start  > /dev/null
 sudo mount -o remount,ro /
 
 

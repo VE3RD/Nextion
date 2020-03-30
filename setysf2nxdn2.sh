@@ -11,11 +11,16 @@ set -o errexit
 set -o pipefail
 # Check all five cross modes and set each one to either 0 or 1
 #Clear all Main Modes
-sudo mount -o remount,rw /
-sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
+
 if [ -z "$6" ]; then
     exit
 else
+
+
+
+sudo /usr/local/sbin/mmdvmhost.service stop  > /dev/null
+sudo mount -o remount,rw /
+sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 
                         sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
 #                        sudo sed -i '/^\[/h;G;/NXDN Network/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/ysf2nxdn
@@ -55,7 +60,7 @@ else
 
 
 fi;
-sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
+sudo /usr/local/sbin/mmdvmhost.service start  > /dev/null
 sudo mount -o remount,ro /
 
 

@@ -5,15 +5,18 @@
 ############################################################
 set -o errexit
 set -o pipefail
-fromfile="/usr/local/etc/Nextion_Support/profiles.txt"
 
+if [ -z "$1" ]; then
+        exit
+fi
+
+
+fromfile="/usr/local/etc/Nextion_Support/profiles.txt"
+sudo /usr/local/sbin/mmdvmhost.service stop  > /dev/null
 sudo mount -o remount,rw /
 #echo "Set DMR Master Server"
 #sudo mount -o remount,ro /
 sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
-if [ -z "$1" ]; then
-        exit
-fi
        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/dmr2ysf
        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/dmr2nxdn
        sudo sed -i '/\[Enabled\]/!b;n;cEnabled='"0"'' /etc/ysf2dmr
@@ -143,4 +146,4 @@ if [ "$1" = 39 ]; then
 #                        echo "38-FDARN Network"  
 fi;
 
-#sudo /usr/local/sbin/mmdvmhost.service restart 
+sudo /usr/local/sbin/mmdvmhost.service start 

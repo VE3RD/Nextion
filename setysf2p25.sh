@@ -16,6 +16,7 @@ if [ -z "$7" ]; then
     echo "Insufficient Number of Parameters"
     exit
 else
+sudo /usr/local/sbin/mmdvmhost.service stop  > /dev/null
 sudo mount -o remount,rw /
 sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 # If Enabled
@@ -54,7 +55,7 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 
 
 fi;
-#sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
+sudo /usr/local/sbin/mmdvmhost.service start  > /dev/null
 
 sudo mount -o remount,ro /
 

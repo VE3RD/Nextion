@@ -11,6 +11,13 @@ set -o errexit
 set -o pipefail
 # Check all five cross modes and set each one to either 0 or 1
 #Clear all Main Modes
+if [ -z "$2" ]; then
+    exit
+else
+
+
+
+sudo /usr/local/sbin/mmdvmhost.service stop  > /dev/null
 sudo mount -o remount,rw /
 #1 Enable
 #2 Port - Not Used
@@ -20,10 +27,6 @@ sudo mount -o remount,rw /
 echo "$1|$2|$3|$4|$5" >  /home/pi-star/dmr2y,txt
 sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 #echo "All Modes Cleared"
-if [ -z "$2" ]; then
-    exit
-else
-
 # If Enabled
 	if [ "$1" = 1 ]; then
         		sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\1'"$1"'/m;P;d' /etc/dmr2ysf
@@ -61,7 +64,7 @@ else
 	fi
 
 fi;
-#sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
+sudo /usr/local/sbin/mmdvmhost.service start  > /dev/null
 sudo mount -o remount,ro /
 
 

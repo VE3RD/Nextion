@@ -1,7 +1,7 @@
 [Profile 0]
 Name=Default
-RXOffset=-350
-TXOffset=-350
+RXOffset=-400
+TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
@@ -15,7 +15,7 @@ Port=62031
 [Profile 1]
 Name=TGIF
 RXOffset=-400
-TXOffset=-334
+TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
@@ -28,8 +28,8 @@ Password=passw0rd
 
 [Profile 2]
 Name=BM
-RXOffset=-250
-TXOffset=-250
+RXOffset=-400
+TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
@@ -43,14 +43,14 @@ Password=passw0rd
 [Profile 3]
 Name=BM 3021
 RXOffset=-400
-TXOffset=-333
+TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
 Id=302073304
 Mode=DMR
 Address=158.69.203.89
-StartupDstId=31402
+StartupDstId=310
 Port=62031
 Local=62035
 Password="passw0rd"
@@ -114,43 +114,43 @@ Password="passw0rd"
 
 [Profile 8]
 Name=YSF2DMR
-RXOffset=-250
-TXOffset=-250
+RXOffset=-225
+TXOffset=-225
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VEZ3RD
-Id=302048219
+Id=302048224
 Mode=YSF2DMR
 Address=tgif.network
-StartupDstId=31665
+StartupDstId=9990
 Port=62031
 Password="passw0rd"
 
 [Profile 9]
 Name=YSF2NXDN
-RXOffset=-250
-TXOffset=-250
+RXOffset=-225
+TXOffset=-225
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
-Id=302073304
+Id=302073334
 Mode=YSF2NXDN
 Address=tgif.network
-StartupDstId=31665
+StartupDstId=10
 Port=62031
 Password="password"
 
 [Profile 10]
 Name=YSF2P25
-RXOffset=-250
-TXOffset=-250
+RXOffset=-225
+TXOffset=-225
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
-Id=302073304
+Id=302073344
 Mode=YSF2P25
 Address=tgif.network
-StartupDstId=31665
+StartupDstId=10
 Port=62031
 Password="passw0rd"
 

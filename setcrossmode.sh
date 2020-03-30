@@ -9,12 +9,15 @@ set -o errexit
 set -o pipefail
 # Check all five cross modes and set each one to either 0 or 1
 #Clear all Main Modes
-sudo mount -o remount,rw /
-sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 #echo "All Modes Cleared"
 if [ -z "$1" ]; then
     exit
 else
+
+sudo /usr/local/sbin/mmdvmhost.service start  > /dev/null
+
+sudo mount -o remount,rw /
+sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
     if [ "$1" = 7 ]; then 
              if [ "$2"  = 1 ]; then  
 #		echo "Setting DMR2YSF Crossover Mode"
@@ -130,5 +133,5 @@ else
                  fi
 	fi
 fi;
-#sudo /usr/local/sbin/mmdvmhost.service restart  > /dev/null
+sudo /usr/local/sbin/mmdvmhost.service start  > /dev/null
 sudo mount -o remount,ro /
