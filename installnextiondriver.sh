@@ -113,7 +113,7 @@ echo "Identify your Inteface"
 
         if [ -z "$m1" ]; then
                 sudo mount -o remount,rw /
-sed -i '/^\[Nextion\]/,/^\[/ { x; /^$/ !{ x; H }; /^$/ { x; h; }; d; }; x; /^\[Nextion\]/ { s/\(\n\+[^\n]*\)$/\nDisplayTempInFahrenheit=0\1/; p; x; p; x; d }; x' /etc/mmdvmhost
+sudo sed -i '/^\[Nextion\]/,/^\[/ { x; /^$/ !{ x; H }; /^$/ { x; h; }; d; }; x; /^\[Nextion\]/ { s/\(\n\+[^\n]*\)$/\nDisplayTempInFahrenheit=0\1/; p; x; p; x; d }; x' /etc/mmdvmhost
          fi
 
         PS3='Select The Temperature Mode:'
