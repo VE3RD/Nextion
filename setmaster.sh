@@ -33,12 +33,12 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 #echo "$m6|$m7|$m8|m$10|$m11"
 
 if [ "$1" = 31 ]; then 
-  		 sudo sed -i '/\[DMR\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
-  		 sudo sed -i '/\[DMR Network\]/!b;n;cEnable='"1"'' /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/DMR/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\162031/m;P;d'  /etc/mmdvmhost
-		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1127.0.0.1/m;P;d'  /etc/mmdvmhost #30231
- 	sudo rm /var/log/pi-star/DMR*
-	sudo dmrgateway.service restart
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1127.0.0.1/m;P;d'  /etc/mmdvmhost 
+#30231
+# 	sudo rm /var/log/pi-star/DMR*
 #            echo "31-DMRGateway"
 fi        
 if [ "$1" = 32 ]; then 
@@ -147,3 +147,7 @@ if [ "$1" = 39 ]; then
 fi;
 
 sudo /usr/local/sbin/mmdvmhost.service start 
+
+if [ "$1" = 31 ]; then 
+	sudo /usr/local/sbin/dmrgateway.service restart
+fi
