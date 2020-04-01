@@ -17,6 +17,17 @@ if [ -z "$2" ]; then
    	exit
 fi
 
+if [ "$3" ]; then
+	if [ "$2" == "1" ]; then
+		echo "Loading EA7KDO Screen Package"
+	fi
+	if [ "$2" == "2" ]; then
+		echo "Loading VE3RD Screen Package"
+	fi
+
+fi
+
+
 #Start Duration Timer
 start=$(date +%s.%N)
 
@@ -36,10 +47,13 @@ sleep 1s
 #Stop the cron service
 sudo systemctl stop cron.service  > /dev/null
 
-#Test for /tmp/Nextion.Images and remove it, if it exists
+#/home/pi-star/Nextion_Temp/
 
-if [ -d /tmp/Nextion.Images ]; then
-  	sudo rm -R /tmp/Nextion.Images
+
+#Test for /home/pi-star/Nextion_Temp and remove it, if it exists
+
+if [ -d /home/pi-star/Nextion_Temp ]; then
+  	sudo rm -R /home/pi-star/Nextion_Temp
 fi
 
   # Get Nextion Screen/Scripts and support files from github
@@ -48,24 +62,24 @@ fi
 mount -o remount,size=128M /tmp/
 
 if [ "$2" = 1 ]; then
-	  sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /tmp/Nextion.Images
+	  sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /home/pi-star/Nextion_Temp
 fi
   # Get VE3RD File Set
 if [ "$2" = 2 ]; then
-  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /tmp/Nextion.Images
+  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion_Temp
 fi
 
 if [ ! -d /usr/local/etc/Nextion_Support ]; then
 	sudo mkdir /usr/local/etc/Nextion_Support
 fi
 
-sudo chmod +x /tmp/Nextion.Images/*.sh
-sudo rsync -avq /tmp/Nextion.Images/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
+sudo chmod +x /home/pi-star/Nextion_Temp/*.sh
+sudo rsync -avq /home/pi-star/Nextion_Temp/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
 if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
         if [ "$3" ]; then
                 echo "Replacing Missing Profiles.txt"
         fi
-        cp  /tmp/Nextion.Images/profiles.txt /usr/local/etc/Nextion_Support/
+        cp  /home/pi-star/Nextion_Temp/profiles.txt /usr/local/etc/Nextion_Support/
 
 fi
 
@@ -76,7 +90,7 @@ fi
 if [ -f /usr/local/etc/$model$tft ]; then
 	rm /usr/local/etc/$model$tft
 fi
-cp /tmp/Nextion.Images/$model$tft /usr/local/etc/
+cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
 
 
  FILE=/usr/local/etc/$model$tft
