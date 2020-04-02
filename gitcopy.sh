@@ -10,23 +10,48 @@
 #  KF6S/VE3RD                               2020=02-09  #
 #########################################################
 # Use screen model from command $1
+# Valid Screen Names for EA7KDO - NX3224K024, NX4832K935
+# Valid Screen Names for VE3RD - NX3224K024
+declare -i tst
+
+function exitcode
+{
+	echo "$1"
+	echo "Program Execution Halted"
+	exit
+
+}
+
 if [ -z "$2" ]; then
 	echo " Syntax: copyrd.sh NX????K??? 1 or 2  ?"
 	echo " 1 Copies EA7KDO Files,   2 Copies VE3RD Files"
 	echo " Third parameter disables command feedback inhibit" 
-   	exit
+   	exitcode "Invalid Parameters"
 fi
-
 if [ "$3" ]; then
 	if [ "$2" == "1" ]; then
-		echo "Loading EA7KDO Screen Package"
+		echo "Loading EA7KDO $1 Screen Package"
 	fi
 	if [ "$2" == "2" ]; then
-		echo "Loading VE3RD Screen Package"
+                if [ ! "$1" = "NX3224K024" ]; then
+			echo "Loading VE3RD $1 Screen Package"
+		fi	
 	fi
-
 fi
 
+if [ "$2" = "2" ]; then
+     	if [ "$1" != "NX3224K024" ]; then
+		if [ "$3" ]; then
+			echo "VE3RD Screen Name MUST be NX3224K024"
+			echo "Revising Screen Name to Match VE3RD Screens"
+			$1="NX3224K024"
+		fi
+	fi
+fi
+
+if [ ! -d /home/pi-star/Nextion_Temp ]; then
+   mkdir /home/pi-star/Nextion_Temp
+fi
 
 #Start Duration Timer
 start=$(date +%s.%N)
@@ -59,13 +84,31 @@ fi
   # Get Nextion Screen/Scripts and support files from github
   # Get EA7KDO File Set
 
-
+tst=0
 if [ "$2" = 1 ]; then
-	  sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /home/pi-star/Nextion_Temp
+     	if [ "$1" = "NX3224K024" ]; then
+	  	sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /home/pi-star/Nextion_Temp
+		tst=1
+	fi     
+	if [ "$1" = "NX4832K035" ]; then
+	  	sudo git clone --depth 1 https://github.com/EA7KDO/NX4832K035 /home/pi-star/Nextion_Temp
+		tst=2
+     	fi
+	
+	if [ "$tst" = 0 ]; then
+		exitcode "Invalid EA7KDO Screen Name $1"
+	fi
+
 fi
+
+
   # Get VE3RD File Set
 if [ "$2" = 2 ]; then
+     	if [ "$1" = "NX3224K024" ]; then	
   	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion_Temp
+	else
+		exitcode "Invalid VE3RD Screen Name $1"
+	fi
 fi
 
 if [ ! -d /usr/local/etc/Nextion_Support ]; then
@@ -100,7 +143,7 @@ cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
  if [ ! -f "$FILE" ]; then
         # Copy failed
       echo "No TFT File Available to Flash - Try Again"
-	exit
+	exitcode
  fi
 
 sudo systemctl start cron.service  > /dev/null
