@@ -50,7 +50,7 @@ if [ "$2" = "2" ]; then
 fi
 
 if [ ! -d /home/pi-star/Nextion_Temp ]; then
-   mkdir /home/pi-star/Nextion_Temp
+   sudo mkdir /home/pi-star/Nextion_Temp
 fi
 
 #Start Duration Timer
@@ -125,7 +125,7 @@ if [ -f /home/pi-star/Nextion_Temp/profiles.txt ]; then
         	if [ "$3" ]; then
                 	echo "Replacing Missing Profiles.txt"
         	fi
-        	cp  /home/pi-star/Nextion_Temp/profiles.txt /usr/local/etc/Nextion_Support/
+        	sudo cp  /home/pi-star/Nextion_Temp/profiles.txt /usr/local/etc/Nextion_Support/
 	fi
 fi
 
@@ -134,9 +134,9 @@ if [ "$3" ]; then
 fi
 
 if [ -f /usr/local/etc/$model$tft ]; then
-	rm /usr/local/etc/$model$tft
+	sudo rm /usr/local/etc/$model$tft
 fi
-cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
+sudo cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
 
 
  FILE=/usr/local/etc/$model$tft
