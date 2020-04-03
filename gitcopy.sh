@@ -14,37 +14,94 @@
 # Valid Screen Names for VE3RD - NX3224K024
 declare -i tst
 
+if [ -z "$1" ]; then
+	echo "No Screen Name Provided"
+	exit
+fi
+scn="$1"
+call="$2"
+fb="$3"
+calltxt="EA7KDO"
+
+#echo "$scn"
+
+
 function exitcode
 {
-	echo "$1"
+	echo "$scn"
 	echo "Program Execution Halted"
 	exit
 
 }
 
-if [ -z "$2" ]; then
-	echo " Syntax: copyrd.sh NX????K??? 1 or 2  ?"
-	echo " 1 Copies EA7KDO Files,   2 Copies VE3RD Files"
-	echo " Third parameter disables command feedback inhibit" 
-   	exitcode "Invalid Parameters"
-fi
-if [ "$3" ]; then
-	if [ "$2" == "1" ]; then
-		echo "Loading EA7KDO $1 Screen Package"
+function getea7kdo
+{
+#	echo "Function EA7KDO"
+	calltxt="EA7KDO"
+
+    	if [ "$scn" = "NX3224K024" ]; then
+	  	sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /home/pi-star/Nextion_Temp
+		tst=1
+	fi     
+	if [ "$scn" = "NX4832K035" ]; then
+	  	sudo git clone --depth 1 https://github.com/EA7KDO/NX4832K035 /home/pi-star/Nextion_Temp
+		tst=2
+     	fi
+	
+	if [ "$tst" = 0 ]; then
+		exitcode "Invalid EA7KDO Screen Name $scn"
 	fi
-	if [ "$2" == "2" ]; then
-                if [ ! "$1" = "NX3224K024" ]; then
-			echo "Loading VE3RD $1 Screen Package"
+}
+
+function getve3rd
+{
+#	echo "Function VE3RD"
+     	
+	calltxt="VE3RD"
+	if [ "$scn" = "NX3224K024" ]; then	
+  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion_Temp
+	else
+		exitcode "Invalid VE3RD Screen Name $scn"
+	fi
+
+}
+
+
+if [ -z "$1" ]; then
+	echo " Syntax: gitcopy.sh NX????K???   // Will copy EA7KDO Files - Default"
+	echo " Syntax: gitcopy.sh NX????K??? 1 // Will copy EA7KDO Files - Selected"
+	echo " Syntax: gitcopy.sh NX????K??? 2 // Will copy VE3RD Files - Selected"
+	echo " Adding a third parameter(anything) will provide feedback as the script runs (Commandline)"
+	echo " " 
+fi
+
+if [ -z "$2" ]; then
+  call="1"
+fi
+
+if [ "$call" = "0" ]; then
+  call="2"
+  fb="2"
+fi
+
+
+if [ "$fb" ]; then
+	if [ "$call" == "1" ]; then
+	 	echo "Loading EA7KDO $scn Screen Package"
+	fi
+	if [ "$call" == "2" ]; then
+                if [ ! "$scn" = "NX3224K024" ]; then
+			echo "Loading VE3RD $scn Screen Package"
 		fi	
 	fi
 fi
 
-if [ "$2" = "2" ]; then
-     	if [ "$1" != "NX3224K024" ]; then
-		if [ "$3" ]; then
+if [ "$call" = "2" ]; then
+     	if [ "$scn" != "NX3224K024" ]; then
+		if [ "$fb" ]; then
+			scn="NX3224K024"
 			echo "VE3RD Screen Name MUST be NX3224K024"
 			echo "Revising Screen Name to Match VE3RD Screens"
-			$1="NX3224K024"
 		fi
 	fi
 fi
@@ -58,12 +115,12 @@ start=$(date +%s.%N)
 
 
 #Disable all command feedback
-if [ ! "$3" ]; then
+if [ ! "$fb" ]; then
 	exec 3>&2
 	exec 2> /dev/null 
 fi
 
-model=$1
+model="$scn"
 tft='.tft' gz='.gz'
 #Put Pi-Star file system in RW mode
 sudo mount -o remount,rw /
@@ -85,30 +142,15 @@ fi
   # Get EA7KDO File Set
 
 tst=0
-if [ "$2" = 1 ]; then
-     	if [ "$1" = "NX3224K024" ]; then
-	  	sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /home/pi-star/Nextion_Temp
-		tst=1
-	fi     
-	if [ "$1" = "NX4832K035" ]; then
-	  	sudo git clone --depth 1 https://github.com/EA7KDO/NX4832K035 /home/pi-star/Nextion_Temp
-		tst=2
-     	fi
-	
-	if [ "$tst" = 0 ]; then
-		exitcode "Invalid EA7KDO Screen Name $1"
-	fi
-
+if [ "$call" = "1" ]; then
+	getea7kdo
+ 
 fi
 
 
   # Get VE3RD File Set
-if [ "$2" = 2 ]; then
-     	if [ "$1" = "NX3224K024" ]; then	
-  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion_Temp
-	else
-		exitcode "Invalid VE3RD Screen Name $1"
-	fi
+if [ "$call" = "2" ]; then
+	getve3rd
 fi
 
 if [ ! -d /usr/local/etc/Nextion_Support ]; then
@@ -122,14 +164,14 @@ sudo rsync -avqru /home/pi-star/Nextion_Temp/* /usr/local/etc/Nextion_Support/ -
 
 if [ -f /home/pi-star/Nextion_Temp/profiles.txt ]; then
 	if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
-        	if [ "$3" ]; then
+        	if [ "$fb" ]; then
                 	echo "Replacing Missing Profiles.txt"
         	fi
         	sudo cp  /home/pi-star/Nextion_Temp/profiles.txt /usr/local/etc/Nextion_Support/
 	fi
 fi
 
-if [ "$3" ]; then
+if [ "$fb" ]; then
     echo "Remove Existing $model$tft and copy in the new one"
 fi
 
@@ -151,11 +193,11 @@ sudo systemctl start cron.service  > /dev/null
 duration=$(echo "$(date +%s.%N) - $start" | bc)
 execution_time=`printf "%.2f seconds" $duration`
 
-if [ ! "$3" ]; then
+if [ ! "$fb" ]; then
  exec 2>&3
 fi 
 
-echo "Script Completed: $execution_time"
+echo "$calltxt Scripts Loaded: $execution_time"
 
 
 
