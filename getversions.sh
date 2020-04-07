@@ -35,10 +35,12 @@ m4=$(sudo sed -n '/^[^#]*dstarrepeater/p' /etc/pistar-release | sed -E "s/[[:spa
 m5=$(sudo sed -n '/^[^#]*MMDVMHost/p' /etc/pistar-release | sed -E "s/[[:space:]]+//g")
 m6=$(sudo sed -n '/^[^#]*kernel/p' /etc/pistar-release | sed -E "s/[[:space:]]+//g")
 m7=$(sudo sed -n '/^[^#]*Hardware/p' /etc/pistar-release | sed -E "s/[[:space:]]+//g")
+#m8=$(sudo sed -n '/^[^#]version/p' /var/www/dashboard/config/version.php | sed -E "s/[[:space:]]+//g")
+m8=$(sudo sed -n '/^[^#]*version/p' /var/www/dashboard/config/version.php | sed -E "s/[[:space:]]+//g" | sed -E "s/'//g" | sed -E "s/;//g" | cut -c2- | sed -E "s/version=/Dashboard:/g" )
 
-mt="$m4|$m5|$m6|$m7"
+
+mt="$m4|$m5|$m6|$m7|$m8"
 echo "$mt"
-
 
 fi
 
