@@ -25,10 +25,11 @@ declare -i pnum
 
 echo "Processing Profile = $1" > /home/pi-star/ActivateProfile.txt
 sudo mount -o remount,rw /
+echo "$1 -0"
 
 #pnum="$1"
 pnum=$(echo $1 | sed 's/^0*//')
-
+echo "$1 -1 - $pnum"
                 m1=$(sed -nr "/^\[Profile $pnum\]/ { :l /^RXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m2=$(sed -nr "/^\[Profile $pnum\]/ { :l /^TXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m3=$(sed -nr "/^\[Profile $pnum\]/ { :l /^RXFrequency[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
@@ -43,6 +44,7 @@ pnum=$(echo $1 | sed 's/^0*//')
                 m12=$(sed -nr "/^\[Profile $pnum\]/ { :l /^Password[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m13=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
 
+echo "$1 -2"
 m8a="$m8"
 mt=$(sudo sed -n '/^[^#]*'"$m8"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
 m8=$( echo "$mt" | cut -d'|' -f3)
@@ -198,12 +200,15 @@ m8=$( echo "$mt" | cut -d'|' -f3)
 		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
-echo "YSF2NXDN"
-                sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
                 sudo /usr/local/sbin/ysf2nxdn.service restart  > /dev/null
+                sudo /usr/local/sbin/ysfgateway.service restart  > /dev/null
+                sudo /usr/local/sbin/nxdngateway.service restart > /dev/null
+
+echo "YSF2NXDN Services Started"
 	fi
 
 	if [ "$m7" = 'YSF2P25' ]; then
+
 		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/ysf2p25
 		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\11/m;P;d' /etc/ysf2p25
 		 sudo sed -i '/^\[/h;G;/P25 Network/s/\(StartupDstId=\).*/\1'"$m9"'/m;P;d' /etc/ysf2p25
@@ -225,10 +230,10 @@ echo "YSF2NXDN"
 		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
 		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
 
-
-
                 sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
                 sudo /usr/local/sbin/ysf2p25.service restart  > /dev/null
+                sudo /usr/local/sbin/p25gateway.service restart  > /dev/null
+echo "YSF2P25 Services Started"
     
 	fi
 
@@ -254,4 +259,4 @@ echo "YSF2NXDN"
 fi
 
 sudo /usr/local/sbin/mmdvmhost.service start > /dev/null
-echo "Profile $pnum - Loaded  - $m8a"
+echo "Profile $pnum - Loaded  - $m7"

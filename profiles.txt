@@ -136,7 +136,7 @@ Callsign=VE3RD
 Id=302073334
 Mode=YSF2NXDN
 Address=tgif.network
-StartupDstId=10
+StartupDstId=9990
 Port=62031
 Password="password"
 
