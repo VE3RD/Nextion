@@ -24,12 +24,11 @@ tofile="/etc/mmdvmhost"
 declare -i pnum
 
 echo "Processing Profile = $1" > /home/pi-star/ActivateProfile.txt
+echo "Processing Profile = $1" 
 sudo mount -o remount,rw /
-echo "$1 -0"
 
 #pnum="$1"
 pnum=$(echo $1 | sed 's/^0*//')
-echo "$1 -1 - $pnum"
                 m1=$(sed -nr "/^\[Profile $pnum\]/ { :l /^RXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m2=$(sed -nr "/^\[Profile $pnum\]/ { :l /^TXOffset[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m3=$(sed -nr "/^\[Profile $pnum\]/ { :l /^RXFrequency[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
@@ -44,11 +43,10 @@ echo "$1 -1 - $pnum"
                 m12=$(sed -nr "/^\[Profile $pnum\]/ { :l /^Password[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
                 m13=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
 
-echo "$1 -2"
 m8a="$m8"
 mt=$(sudo sed -n '/^[^#]*'"$m8"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
 m8=$( echo "$mt" | cut -d'|' -f3)
-	
+echo "$mt"	
 		 sudo sed -i '/^\[/h;G;/Modem/s/\(RXOffset=\).*/\1'"$m1"'/m;P;d' $tofile 
 		 sudo sed -i '/^\[/h;G;/Modem/s/\(TXOffset=\).*/\1'"$m2"'/m;P;d' $tofile 
 		 sudo sed -i '/^\[/h;G;/Info/s/\(RXFrequency=\).*/\1'"$m3"'/m;P;d' $tofile 
@@ -120,8 +118,8 @@ m8=$( echo "$mt" | cut -d'|' -f3)
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Local=\).*/\162034/m;P;d' /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Password=\).*/\1'"PASSWORD"'/m;P;d' /etc/dmrgateway
 
+                sudo /usr/local/sbin/dmr2ysf.service restart  
 
-                sudo /usr/local/sbin/dmr2ysf.service restart  > /dev/null
 	fi
 	if [ "$m7" = 'DMR2NXDN' ]; then
 		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
@@ -155,9 +153,10 @@ m8=$( echo "$mt" | cut -d'|' -f3)
 		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost
 
 		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/ysf2dmr
-		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\10/m;P;d' /etc/ysf2dmr
+		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(EnableWiresX=\).*/\11/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/YSF Network/s/\(LocalPort=\).*/\142013/m;P;d' /etc/ysf2dmr
 
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(EnableUnlink=\).*/\10/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(StartupDstId=\).*/\1'"$m9"'/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Port=\).*/\1'"$m10"'/m;P;d' /etc/ysf2dmr
@@ -250,7 +249,6 @@ echo "YSF2P25 Services Started"
                          sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\110/m;P;d'  /etc/mmdvmhost
                          sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d'  /etc/mmdvmhost
                          sudo sed -i '/^\[/h;G;/DMR]/s/\(^Id=\).*/\1'"$m13"'/m;P;d'  /etc/mmdvmhost
-                        sudo sed -i '/^\[/h;G;/DMR]/s/\(Enable=\).*/\11/m;P;d'  /etc/mmdvmhost
 
 			echo "$m7   TGIF"
 
@@ -260,3 +258,5 @@ fi
 
 sudo /usr/local/sbin/mmdvmhost.service start > /dev/null
 echo "Profile $pnum - Loaded  - $m7"
+sudo reboot
+

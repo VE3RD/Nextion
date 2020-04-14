@@ -7,7 +7,6 @@
 ############################################################
 set -o errexit
 set -o pipefail
-export NCURSES_NO_UTF8_ACS=1
 sudo mount -o remount,rw /
 homedir=/home/pi-star/
 curdir=$(pwd)
@@ -58,51 +57,35 @@ function installnxd
 if [ ! -d /temp ] ; then
    sudo mkdir /temp
 fi
-
-HEIGHT=15
-WIDTH=60
-CHOICE_HEIGHT=5
-BACKTITLE="Nextion Driver & Support Install Script"
-TITLE="Install Nextion Driver Main Menu"
-MENU="Choose one of the following options:"
-
-OPTIONS=(1 "Pi-Star Update + Install Nextion Driver"
-         2 "Install Nextion Driver - No Update"
-         3 "Continue after Reboot"
-	 4 "Quit")
-
-CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
-
-clear
-case $CHOICE in
-        1)
-            echo "You Chose Pi-Star Update + Install"
+ 
+PS3='Choose the option that reflects what you need done: '
+options=("Update" "Start" "Continue" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Update")
+		echo "Update Option Chosen"
 		sudo pistar-update
 		sudo mount -o remount,rw /
 		installnxd
             ;;
-        2)
-            echo "You Chose Install - No Update"
+
+        "Start")
 		installnxd
+		break
             ;;
-        3)
-            echo "You Chose Continue after Reboot"
+        "Continue")
+		echo "Continue Option Chosen"
 		continue=1
+		break
             ;;
-	4)   echo " You Chose to Quit"
+        "Quit")
 		exit
-
-	;;
-esac
-
-clear
-
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
 echo " "
 
 
@@ -113,42 +96,36 @@ echo " "
 			sudo sed -i '/^\[/h;G;/Nextion/s/\(Port=\).*/\1\/dev\/ttyNextionDriver/m;P;d'  /etc/mmdvmhost                        
 	echo " "
 
-TITLE="Select Your Screen to Pi Interface"
-MENU="Choose one of the following options:"
 
-OPTIONS=(1 "USB to TTL Interface"
-         2 "GPIO Pins"
-	 3 "Quit")
-
-CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
-
-clear
-case $CHOICE in
-
-         1)   		echo "Setting the Port to TTL Adapter, and ScreenLayout to 3 ON7LDSHS LS "
+	echo "Identify your Inteface"
+	PS3='Identify Your Interface: '
+	options=("TTL_Adapter" "GPIO" "Quit")
+	select opt in "${options[@]}"
+	do
+    		case $opt in
+        	"TTL_Adapter")
+            		echo "Setting the Port to TTL Adapter, and ScreenLayout to 3 ON7LDSHS LS "
 			sudo sed -i '/^\[/h;G;/Nextion]/s/\(Port=\).*/\1\/dev\/ttyNextionDriver/m;P;d'  /etc/mmdvmhost                        
 			sudo sed -i '/^\[/h;G;/NextionDriver]/s/\(Port=\).*/\1\/dev\/ttyUSB0/m;P;d'  /etc/mmdvmhost                        
 			sudo sed -i '/^\[/h;G;/Nextion/s/\(ScreenLayout=\).*/\14/m;P;d'  /etc/mmdvmhost
 			# if using TTL_Adapter set WaitForLan=0 we do not need to wait for LAN if using USB for screen
 			sudo sed -i '/^\[/h;G;/NextionDriver/s/\(WaitForLan=\).*/\10/m;P;d'  /etc/mmdvmhost
+			break
 		;;
-        2)
+        	"GPIO")
             		echo "Setting the Ports to GPIO, ScreenLayout to 3 ON7LDSHS"
 			sudo sed -i '/^\[/h;G;/Nextion]/s/\(Port=\).*/\1\/dev\/ttyNextionDriver/m;P;d'  /etc/mmdvmhost                        
 			sudo sed -i '/^\[/h;G;/NextionDriver]/s/\(Port=\).*/\1\/dev\/ttyAMA0/m;P;d'  /etc/mmdvmhost                        
 			sudo sed -i '/^\[/h;G;/Nextion/s/\(ScreenLayout=\).*/\13/m;P;d'  /etc/mmdvmhost                        
+			break
             	;;
-        3)
+        	"Quit")
 			exit            	
+			break
             	;;
         	*) echo "invalid option $REPLY";;
     	esac
+	done
 	sudo /Nextion/check_installation.sh
         
         echo " "
@@ -157,41 +134,38 @@ case $CHOICE in
 
         if [ -z "$m1" ]; then
                 sudo mount -o remount,rw /
-sudo sed -i '/^\[Nextion\]/,/^\[/ { x; /^$/ !{ x; H }; /^$/ { x; h; }; d; }; x; /^\[Nextion\]/ { s/\(\n\+[^\n]*\)$/\nDisplayTempInFahrenheit=0\1/; p; x; p; x; d }; x' /etc/mmdvmhost
+	
+#sudo sed -i '/^\[Nextion\]/,/^\[/ { x; /^$/ !{ x; H }; /^$/ { x; h; }; d; }; x; /^\[Nextion\]/ { s/\(\n\+[^\n]*\)$/\nDisplayTempInFahrenheit=0\1/; p; x; p; x; d }; x' /etc/mmdvmhost
+
+#sed -i '/^\[Nextion\]/,/^\[/ { x; /^$/ !{ x; H }; /^$/ { x; h; }; d; }; x; /^\[Nextion\]/ \
+#-e { s/\(\n\+[^\n]*\)$/\nDisplayTempInFahrenheit=0\1/; p; x; p; x; d }; x' /etc/mmdvmhost
+p1="/^\[Nextion\]/,/^\[/ { x; /^$/ !{ x; H }; /^$/ { x; h; }; d; }; x; /^\[Nextion\]/ "
+p2=" { s/\(\n\+[^\n]*\)$/\nDisplayTempInFahrenheit=0\1/; p; x; p; x; d }; x"
+sudo sed -i "$p1$p2" /etc/mmdvmhost
          fi
 
-
-
-TITLE="Select Temperature Mode"
-MENU="Choose one of the following options:"
-
-OPTIONS=(1 "Fahrenheit"
-         2 "Celcius"
-	 3 "Quit")
-
-CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
-
-clear
-case $CHOICE in
-                1)
-                        echo "Fahrenheit Selected"
-			sudo sed -i '/^\[/h;G;/Nextion/s/\(DisplayTempInFahrenheit=\).*/\11/m;P;d'  /etc/mmdvmhost                        
-                ;;
-
-                2)
+        PS3='Select The Temperature Mode:'
+        options=("Celcius" "Fahrenheit" "Quit")
+        select opt in "${options[@]}"
+        do
+                case $opt in
+                "Celcius")
                         echo "Celcius Selected "
 			sudo sed -i '/^\[/h;G;/Nextion/s/\(DisplayTempInFahrenheit=\).*/\10/m;P;d'  /etc/mmdvmhost
+                        break
                 ;;
-                3)
+                "Fahrenheit")
+                        echo "Fahrenheit Selected"
+			sudo sed -i '/^\[/h;G;/Nextion/s/\(DisplayTempInFahrenheit=\).*/\11/m;P;d'  /etc/mmdvmhost                        
+			break
+                ;;
+                "Quit")
 			exit
+                        break
                 ;;
+                *) echo "invalid option $REPLY";;
         esac
+        done
 
 
 	echo "Installing BC"
@@ -200,8 +174,8 @@ case $CHOICE in
 	sudo mount -o remount,rw /
 
 	sudo rm -R /temp
-	sudo sh -c 'echo "iptables -A OUTPUT -p tcp --dport 5040 -j ACCEPT" > /root/ipv4.fw'
-
+	sudo echo "iptables -A OUTPUT -p tcp --dport 5040 -j ACCEPT" > /home/pi-star/ipv4.fw
+	sudo cp /home/pi-star/ipv4.fw /root
 	sudo pistar-firewall
 
 	echo "Nextion Driver Installation Completed"

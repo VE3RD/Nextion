@@ -9,7 +9,7 @@ Id=3020733
 ExtId=302073304
 Mode=DMR
 Address=tgif.network
-StartupDstId=0
+StartupDstId=31665
 Port=62031
 
 [Profile 1]
@@ -88,8 +88,8 @@ Password="passw0rd"
 Name=DMR2YSF
 RXOffset=-400
 TXOffset=-400
-RXFrequency=433900000
-TXFrequency=433900000
+RXFrequency=445100000
+TXFrequency=445100000
 Callsign=VE3RD
 Id=302073304
 Mode=DMR2YSF
@@ -122,7 +122,7 @@ Callsign=VEZ3RD
 Id=302048224
 Mode=YSF2DMR
 Address=tgif.network
-StartupDstId=9990
+StartupDstId=31665
 Port=62031
 Password="passw0rd"
 
