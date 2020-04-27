@@ -16,7 +16,7 @@ if [ -z "$1" ]; then
 fi
 typeset -u str="$1"
 
-	mts=$(sudo sed -n '/'"$str"'/p' /usr/local/etc/YSFHosts.txt | sed -r 's/[;]+/|/g')
+	mts=$(sudo sed -n '/'"$str"'/p' /usr/local/etc/YSFHosts.txt | sed -r 's/[;]+/|/g' | head -1)
 #echo "mts -- $mts"
 	mt1=$(echo "$mts" | cut -d'|' -f1)
 	mt2=$(echo "$mts" | cut -d'|' -f2)

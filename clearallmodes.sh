@@ -7,6 +7,7 @@
 set -o errexit
 set -o pipefail
 sudo mount -o remount,rw /
+echo "Clearing All Modes - Started" >> /home/pi-star/ActivateProfile.txt
 
 #echo "D-Star"
         sudo sed -i '/\[D-Star\]/!b;n;cEnable=0' /etc/mmdvmhost
@@ -102,6 +103,7 @@ sudo mount -o remount,rw /
 
 
 #echo "DONE"
+echo "Clearing All Modes Complete" >> /home/pi-star/ActivateProfile.txt
 
 # sudo /usr/local/etc/Nextion_Support/startnet.sh DMR
  

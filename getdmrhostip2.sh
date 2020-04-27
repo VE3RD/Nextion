@@ -18,7 +18,7 @@ else
 fi
 fromfile=/usr/local/etc/Nextion_Support/profiles.txt
 
-mt=$(sudo sed -n '/^[^#]*'"$HN"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
+mt=$(sudo sed -n '/^[^#]*'"$HN"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | head -1)
 
 mt1=$( echo "$mt" | cut -d'|' -f1)
 #mt2=$( echo "$mt" | cut -d'|' -f2)

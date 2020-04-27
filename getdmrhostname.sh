@@ -16,7 +16,7 @@ fromfile=/usr/local/etc/Nextion_Support/profiles.txt
 Addr=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/mmdvmhost)
 #Addr="$1"
  
-mt=$(sudo sed -n '/^[^#]*'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
+mt=$(sudo sed -n '/^[^#]*'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | head -1)
 
 mt1=$( echo "$mt" | cut -d'|' -f1)
 mt2=$( echo "$mt" | cut -d'|' -f2)
@@ -26,7 +26,7 @@ mt5=$( echo "$mt" | cut -d'|' -f5)
 
 #mt2=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
 
-if [ -z $mt ]; then
+if [ -z "$mt" ]; then
 	echo "Nothing|Found|Try|Another|Search"
 else
 	echo "$mt1"

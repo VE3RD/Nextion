@@ -16,7 +16,7 @@ exit
 fi
 typeset -u str="$1"
 
-mtf=$(sudo sed -n '/^[^#]*'"$str"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
+mtf=$(sudo sed -n '/^[^#]*'"$str"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | head -1)
 mt1=$(echo "$mtf" | cut -d'|' -f1)
 mt2=$(echo "$mtf" | cut -d'|' -f2)
 mt3=$(echo "$mtf" | cut -d'|' -f3)

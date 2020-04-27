@@ -13,7 +13,7 @@ StartupDstId=31665
 Port=62031
 
 [Profile 1]
-Name=TGIF
+Name=TGIF_Network
 RXOffset=-400
 TXOffset=-400
 RXFrequency=445100000
@@ -24,23 +24,40 @@ Mode=TGIF
 Address=tgif.network
 StartupDstId=31665
 Port=62031
+Local=62035
 Password=passw0rd
 
 [Profile 2]
-Name=BM
+Name=PRIME_TGIF_Network
 RXOffset=-400
 TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
 Id=3020733
-Mode=DMR
-Address=158.69.203.89
-StartupDstId=310
+Mode=PRIME
+Address=prime.tgif.network
+StartupDstId=31665
 Port=62031
+Local=62035
 Password=passw0rd
 
 [Profile 3]
+Name=PRIME_TGIF_Network
+RXOffset=-400
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=302073304
+Mode=DMR
+Address=prime.tgif.network
+StartupDstId=31665
+Port=62031
+Local=62035
+Password=passw0rd
+
+[Profile 13]
 Name=BM 3021
 RXOffset=-400
 TXOffset=-400
