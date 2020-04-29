@@ -25,44 +25,45 @@ function exitfunction
 
 function KillProcesses
 {
-sudo pistar-watchdog.service stop 
-if [ "$?" = 1 ]; then 
-echo  "pistar-watchdog  failed to stop" >> /home/pi-star/ActivateProfile.txt
-fi
+#sudo systemctl stop mmdvmhost.timer
+#if [ "$?" = 1 ]; then 
+#echo  "mmdvmhost.timer failed to stop" >> /home/pi-star/ActivateProfile.txt
+#fi
+#sudo pistar-watchdog.service stop 
+#if [ "$?" = 1 ]; then 
+#echo  "pistar-watchdog  failed to stop" >> /home/pi-star/ActivateProfile.txt
+#fi
 sudo mmdvmhost.service stop
 if [ "$?" = 1 ]; then 
 echo  "mmdvmhost.service  failed to stop" >> /home/pi-star/ActivateProfile.txt
 fi
-sudo systemctl stop mmdvmhost.timer
-if [ "$?" = 1 ]; then 
-echo  "mmdvmhost.timer failed to stop" >> /home/pi-star/ActivateProfile.txt
-fi
-sudo systemctl stop cron.service
-if [ "$?" = 1 ]; then 
-echo  "cron service failed to stop" >> /home/pi-star/ActivateProfile.txt
-fi
+#sudo systemctl stop cron.service
+#if [ "$?" = 1 ]; then 
+#echo  "cron service failed to stop" >> /home/pi-star/ActivateProfile.txt
+#fi
+echo "All Processes Stopped OK" >>  /home/pi-star/ActivateProfile.txt
 
 }
 
 function StartProcesses
 {
-sudo pistar-watchdog.service start
-if [ "$?" = 1 ]; then 
-echo  "pistar-watchdog  failed to start" >> /home/pi-star/ActivateProfile.txt
-fi
-sudo mmdvmhost.service start
+#sudo pistar-watchdog.service start
+#if [ "$?" = 1 ]; then 
+#echo  "pistar-watchdog  failed to start" >> /home/pi-star/ActivateProfile.txt
+#fi
+#sudo systemctl start mmdvmhost.timer
+#if [ "$?" = 1 ]; then 
+#echo  "mmdvmhost.timer failed to start" >> /home/pi-star/ActivateProfile.txt
+#fi
+#sudo systemctl start cron.service
+#if [ "$?" = 1 ]; then 
+#echo  "cron service failed to start" >> /home/pi-star/ActivateProfile.txt
+#fi
+sudo mmdvmhost.service restart
 if [ "$?" = 1 ]; then 
 echo  "mmdvmhost.service  failed to start" >> /home/pi-star/ActivateProfile.txt
 fi
-sudo systemctl start mmdvmhost.timer
-if [ "$?" = 1 ]; then 
-echo  "mmdvmhost.timer failed to start" >> /home/pi-star/ActivateProfile.txt
-fi
-sudo systemctl stoart cron.service
-if [ "$?" = 1 ]; then 
-echo  "cron service failed to start" >> /home/pi-star/ActivateProfile.txt
-fi
-
+echo "All Processes Started OK" >>  /home/pi-star/ActivateProfile.txt
 
 }
 
@@ -118,9 +119,10 @@ sudo mount -o remount,rw /
 		 sudo sed -i '/^\[/h;G;/General/s/\(Id=\).*/\1'"$m6"'/m;P;d' /etc/mmdvmhost.tmp
 		 sudo sed -i '/^\[/h;G;/DMR/s/\(Id=\).*/\1'"$m6"'/m;P;d' /etc/mmdvmhost.tmp
 	
-		echo "Processing Profile = $pnum,  Mode = $m7" >> /home/pi-star/ActivateProfile.txt
-	
+		echo "Processing Profile = $pnum,  Mode = $m7" >> /home/pi-star/ActivateProfile.txt	
 		echo "Set Defaults Complete"  >> /home/pi-star/ActivateProfile.txt
+		sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
+
 }		
 
 function setdmr
@@ -134,14 +136,12 @@ sudo mount -o remount,rw /
        	sudo sed -i '/^\[/h;G;/DMR Network/s/\(Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d' /etc/dmr2nxdn
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Port=\).*/\1'"$m10"'/m;P;d' /etc/dmr2nxdn
-#        sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Port=\).*/\162031/m;P;d' /etc/mmdvmhost.tmp
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1'"$m12"'/m;P;d' /etc/dmr2nxdn
-#        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1passw0rd/m;P;d' /etc/mmdvmhost.tmp
         sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162035/m;P;d' /etc/mmdvmhost.tmp
         sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\115/m;P;d' /etc/mmdvmhost.tmp
 
-#	sudo /usr/local/etc/Nextion_Support/setdmron.sh
 	echo "Set DMR Complete" >> /home/pi-star/ActivateProfile.txt
+	sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
 }
 
@@ -152,6 +152,8 @@ function setysf
 		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
 		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost.tmp
 		 sudo sed -i '/^\[/h;G;/DMR/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost.tmp
+	sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
+
 }
 
 function setysfgateway
@@ -172,13 +174,21 @@ if [ -z "$1" ]; then
    	exit
 else
 
-echo "Starting KillProcesses" >> /home/pi-star/ActivateProfile.txt
 
-KillProcesses
+
 echo "Starting preposses" >> /home/pi-star/ActivateProfile.txt
 preprocess
+
 echo "Starting readprofile0" >> /home/pi-star/ActivateProfile.txt
 readprofile0
+
+if [ "$m7" = 'NXDN2DMR' ]; then 
+	exit
+fi
+
+echo "Starting KillProcesses" >> /home/pi-star/ActivateProfile.txt
+KillProcesses
+
 echo "Starting setdefaults" >> /home/pi-star/ActivateProfile.txt
 setdefaults
 
@@ -199,6 +209,7 @@ sudo mount -o remount,rw /
                          sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\110/m;P;d'  /etc/mmdvmhost.tmp
                          sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d'  /etc/mmdvmhost.tmp
                          sudo sed -i '/^\[/h;G;/DMR]/s/\(^Id=\).*/\1'"$m13"'/m;P;d'  /etc/mmdvmhost.tmp
+sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
                         echo "$m7  $m8"  >> /home/pi-star/ActivateProfile.txt
         fi
@@ -226,10 +237,13 @@ sudo mount -o remount,rw /
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(^Port=\).*/\162033/m;P;d' /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Local=\).*/\162034/m;P;d' /etc/dmrgateway
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Password=\).*/\1'"PASSWORD"'/m;P;d' /etc/dmrgateway
+sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
                 sudo /usr/local/sbin/dmr2ysf.service restart  
+                sudo /usr/local/sbin/dmrgatewayservice restart  
 
 	fi
+
 	if [ "$m7" = 'DMR2NXDN' ]; then
 		setdmr
 		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1127.0.0.3/m;P;d' /etc/mmdvmhost.tmp
@@ -244,10 +258,47 @@ sudo mount -o remount,rw /
                 sudo sed -i '/\[DMR Network\]/!b;n;cEnabled='"1"'' /etc/dmr2nxdn
 		 sudo sed -i '/^\[/h;G;/Log/s/\(FileLevel=\).*/\12/m;P;d' /etc/dmr2nxdn
 
+sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
                 sudo /usr/local/sbin/dmr2nxdn.service restart > /dev/null
                 sudo /usr/local/sbin/nxdngateweay.service restart  > /dev/null
 	fi
+	if [ "$m7" = 'NXDN2DMR' ]; then
+#		setdmr
+		echo " Under Construction - Script Aborted"
+exit
+		echo "Starting NXDN2DMR Process" >> /home/pi-star/ActivateProfile.txt
+		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$m13"'/m;P;d' /etc/nxdn2dmr
+		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/nxdn2dmr
+		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/nxdngateway
+		 sudo sed -i '/^\[/h;G;/NXDN/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
+		 sudo sed -i '/^\[/h;G;/NXDN  Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
+
+		echo "NXDN2DMR Enables Complete" >>  /home/pi-star/ActivateProfile.txt
+
+		sudo sed -i '/^\[/h;G;/DMR Network/s/\(StartupDstId=\).*/\1'"$m9"'/m;P;d' /etc/nxdn2dmr
+                sudo sed -i '/\[DMR Network\]/!b;n;cEnabled='"1"'' /etc/nxdn2dmr
+		 sudo sed -i '/^\[/h;G;/Log/s/\(FileLevel=\).*/\12/m;P;d' /etc/nxdn2dmr
+
+		echo "NXDN2DMR Mid Process" >> /home/pi-star/ActivateProfile.txt             
+		 #sudo /usr/local/sbin/nxdngateweay.service restart  > /dev/null
+		
+		 echo " NXDN Enables Set" >> /home/pi-star/ActivateProfile.txt
+
+		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d' /etc/nxdn2dmr
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Port=\).*/\162031/m;P;d' /etc/nxdn2dmr
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Local=\).*/\162035/m;P;d' /etc/nxdn2dmr
+		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Password=\).*/\1passw0rd/m;P;d' /etc/nxdn2dmr
+
+		echo "NXDN2DMR Process Complete" >> /home/pi-star/ActivateProfile.txt
+		
+                sudo /usr/local/sbin/nxdn2dmr.service restart 
+                sudo /usr/local/sbin/nxdngateweay.service restart  
+		echo "nxdn2dmr services started Complete" >> /home/pi-star/ActivateProfile.txt
+		sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
+
+	fi
+
 	if [ "$m7" = 'YSF2DMR' ]; then
 		 sudo sed -i '/^\[/h;G;/System Fusion/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
 		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
@@ -270,6 +321,7 @@ sudo mount -o remount,rw /
 		 sudo sed -i '/^\[/h;G;/Info/s/\(TXFrequency=\).*/\1'"$m4"'/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/Log/s/\(FileLevel=\).*/\12/m;P;d' /etc/ysf2dmr
 ysfgateway
+sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
                 sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
                 sudo /usr/local/sbin/ysf2dmr.service restart  > /dev/null
@@ -294,6 +346,7 @@ setysf
                 sudo /usr/local/sbin/ysf2nxdn.service restart  > /dev/null
                 sudo /usr/local/sbin/ysfgateway.service restart  > /dev/null
                 sudo /usr/local/sbin/nxdngateway.service restart > /dev/null
+sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
 		echo "YSF2NXDN Services Started"
 	fi
@@ -316,6 +369,7 @@ setysfgateway
                 sudo /usr/local/sbin/ysf2p25.service restart  > /dev/null
                 sudo /usr/local/sbin/p25gateway.service restart  > /dev/null
 		echo "YSF2P25 Services Started"
+sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
     
 	fi
 
@@ -335,6 +389,7 @@ setysfgateway
                          sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d' /etc/mmdvmhost.tmp
 			setdmr
 			echo "Processing Profile = $pnum  Mode = $m7  Finished"  >> /home/pi-star/ActivateProfile.txt
+sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
 	fi 
  
@@ -342,9 +397,8 @@ fi
 
 echo "Processing Profile = $pnum  Mode = $m7  Ready for Reboot" >> /home/pi-star/ActivateProfile.txt
 
-#sudo /usr/local/sbin/mmdvmhost.service restart > /dev/null
 #echo "Profile $pnum - Loaded  - $m7"
-#sudo /usr/local/etc/Nextion_Support/setdmron.sh
 sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
-StartProcesses
-
+sudo /usr/local/sbin/mmdvmhost.service restart >
+#startprocesses
+#reboot

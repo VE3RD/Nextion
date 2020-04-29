@@ -79,7 +79,7 @@ fi
 HEIGHT=15
 WIDTH=60
 CHOICE_HEIGHT=5
-BACKTITLE="This SCRIPT will Install the Nextion Driver,  BC,  and Firewall Rule  - VE3RD"
+BACKTITLE="This SCRIPT will Install the Nextion Driver,  BC,  anf Firewall Rule"
 TITLE="Main Menu - Nextion Driver Installation"
 MENU="Select your Installation Mode"
 

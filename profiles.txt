@@ -28,7 +28,7 @@ Local=62035
 Password=passw0rd
 
 [Profile 2]
-Name=PRIME_TGIF_Network
+Name=TGIF_Network
 RXOffset=-400
 TXOffset=-400
 RXFrequency=445100000
@@ -36,22 +36,22 @@ TXFrequency=445100000
 Callsign=VE3RD
 Id=3020733
 Mode=PRIME
-Address=prime.tgif.network
+Address=tgif.network
 StartupDstId=31665
 Port=62031
 Local=62035
 Password=passw0rd
 
 [Profile 3]
-Name=PRIME_TGIF_Network
+Name=NXDN2DMR
 RXOffset=-400
 TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
 Id=302073304
-Mode=DMR
-Address=prime.tgif.network
+Mode=NXDN2DMR
+Address=tgif.network
 StartupDstId=31665
 Port=62031
 Local=62035

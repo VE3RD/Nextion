@@ -35,6 +35,8 @@ echo "Clearing All Modes - Started" >> /home/pi-star/ActivateProfile.txt
 #echo  "NXDN"
          sudo sed -i '/\[NXDN\]/!b;n;cEnable=0' /etc/mmdvmhost
 	sudo sed -i '/\[NXDN Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/nxdn2dmr
+	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/nxdngateway
 
 #echo "POCSAG"
 
@@ -84,6 +86,11 @@ echo "Clearing All Modes - Started" >> /home/pi-star/ActivateProfile.txt
    if pgrep -x NXDNGateway > /dev/null
    then
      killall -9 NXDNGateway
+   fi
+
+   if pgrep -x NXDN2DMR > /dev/null
+   then
+     killall -9 NXDN2DMR
    fi
 
    if pgrep -x YSFGateway > /dev/null
