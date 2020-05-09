@@ -28,14 +28,14 @@ Local=62035
 Password=passw0rd
 
 [Profile 2]
-Name=TGIF_Network
+Name=New_Server
 RXOffset=-400
 TXOffset=-400
 RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
 Id=3020733
-Mode=PRIME
+Mode=TGIF
 Address=tgif.network
 StartupDstId=31665
 Port=62031

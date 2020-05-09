@@ -8,10 +8,11 @@ set -o errexit
 set -o pipefail
 sudo mount -o remount,rw /
 echo "Clearing All Modes - Started" >> /home/pi-star/ActivateProfile.txt
+cp /etc/mmdvmhost /etc/mmdvmhost.tmp
 
 #echo "D-Star"
-        sudo sed -i '/\[D-Star\]/!b;n;cEnable=0' /etc/mmdvmhost
-        sudo sed -i '/\[D-Star Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+        sudo sed -i '/\[D-Star\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
+        sudo sed -i '/\[D-Star Network\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
 #	sudo dstarrepeater.service stop
 
 #echo  "YSF"
@@ -20,34 +21,34 @@ echo "Clearing All Modes - Started" >> /home/pi-star/ActivateProfile.txt
         sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/ysf2nxdn
         sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/ysf2p25
  	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/ysfgateway
-        sudo sed -i '/\[System Fusion\]/!b;n;cEnable=0' /etc/mmdvmhost
-	sudo sed -i '/\[System Fusion Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+        sudo sed -i '/\[System Fusion\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
+	sudo sed -i '/\[System Fusion Network\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
 	sudo sed -i '/\[YSF Network\]/!b;n;cEnable=0' /etc/ysfgateway
 	sudo sed -i '/\[FCS Network\]/!b;n;cEnable=0' /etc/ysfgateway
 
 
 
 #echo "P25"
-        sudo sed -i '/\[P25\]/!b;n;cEnable=0' /etc/mmdvmhost
-	sudo sed -i '/\[P25 Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+        sudo sed -i '/\[P25\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
+	sudo sed -i '/\[P25 Network\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
 	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/p25gateway
 
 #echo  "NXDN"
-         sudo sed -i '/\[NXDN\]/!b;n;cEnable=0' /etc/mmdvmhost
-	sudo sed -i '/\[NXDN Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+         sudo sed -i '/\[NXDN\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
+	sudo sed -i '/\[NXDN Network\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
 	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/nxdn2dmr
 	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/nxdngateway
 
 #echo "POCSAG"
 
-        sudo sed -i '/\[POCSAG\]/!b;n;cEnable=0' /etc/mmdvmhost
-	sudo sed -i '/\[POCSAG Network\]/!b;n;cEnable=0' /etc/mmdvmhost
+        sudo sed -i '/\[POCSAG\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
+	sudo sed -i '/\[POCSAG Network\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
 
 #echo "DMR"
 
-        sudo sed -i '/\[DMR\]/!b;n;cEnable=0' /etc/mmdvmhost
-	sudo sed -i '/\[DMR Network\]/!b;n;cEnable=0' /etc/mmdvmhost
-      #  sudo sed  -i 's/tgif.network/127.0.0.2/g' /etc/mmdvmhost
+        sudo sed -i '/\[DMR\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
+	sudo sed -i '/\[DMR Network\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
+      #  sudo sed  -i 's/tgif.network/127.0.0.2/g' /etc/mmdvmhost.tmp
         sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/dmr2ysf
         sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/dmr2nxdn
 
@@ -111,6 +112,7 @@ echo "Clearing All Modes - Started" >> /home/pi-star/ActivateProfile.txt
 
 #echo "DONE"
 echo "Clearing All Modes Complete" >> /home/pi-star/ActivateProfile.txt
+cp /etc/mmdvmhost.tmp /etc/mmdvmhost
 
 # sudo /usr/local/etc/Nextion_Support/startnet.sh DMR
  
