@@ -14,9 +14,10 @@ declare LEN number
 fromfile=/usr/local/etc/Nextion_Support/profiles.txt
        
 Addr=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/mmdvmhost)
-#Addr="$1"
+#echo "Addr=$Addr"
  
 mt=$(sudo sed -n '/^[^#]*\t'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | head -1)
+#echo "$mt"
 
 mt1=$( echo "$mt" | cut -d'|' -f1)
 mt2=$( echo "$mt" | cut -d'|' -f2)

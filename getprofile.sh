@@ -4,10 +4,11 @@
 #  Returns a multi string | Separated                      #
 #                                                          #
 #                                                          #
-#  VE3RD                                     2019-11-17    #
+#  VE3RD                                     2020-05-12    #
 ############################################################
 set -o errexit
 set -o pipefail
+ver="20200512"
 dirn=/usr/local/etc/Nextion_Support/profiles.txt
 declare -i pnum
 sudo mount -o remount,rw /
