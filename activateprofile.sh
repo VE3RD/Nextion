@@ -260,12 +260,6 @@ exit
 	fi
 
 	if [ "$m7" = 'YSF2DMR' ]; then
-
-		sudo /usr/local/etc/Nextion_Support/setysf2dmr.sh 1
-test+=32
-
-	fi
-	if [ "$m7" = 'YSF2DMRXXX' ]; then
 		 sudo sed -i '/^\[/h;G;/System Fusion/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
 		 sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
 		 sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d' /etc/mmdvmhost.tmp
@@ -341,16 +335,9 @@ test+=32
 
 
 	if [ "$m7" = 'TGIF' ]; then 
-
-			echo "Processing Profile = $pnum  Mode = $m7  Starting"  >> /home/pi-star/ActivateProfile.txt
-
-			if [ "$pnum" == 2 ]; then
-				sudo /home/pi-star/switch2.sh
-			else
-                        	sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d' /etc/mmdvmhost.tmp
-			fi
-			setdmr
-			echo "Processing Profile = $pnum  Mode = $m7  Finished"  >> /home/pi-star/ActivateProfile.txt
+		setdmr
+             	sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d' /etc/mmdvmhost.tmp
+		echo "Processing Profile = $pnum  Mode = $m7  Finished"  >> /home/pi-star/ActivateProfile.txt
 	fi 
 fi
 
