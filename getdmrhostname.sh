@@ -15,6 +15,9 @@ fromfile=/usr/local/etc/Nextion_Support/profiles.txt
        
 Addr=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/mmdvmhost)
 #echo "Addr=$Addr"
+
+#Line="HB_US_TGIF_Network              0000    tgif.network                    passw0rd        62031"
+#sed "/$Line/d" /usr/local/etc/DMR_Hosts.txt
  
 mt=$(sudo sed -n '/^[^#]*\t'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | head -1)
 #echo "$mt"
