@@ -11,6 +11,7 @@ declare -i pnum
 declare -i test 
 
 test=0
+chmod 766 /etc/mmdvmhost
 
 fromfile="/usr/local/etc/Nextion_Support/profiles.txt"
 t0="/etc/mmdvmhost"
@@ -19,7 +20,6 @@ t1="/etc/mmdvmhost.tmp"
 
 pnum=$(echo "$1" | sed 's/^0*//')
 echo "Profile $1 - $pnum" > /home/pi-star/ActivateProfile.txt
-
 
 function exitfunction
 {
@@ -35,6 +35,11 @@ function preprocess
 	echo "Clearing Modes Complete" >> /home/pi-star/ActivateProfile.txt
 	echo "Pre-Process Function Complete" >> /home/pi-star/ActivateProfile.txt
 sudo cp /etc/mmdvmhost /etc/mmdvmhost.tmp
+if [  "$?" == 0 ]; then
+  echo "Backup mmdvmhozst OK!"
+else
+  echo "Backup mmdvmhozst FAILED!"
+fi
 echo "cp mmdvmhost .tmp"
 }
 
@@ -165,14 +170,25 @@ test+=32
  
 	fi 
         if [ "$m7" = 'DMRGateway' ]; then
-			setdmr
-                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d'  /etc/mmdvmhost.tmp
-                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\110/m;P;d'  /etc/mmdvmhost.tmp
-                         sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d'  /etc/mmdvmhost.tmp
-                         sudo sed -i '/^\[/h;G;/DMR]/s/\(^Id=\).*/\1'"$m13"'/m;P;d'  /etc/mmdvmhost.tmp
-
-                        echo "$m7  $m8"  >> /home/pi-star/ActivateProfile.txt
-test+=32
+	echo "Set DMR "	
+		setdmr
+	echo "Starting Gateway"
+                         sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1127.0.0.1/m;P;d'  /etc/mmdvmhost.tmp
+	echo "Gateway 1"              
+		         sudo sed -i '/^\[/h;G;/DMR Network/s/\(ModeHang=\).*/\110/m;P;d'  /etc/mmdvmhost.tmp
+        echo "Gateway 2"                
+        	
+		         sudo sed -i '/^\[/h;G;/General/s/\(^Id=\).*/\1'"$m11"'/m;P;d'  /etc/mmdvmhost.tmp
+	echo "Gateway 3"                
+                
+		         sudo sed -i '/^\[/h;G;/DMR]/s/\(^Id=\).*/\1'"$m13"'/m;P;d'  /etc/mmdvmhost.tmp
+	echo "Gateway 4"                
+		
+			sudo dmrgateway.service restart
+	echo "Gateway 5"                
+                
+        echo "$m7  $m8"  >> /home/pi-star/ActivateProfile.txt
+echo "Finished DMR Gateway Script"
         fi
 
 	if [ "$m7" = 'DMR2YSF' ]; then
@@ -200,7 +216,7 @@ test+=32
 		 sudo sed -i '/^\[/h;G;/DMR Network 3/s/\(Password=\).*/\1'"PASSWORD"'/m;P;d' /etc/dmrgateway
 
                 sudo /usr/local/sbin/dmr2ysf.service restart  
-                sudo /usr/local/sbin/dmrgatewayservice restart  
+                sudo /usr/local/sbin/dmrgateway.service restart  
 test+=32
 
 	fi
@@ -280,7 +296,6 @@ exit
 		 sudo sed -i '/^\[/h;G;/Info/s/\(RXFrequency=\).*/\1'"$m3"'/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/Info/s/\(TXFrequency=\).*/\1'"$m4"'/m;P;d' /etc/ysf2dmr
 		 sudo sed -i '/^\[/h;G;/Log/s/\(FileLevel=\).*/\12/m;P;d' /etc/ysf2dmr
-ysfgateway
                 sudo /usr/local/sbin/ysfgateway.service restart > /dev/null
                 sudo /usr/local/sbin/ysf2dmr.service restart  > /dev/null
 test+=32
@@ -344,14 +359,23 @@ fi
 echo "Processing Profile = $pnum  Mode = $m7  Ready for Reboot" >> /home/pi-star/ActivateProfile.txt
 
 #echo "Profile $pnum - Loaded  - $m7"
-sudo /usr/local/sbin/mmdvmhost.service stop
-sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
-sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
-sudo cp /etc/mmdvmhost.tmp /etc/mmdvmhost
-sudo /usr/local/sbin/mmdvmhost.service restart
+systemctl stop mmdvmhost
+systemctl stop mmdvmhost.timer
+sudo rm /etc/mmdvmhost
+sudo mv -f /etc/mmdvmhost.tmp /etc/mmdvmhost
+
+if [  "$?" == 0 ]; then
+  echo "Resrore mmdvmhost OK!"
+else
+  echo "Restore mmdvmhost FAILED!"
+fi
+
+systemctl start mmdvmhost
+systemctl start mmdvmhost.timer
+
 ysfgateway.service restart
 ysf2dmr.service restart 
-
+dmrgateway.service restart
 echo "Profile Script Completed Processing Test=$test"
 echo "Profile Script Completed Processing Test=$test"  >> /home/pi-star/ActivateProfile.txt
 
