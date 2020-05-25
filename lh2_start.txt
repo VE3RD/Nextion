@@ -309,3 +309,160 @@ mode 1 3
 05-16 19:51    NW3Q   Seavey   11125905-16 19:47   W4WNO     Andy   11374005-16 19:39   N9DRF   George   31174705-16 19:30  VE3JAR      Vic   30235705-16 19:11    WV8T  Timothy   31540505-16 19:03   W9ABF     Paul   315525
 05-16 20:03  WD8KOB           Rodney 05-16 19:51    NW3Q           Seavey 05-16 19:47   W4WNO             Andy 05-16 19:39   N9DRF           George 05-16 19:30  VE3JAR              Vic 05-16 19:11    WV8T           Timothy
 05-16 20:03 WD8KOB  Rodney 3115571   05-16 19:51   NW3Q  Seavey 1112594   05-16 19:47  W4WNO    Andy 1137403   05-16 19:39  N9DRF  George 3117476   05-16 19:30 VE3JAR     Vic 3023571   05-16 19:11   WV8T Timothy 3154055   
+mode 1 1
+mode 1 1
+mode 1 1
+mode 1 3
+mode 1 3
+KC0RNP N/A N/A N/A N/A               K9IUQ Stanley J Shestokes Cobden IL UW9ZEP Mike Wagner Fishers IN US      W1BIC Harrison Bicknell Auburn Hills WA4CLA Steven Murtrey Florence AL US AA8X Joseph Trunk Buford GA US       
+mode 1 2
+mode 1 2
+mode 1 2
+05-24 21:07      2         0% Joe    05-24 21:06      2         0% Stanley05-24 21:05      2         0%        05-24 20:49      2         0% Mike   05-24 20:38      2         0% Harriso05-24 20:37      2    0%05-24 21:07  05-24 21
+mode 1 2
+05-24 21:08      2         0% Ronald 05-24 21:07      2         0% Joe    05-24 21:06      2         0% Stanley05-24 21:05      2         0%        05-24 20:49      2         0% Mike   05-24 20:38      2    0%05-24 21:08  05-24 21
+mode 1 2
+05-24 21:08      2         0% Ronald 05-24 21:07      2         0% Joe    05-24 21:06      2         0% Stanley05-24 21:05      2         0%        05-24 20:49      2         0% Mike   05-24 20:38      2    0%05-24 21:08  05-24 21
+mode 1 2
+05-24 21:08     0%          2 Ronald 05-24 21:07     0%          2 Joe    05-24 21:06     0%          2 Stanley05-24 21:05     0%          2        05-24 20:49     0%          2 Mike   05-24 20:38 0%05-24          2 21:08 05-24 21
+mode 1 2
+05-24 21:08     0%          2 Ronald 05-24 21:07     0%          2 Joe    05-24 21:06     0%          2 Stanley05-24 21:05     0%          2        05-24 20:49     0%          2 Mike   05-24 20:38 0%05-24          2 21:08 05-24 21
+mode 1 2
+05-24 21:18  W1SMC     Steven Campisa05-24 21:18   NA3E      Erich S      05-24 21:08 KK4KRC     Ronald Graham 05-24 21:07 WA5VYK        Joe Detivea05-24 21:06  K9IUQ    Stanley J      05-24 21:05 KC0RNP      21:18 2      05-24 21
+mode 1 2
+05-24 21:21  W1SMC Steven     Campisa05-24 21:21   NA3E Erich      S      05-24 21:08 KK4KRC Ronald     Graham 05-24 21:07 WA5VYK Joe        Detivea05-24 21:06  K9IUQ Stanley    J      05-24 21:05 KC0RNP 21:21      2      05-24 21
+mode 1 2
+05-24 21:32 WA5FYI William    Tipps  05-24 21:31 KC0RNP                   05-24 21:30 WA1QCE Ronald     Di     05-24 21:29  W1MVP Michael    Pasqual05-24 21:28  N0BTC David      Brown  05-24 21:22  M0GET 21:32      2      05-24 21
+mode 1 2
+05-24 21:34 KC0RNP                   05-24 21:34 KA2YED Angel      Rodrigu05-24 21:32 WA5FYI William    Tipps  05-24 21:30 WA1QCE Ronald     Di     05-24 21:29  W1MVP Michael    Pasqual05-24 21:28  N0BTC 21:34      2      05-24 21
+mode 1 2
+05-24 21:34 KC0RNP                   05-24 21:34 KA2YED Angel      Rodrigu05-24 21:32 WA5FYI William    Tipps  05-24 21:30 WA1QCE Ronald     Di     05-24 21:29  W1MVP Michael    Pasqual05-24 21:28  N0BTC 21:34      2      05-24 21
+mode 1 2
+05-24 21:34 KC0RNP                   05-24 21:34 KA2YED Angel      Rodrigu05-24 21:32 WA5FYI William    Tipps  05-24 21:30 WA1QCE Ronald     Di     05-24 21:29  W1MVP Michael    Pasqual05-24 21:28  N0BTC 21:34      2      05-24 21
+mode 1 2
+05-24 21:38   NA3E Erich      S      05-24 21:38  K4WZV Robert     Bretzma05-24 21:34 KC0RNP                   05-24 21:34 KA2YED Angel      Rodrigu05-24 21:32 WA5FYI William    Tipps  05-24 21:30 WA1QCE 21:38      2      05-24 21
+mode 1 2
+mode 1 2
+05-24 21:39  K4WZV Robert     Bretzma05-24 21:38   NA3E Erich      S      05-24 21:34 KC0RNP                   05-24 21:34 KA2YED Angel      Rodrigu05-24 21:32 WA5FYI William    Tipps  05-24 21:30 WA1QCE 21:39      2      05-24 21
+mode 1 2
+05-24 21:39  K4WZV     RobertBretzman05-24 21:38   NA3E      ErichS       05-24 21:34 KC0RNP                   05-24 21:34 KA2YED      AngelRodrigue05-24 21:32 WA5FYI    WilliamTipps   05-24 21:30 WA1QCE      21:392       05-24 21
+mode 1 2
+mode 1 2
+mode 1 2
+05-24 21:55 EA7KDO   Mitchell2147415 05-24 21:54  K4WZV     RobertBretzman05-24 21:49   NA3E      ErichS       05-24 21:34 KC0RNP                   05-24 21:34 KA2YED      AngelRodrigue05-24 21:32 WA5FYI      21:552       05-24 21
+mode 1 2
+05-24 22:03 KN4YBU         $7Dietrich05-24 22:02  K4WZV         $7Bretzman05-24 21:55 EA7KDO         $72147415 05-24 21:49   NA3E         $7S       05-24 21:34 KC0RNP         $7        05-24 21:34 KA2YED         $72       05-24 22
+mode 1 2
+mode 1 2
+mode 1 2
+05-24 22:06  K4WZV         $7 Bretzma05-24 22:05   W5LD         $7 Kangas 05-24 22:03 KN4YBU         $7 Dietric05-24 21:55 EA7KDO         $7 214741505-24 21:49   NA3E         $7 S      05-24 21:34 KC0RNP         $7 2      05-24 22
+mode 1 2
+05-24 22:11 KC8USA         $7 J      05-24 22:10  W1MVP         $7 Pasqual05-24 22:09  W9ZEP         $7 Wagner 05-24 22:07  K4WZV         $7 Bretzma05-24 22:06   W5LD         $7 Kangas 05-24 22:03 KN4YBU         $7 2      05-24 22
+mode 1 2
+05-24 22:12 KC8USA         $7 J      05-24 22:11 EA7KDO         $7 214741505-24 22:10  W1MVP         $7 Pasqual05-24 22:09  W9ZEP         $7 Wagner 05-24 22:07  K4WZV         $7 Bretzma05-24 22:06   W5LD         $7 2      05-24 22
+mode 1 2
+mode 1 2
+05-24 22:12 KC8USA  Frederick J      05-24 22:11 EA7KDO   Mitchell 214741505-24 22:10  W1MVP    Michael Pasqual05-24 22:09  W9ZEP       Mike Wagner 05-24 22:07  K4WZV     Robert Bretzma05-24 22:06   W5LD      22:12 2      05-24 22
+mode 1 2
+05-24 22:12 KC8USA  Frederick J      05-24 22:11 EA7KDO   Mitchell 214741505-24 22:10  W1MVP    Michael Pasqual05-24 22:09  W9ZEP       Mike Wagner 05-24 22:07  K4WZV     Robert Bretzma05-24 22:06   W5LD      22:12 2      05-24 22
+mode 1 2
+05-24 22:12 KC8USA          J Frederi05-24 22:11 EA7KDO    2147415 Mitchel05-24 22:10  W1MVP   Pasquale Michael05-24 22:09  W9ZEP     Wagner Mike   05-24 22:07  K4WZV   Bretzman Robert 05-24 22:06   W5LD          2 22:12  05-24 22
+mode 1 2
+05-24 22:12 KC8USA  Frederick05-24 22:11 EA7KDO   Mitchell05-24 22:10  W1MVP    Michael05-24 22:09  W9ZEP       Mike05-24 22:07  K4WZV     Robert05-24 22:06   W5LD      22:1205-24 22:11 EA7KDO   Mitchell05-24 22:10  W1MVP    Micha
+mode 1 2
+05-24 22:12 KC8USA Frederick 05-24 22:11 EA7KDO Mitchell  05-24 22:10  W1MVP Michael   05-24 22:09  W9ZEP Mike      05-24 22:07  K4WZV Robert    05-24 22:06   W5LD 22:12     05-24 22:11 EA7KDO Mitchell  05-24 22:10  W1MVP Michael 
+mode 1 2
+05-24 22:12 KC8USA Frederick 05-24 22:11 EA7KDO Mitchell  05-24 22:10  W1MVP Michael   05-24 22:09  W9ZEP Mike      05-24 22:07  K4WZV Robert    05-24 22:06   W5LD 22:12     05-24 22:11 EA7KDO Mitchell  05-24 22:10  W1MVP Michael 
+mode 1 2
+mode 1 2
+mode 1 2
+05-24 22:12 KC8USA 31665 0%          05-24 22:11 EA7KDO 31665 0%          05-24 22:10  W1MVP 31665 0%          05-24 22:09  W9ZEP 31665 0%          05-24 22:07  K4WZV 31665 0%          05-24 22:06   W5LD 31665 0%05-24     05-24 22
+mode 1 2
+05-24 22:12 KC8USA 31665 0%          05-24 22:11 EA7KDO 31665 0%          05-24 22:10  W1MVP 31665 0%          05-24 22:09  W9ZEP 31665 0%          05-24 22:07  K4WZV 31665 0%          05-24 22:06   W5LD 31665 0%05-24     05-24 22
+KC8USA Frederick J Fritz Prudenville EA7KDO Mitchell Nerja Andalucia ES   W1MVP Michael Pasquale Shrewsbury MA W9ZEP Mike Wagner Fishers IN US      K4WZV Robert Bretzman Brooksville FL W5LD Linda Kangas Houston TX US      
+KC8USA Frederick J Fritz Prudenville EA7KDO Mitchell Nerja Andalucia ES   W1MVP Michael Pasquale Shrewsbury MA W9ZEP Mike Wagner Fishers IN US      K4WZV Robert Bretzman Brooksville FL W5LD Linda Kangas Houston TX US      
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-24 23:56 W9ZEP 31665 2 159.2 0%
+05-24 23:54 WD4KAV 31665 2 1.6 0%
+05-24 23:54 WA5FYI 31665 2 1.6 0%
+05-24 23:52 K4KWQ 31665 2 263.6 0%
+05-24 23:43 KC8USA 31665 2 35.4 0%
+05-24 23:40 KB2VQS 31665 2 2.3 0%
+05-24 23:34 VE3OZW 31665 2 0.8 0%
+05-25 02:48 KE4VRM         KE4VRM    05-25 02:46  N4MNN  Watson  N4MNN    05-25 02:41  AD4ZU     Day  AD4ZU 31105-25 02:39 KC0RNP         KC0RNP    05-25 02:32   K6WU Woolston   K6WU 3105-25 02:31  K4GPS Mcmahon  K4GPS    
+N4CET Lynn Hedspeth Iron StationKE4VRM    N4MNN Marty Watson Easley SCAD4ZU Chris Day New PortKC0RNP    K6WU Doug Woolston Anaheim CA
+KF5KHS Michael Bentley Corsicana TX  KB8IWO Vernon Lawson Beulah MI      N4CET Lynn Hedspeth Iron Station     KE4VRM          N4MNN Marty Watson Easley SC      AD4ZU Chris Day New Port      
+KF5KHS Michael Bentley Corsicana TX  KB8IWO Vernon Lawson Beulah MI       N4CET Lynn Hedspeth Iron Station     KE4VRM                 N4MNN Marty Watson Easley SC         AD4ZU Chris Day New Port             
+KF5KHS Michael Bentley Corsicana TX UKB8IWO Vernon Lawson Beulah MI US}   N4CET Lynn Hedspeth Iron Station NC} KE4VRM     }                         N4MNN Marty Watson Easley SC US}     AD4ZU Chris Day New Port Richey}     
+line2line2line2line2line2line2
+KD2EWE William R Rasberry Rochester NKF5KHS Michael Bentley Corsicana TX UKB8IWO Vernon Lawson Beulah MI US    N4CET Lynn Hedspeth Iron Station NC UKE4VRM                     N4MNN Marty Watson Easley SC US      
+NC4KG Glenn Taylor Clayton NC USKQ6K Edward Pierce Moorpark CA USN2MRH Joseph Ciraulo Barnegat NJ USKD2EWE William R Rasberry Rochester NKF5KHS Michael Bentley Corsicana TX UKB8IWO Vernon Lawson Beulah MI US
+N2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC USKQ6K Edward Pierce Moorpark CA USN2MRH Joseph Ciraulo Barnegat NJ USKD2EWE William R Rasberry Rochester NKF5KHS Michael Bentley Corsicana TX U
+N2RGI Gary Evans Lancaster PANC4KG Glenn Taylor Clayton NCKQ6K Edward Pierce Moorpark CAN2MRH Joseph Ciraulo Barnegat NJKD2EWE William R Rasberry RochesterKF5KHS Michael Bentley Corsicana TX
+N2RGI Gary Evans Lancaster PA NC4KG Glenn Taylor Clayton NC KQ6K Edward Pierce Moorpark CA N2MRH Joseph Ciraulo Barnegat NJ KD2EWE William R Rasberry Rochester KF5KHS Michael Bentley Corsicana TX 
+N2RGI Gary Evans Lancaster PA NC4KG Glenn Taylor Clayton NC KQ6K Edward Pierce Moorpark CA N2MRH Joseph Ciraulo Barnegat NJ KD2EWE William R Rasberry Rochester KF5KHS Michael Bentley Corsicana TX 
+N2RGI Gary Evans Lancaster PA NC4KG Glenn Taylor Clayton NC KQ6K Edward Pierce Moorpark CA N2MRH Joseph Ciraulo Barnegat NJ KD2EWE William R Rasberry Rochester KF5KHS Michael Bentley Corsicana TX 
+N9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL USN2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC USKQ6K Edward Pierce Moorpark CA USN2MRH Joseph Ciraulo Barnegat NJ US
+K4GPS Patrick Mcmahon Maryville TN USKC0TMD Justina Bernstein Valley Park N9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL USN2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC US
+KC0TMD Justina Bernstein Valley Park K4GPS Patrick Mcmahon Maryville TN USN9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL USN2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC US
+K4GPS Patrick Mcmahon Maryville TN USKC0TMD Justina Bernstein Valley Park N9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL USN2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC US
+KC0TMD Justina Bernstein Valley Park K4GPS Patrick Mcmahon Maryville TN USN9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL USN2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC US
+KC0TMD Justina Bernstein Valley Park K4GPS Patrick Mcmahon Maryville TN USN9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL USN2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC US
+KC0TMD Justina Bernstein Valley Park K4GPS Patrick Mcmahon Maryville TN USN9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL USN2RGI Gary Evans Lancaster PA USNC4KG Glenn Taylor Clayton NC US
+NC4KG Glenn Taylor Clayton NC USEA7KDO Mitchell Nerja Andalucia ES --KC0TMD Justina Bernstein Valley Park K4GPS Patrick Mcmahon Maryville TN USN9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL US
+NC4KG Glenn Taylor Clayton NC USEA7KDO Mitchell Nerja Andalucia ES --KC0TMD Justina Bernstein Valley Park K4GPS Patrick Mcmahon Maryville TN USN9QMG Shawn P Murphy Owensboro KYKC4IPX Eric Burr Jacksonville FL US
+W9ZEP Mike Wagner Fishers IN USEA7KDO Mitchell Nerja Andalucia ES -----KB7BYI Dave Poulson Idaho Falls IDNC4KG Glenn Taylor Clayton NC USKC0TMD Justina Bernstein Valley Park MOK4GPS Patrick Mcmahon Maryville TN US
+W9ZEP Mike Wagner Fishers IN USEA7KDO Mitchell Nerja Andalucia ES ------KB7BYI Dave Poulson Idaho Falls IDNC4KG Glenn Taylor Clayton NC USKC0TMD Justina Bernstein Valley Park MOK4GPS Patrick Mcmahon Maryville TN US
+KB7BYI Dave Poulson Idaho Falls IDW9ZEP Mike Wagner Fishers IN USEA7KDO Mitchell Nerja Andalucia ES NC4KG Glenn Taylor Clayton NC USKC0TMD Justina Bernstein Valley ParK4GPS Patrick Mcmahon Maryville TN 
+KB7BYI Dave Poulson Idaho Falls IDW9ZEP Mike Wagner Fishers IN USEA7KDO Mitchell Nerja Andalucia ES NC4KG Glenn Taylor Clayton NC USKC0TMD Justina Bernstein Valley ParK4GPS Patrick Mcmahon Maryville TN 
+$call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc
+W9ZEP Mike Wagner Fishers IN US -----KB7BYI Dave Poulson Idaho Falls ID USK4WZV Robert Bretzman Brooksville FL EA7KDO Mitchell Nerja Andalucia ES --KC0TMD Justina Bernstein Valley Park NC4KG Glenn Taylor Clayton NC US ----
+NC4KG Glenn Taylor Clayton NC US     EA7KDO Mitchell Nerja Andalucia ES   W9ZEP Mike Wagner Fishers IN US      KB7BYI Dave Poulson Idaho Falls ID USK4WZV Robert Bretzman Brooksville FL KC0TMD Justina Bernstein Valley Park 
