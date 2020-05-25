@@ -37,7 +37,7 @@ do
 	did=$(echo "$dataline" | cut -d',' -f1)
 	name=$(echo "$dataline" | cut -d',' -f3)
 
-	line2=$(echo "$line $name $did" | awk '{printf  "%5s %.5s %6s %7s %6s %6s\n",$1,$2,$3,$6,$4,$7,"   "}')
+	line2=$(echo "$line ${name} $did" | awk '{printf  "%5s %.5s %6s %-7s %6s %6s\n",$1,$2,$3,$6,$4,$7,"   "}')
 	line3=${line2:0:37}
 	line4=$(echo "$line3" | tr -d "\n") 
 	list5+="$line4"
@@ -67,7 +67,7 @@ do
         prov=$(echo "$dataline" | cut -d',' -f5 | head -1)
         country=$(echo "$dataline" | cut -d',' -f7 | head -1)
 	spc="        "
-	line3=$(echo "$call" "$name" "$city" "$prov" "$country" "$spc" | awk '{printf  "%s %s %s %s %s %s\n", $call, $name, $city, $prov, $country, $spc}')
+	line3=$(echo "$call" "${name}" "$city" "$prov" "$country" "$spc" | awk '{printf  "%s %s %s %s %s %s\n", $call, $name, $city, $prov, $country, $spc}')
 #	echo "$line2"
 	line4=${line3:0:37}
 	line6=$(echo "$line4" | tr -d "\n")
