@@ -136,6 +136,7 @@ if [ "$2" == "1" ]; then
 
 	if [ "$1" == "1" ]; then
 		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
+#		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7}' 
 	fi
 	if [ "$1" == "2" ]; then
 		echo "$list3" | sed -n '7,12p;12q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
