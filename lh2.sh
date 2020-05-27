@@ -130,13 +130,15 @@ if [ $lcnt -lt 20 ]; then
 	list3+=$list4
 fi
 
+echo "Test 1,"
+echo "Test 2"
 ######  Mode 1
 if [ "$2" == "1" ]; then
 #		echo "Check OK 1 = $2" >> /home/pi-star/lh2_start.txt 
 
 	if [ "$1" == "1" ]; then
-		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
-#		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7}' 
+#		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
+		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\r\n", $1, $2, $3, $4, $5, $6, $7}' 
 	fi
 	if [ "$1" == "2" ]; then
 		echo "$list3" | sed -n '7,12p;12q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
