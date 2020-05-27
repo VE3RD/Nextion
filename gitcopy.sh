@@ -18,14 +18,24 @@ if [ -z "$1" ]; then
 	echo "No Screen Name Provided"
 	exit
 fi
+if [ -z "$2" ]; then
+	echo "No User Name Provided"
+	echo "User Name must EA7KDO or VE3RD"
+	exit
+fi
 
 
 scn="$1"
 scn="${scn:0:10}"
 
-call="$2"
+if [ "$2" == "EA7KDO" ] || [ "$2" == "ea7kdo" ]; then
+	calls="EA7KDO"
+fi 
+if [ "$2" == "VE3RD" ] || [ "$2" == "ve3rd" ]; then
+	calls="VE3RD"
+fi 
+
 fb="$3"
-calltxt="EA7KDO"
 
 #echo "$scn"
 
@@ -41,7 +51,6 @@ function exitcode
 function getea7kdo
 {
 #	echo "Function EA7KDO"
-	calltxt="EA7KDO"
 
     	if [ "$scn" = "NX3224K024" ]; then
 	  	sudo git clone --depth 1 https://github.com/EA7KDO/Nextion.Images /home/pi-star/Nextion_Temp
@@ -60,47 +69,44 @@ function getea7kdo
 function getve3rd
 {
 #	echo "Function VE3RD"
-     	
-	calltxt="VE3RD"
+     	                if [ "$fb" ]; then
+                        echo "Starting GetVe3rd Function"
+                fi
 	if [ "$scn" = "NX3224K024" ]; then	
-  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion_Temp
+	if [ -d /home/pi-star/Nextion ]; then
+		rm -r /home/pi-star/Nextion
+	fi
+  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion 
 	else
 		exitcode "Invalid VE3RD Screen Name $scn"
 	fi
+                if [ "$fb" ]; then
+                        echo "VE3RD Files git Completed"
+                fi
 
 }
 
 
 if [ -z "$1" ]; then
 	echo " Syntax: gitcopy.sh NX????K???   // Will copy EA7KDO Files - Default"
-	echo " Syntax: gitcopy.sh NX????K??? 1 // Will copy EA7KDO Files - Selected"
-	echo " Syntax: gitcopy.sh NX????K??? 2 // Will copy VE3RD Files - Selected"
+	echo " Syntax: gitcopy.sh NX????K??? EA7KDO // Will copy EA7KDO Files - Selected"
+	echo " Syntax: gitcopy.sh NX????K??? VE3RD // Will copy VE3RD Files - Selected"
 	echo " Adding a third parameter(anything) will provide feedback as the script runs (Commandline)"
 	echo " " 
 fi
 
-if [ -z "$2" ]; then
-  call="1"
-fi
-
-if [ "$call" = "0" ]; then
-  call="2"
-  fb="2"
-fi
-
-
 if [ "$fb" ]; then
-	if [ "$call" == "1" ]; then
+	if [ "$calls" == "EA7KDO" ]; then
 	 	echo "Loading EA7KDO $scn Screen Package"
 	fi
-	if [ "$call" == "2" ]; then
+	if [ "$calls" == "VE3RD" ]; then
                 if [ ! "$scn" = "NX3224K024" ]; then
 			echo "Loading VE3RD $scn Screen Package"
 		fi	
 	fi
 fi
 
-if [ "$call" = "2" ]; then
+if [ "$call" = "VE3RD" ]; then
      	if [ "$scn" != "NX3224K024" ]; then
 		if [ "$fb" ]; then
 			scn="NX3224K024"
@@ -146,46 +152,53 @@ fi
   # Get EA7KDO File Set
 
 tst=0
-if [ "$call" = "1" ]; then
+if [ "$calls" = "EA7KDO" ]; then
 	getea7kdo
  
 fi
 
 
   # Get VE3RD File Set
-if [ "$call" = "2" ]; then
+if [ "$calls" = "VE3RD" ]; then
 	getve3rd
 fi
 
-if [ ! -d /usr/local/etc/Nextion_Support ]; then
-	sudo mkdir /usr/local/etc/Nextion_Support
-else
-       sudo rm  /usr/local/etc/Nextion_Support/*
+if [ -d /usr/local/etc/Nextion_Support ]; then
+	sudo rm -r /usr/local/etc/Nextion_Support
+                if [ "$fb" ]; then
+                        echo "Removing Nextion_Support"
+                fi
+	
 fi
-
-sudo chmod +x /home/pi-star/Nextion_Temp/*.sh
-sudo rsync -avqru /home/pi-star/Nextion_Temp/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
-
-if [ -f /home/pi-star/Nextion_Temp/profiles.txt ]; then
-	if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
-        	if [ "$fb" ]; then
-                	echo "Replacing Missing Profiles.txt"
-        	fi
-        	sudo cp  /home/pi-star/Nextion_Temp/profiles.txt /usr/local/etc/Nextion_Support/
-	fi
-fi
-
+sudo mkdir /usr/local/etc/Nextion_Support
+                if [ "$fb" ]; then
+                        echo "Creating Nextion_Support"
+                fi
 if [ "$fb" ]; then
-    echo "Remove Existing $model$tft and copy in the new one"
+    echo "Remove Existing $model$tft"
 fi
 
 if [ -f /usr/local/etc/$model$tft ]; then
 	sudo rm /usr/local/etc/$model$tft
 fi
-if [ "$calls" == "EA7KDO ]; then
+
+if [ "$calls" == "EA7KDO" ]; then
+	sudo chmod +x /home/pi-star/Nextion_Temp/*.sh
+	sudo rsync -avqru /home/pi-star/Nextion_Temp/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
 	sudo cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
 else
+	sudo chmod +x /home/pi-star/Nextion/*.sh
+	sudo rsync -avqru /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
+	if [ -f /home/pi-star/Nextion/profiles.txt ]; then
+		if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
+        		if [ "$fb" ]; then
+                		echo "Replacing Missing Profiles.txt"
+        		fi
+        		sudo cp  /home/pi-star/Nextion/profiles.txt /usr/local/etc/Nextion_Support/
+		fi
 	sudo cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
+	fi
+	
 fi
 
  FILE=/usr/local/etc/$model$tft
