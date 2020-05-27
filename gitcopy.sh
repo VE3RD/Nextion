@@ -182,8 +182,11 @@ fi
 if [ -f /usr/local/etc/$model$tft ]; then
 	sudo rm /usr/local/etc/$model$tft
 fi
-sudo cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
-
+if [ "$calls" == "EA7KDO ]; then
+	sudo cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
+else
+	sudo cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
+fi
 
  FILE=/usr/local/etc/$model$tft
  if [ ! -f "$FILE" ]; then
