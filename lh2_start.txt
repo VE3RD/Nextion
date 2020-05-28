@@ -466,3 +466,15 @@ KB7BYI Dave Poulson Idaho Falls IDW9ZEP Mike Wagner Fishers IN USEA7KDO Mitchell
 $call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc$call $name $city $prov $country $spc
 W9ZEP Mike Wagner Fishers IN US -----KB7BYI Dave Poulson Idaho Falls ID USK4WZV Robert Bretzman Brooksville FL EA7KDO Mitchell Nerja Andalucia ES --KC0TMD Justina Bernstein Valley Park NC4KG Glenn Taylor Clayton NC US ----
 NC4KG Glenn Taylor Clayton NC US     EA7KDO Mitchell Nerja Andalucia ES   W9ZEP Mike Wagner Fishers IN US      KB7BYI Dave Poulson Idaho Falls ID USK4WZV Robert Bretzman Brooksville FL KC0TMD Justina Bernstein Valley Park 
+
+
+
+
+
+
+
+
+
+
+
+
