@@ -25,6 +25,8 @@ declare -i n
 function domode2
 {
 line3=""
+call1=""
+name=""
 while read -r line
 do
 	call=$(echo "$line" | cut -d' ' -f3)
@@ -36,22 +38,29 @@ do
 	dataline=$(sudo sed -n "/$call/p" /usr/local/etc/stripped.csv)
        	did=$(echo "$dataline" | cut -d',' -f1 | head -1)
         call1=$(echo "$dataline" | cut -d',' -f2 | head -1)
+
         name=$(echo "$dataline" | cut -d',' -f3 | head -1)
         city=$(echo "$dataline" | cut -d',' -f4 | head -1)
         prov=$(echo "$dataline" | cut -d',' -f5 | head -1)
         country=$(echo "$dataline" | cut -d',' -f7 | head -1)
-#	line3=$(echo  "$dt" "$tm" "$call1" "$name" | awk '{printf  "%5s %s %s %s|\n", $1 $2 $3 $name}')
-line3=""
-	echo  "$dt $tm $call1 $name |" |  tr -d "\n"
+
+	if [ -z "$name" ]; then
+		name="Name N/A"
+	fi
+
+
+#	line3=$(echo  "$dt" "$tm" "$call" "$name" | awk '{printf  "%5s %s %s %s|\n", $1 $2 $3 $name}')
+	line3=""
+	echo  "$dt $tm $call $name |" |  tr -d "\n"
 #	echo "$line2"
 #	line4=${line3:0:37}
-	line6=$(echo "$line3" | tr -d "\n")
+#	line6=$(echo "$line3" | tr -d "\n")
 
-	list5+="$line6"
+#	list5+="$line6"
 done <<< "$list9"
 
 var="${list5:0:400}"
-echo "${var}"
+#echo "${var}"
 echo "${var}" >> ./lh2_start.txt
 
 }
@@ -73,7 +82,7 @@ do
         city=$(echo "$dataline" | cut -d',' -f4 | head -1)
         prov=$(echo "$dataline" | cut -d',' -f5 | head -1)
         country=$(echo "$dataline" | cut -d',' -f7 | head -1)
-if [-z "$city" ]; then
+if [ -z "$city" ]; then
 	city="N/A"
 fi
 	line3=$(echo "$call" "$name" "$city" "$prov" "$country"| awk '{printf  "%5s %s %s %s %s |\n", $1, $name, $3, $4, $5}'  |  tr -d "\n" )
@@ -146,8 +155,7 @@ if [ "$2" == "1" ]; then
 #		echo "Check OK 1 = $2" >> /home/pi-star/lh2_start.txt 
 
 	if [ "$1" == "1" ]; then
-#		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s\n", $1, $2, $3, $4, $5, $6, $7, $nl}' 
-		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s|\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
+		echo "$list3" | sed -n '1,6p;7q' |  awk '{printf "%5s %5s %7s %6s %1s %4s %-4s|\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
 	fi
 	if [ "$1" == "2" ]; then
 		echo "$list3" | sed -n '7,12p;12q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s|\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
@@ -159,10 +167,8 @@ if [ "$2" == "1" ]; then
 		echo "$list3" | sed -n '19,24p;25q' |  awk '{printf "%5s %5s %6s %6s %1s %4s %-4s|\n", $1, $2, $3, $4, $5, $6, $7}' | tr -d "\n"
 	fi
 fi
-######  Mode 2
+######  Mode 2/3/4
 
-if [ "$2" == "2" ]; then
-                echo "Check OK 2 = $2" >> /home/pi-star/lh2_start.txt
 
 	if [ "$1" == "1" ]; then
 		list9=$(echo "$list3" | sed -n '1,6p;7q' | awk '{print $1, $2, $3, $4}' )
@@ -176,25 +182,15 @@ if [ "$2" == "2" ]; then
 	if [ "$1" == "4" ]; then
 		list9=$(echo "$list3" | sed -n '19,24p;25q' | awk '{print $1, $2, $3, $4}') 
 	fi
+
+
+if [ "$2" == "2" ]; then
+                echo "Check OK 2 = $2" >> /home/pi-star/lh2_start.txt
 	domode2
 fi
 #####  Mode 3
 if [ "$2" == "3" ]; then
         echo "Check OK 3 = $2" >> /home/pi-star/lh2_start.txt
-
-	if [ "$1" == "1" ]; then
-		list9=$(echo "$list3" | sed -n '1,6p;7q' | awk '{print $1, $2, $3, $4}' )
-	fi
-
-	if [ "$1" == "2" ]; then
-		list9=$(echo "$list3" | sed -n '7,12p;13q' | awk '{print $1, $2, $3,$4}') 
-	fi
-	if [ "$1" == "3" ]; then
-		list9=$(echo "$list3" | sed -n '13,18p;19q' | awk '{print $1, $2, $3, $4}') 
-	fi
-	if [ "$1" == "4" ]; then
-		list9=$(echo "$list3" | sed -n '19,24p;25q' | awk '{print $1, $2, $3, $4}') 
-	fi
 
 	domode3
 fi
@@ -202,22 +198,8 @@ fi
 
 if [ "$2" == "4" ]; then
         echo "Check OK 3 = $2" >> /home/pi-star/lh2_start.txt
-
-	if [ "$1" == "1" ]; then
-		list9=$(echo "$list3" | sed -n '1,6p;7q' | awk '{print $1, $2, $4, $5}' )
-	fi
-
-	if [ "$1" == "2" ]; then
-		list9=$(echo "$list3" | sed -n '7,12p;13q' | awk '{print $1, $2, $4,$5}') 
-	fi
-	if [ "$1" == "3" ]; then
-		list9=$(echo "$list3" | sed -n '13,18p;19q' | awk '{print $1, $2, $4, $5}') 
-	fi
-	if [ "$1" == "4" ]; then
-		list9=$(echo "$list3" | sed -n '19,24p;25q' | awk '{print $1, $2, $4, $5}') 
-	fi
-
-	domode4
+## No mode 4 yet, use mode 3
+	domode3
 
 fi
 
