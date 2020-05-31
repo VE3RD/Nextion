@@ -28,8 +28,8 @@ pnum=$(echo $1 | sed 's/^0*//')
 		m8=$(sed -nr "/^\[Profile $pnum\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 		m9=$(sed -nr "/^\[Profile $pnum\]/ { :l /^Mode[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 #	mt=$(sudo sed -n '/^[^#]*^$m8/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
-	mt=$(sudo sed -n "/\t$m8/p" /usr/local/etc/DMR_Hosts.txt |sed -E "s/[[:space:]]+/|/g" | head -1)
-	m8=$( echo "$mt" | cut -d'|' -f1)
+#	mt=$(sudo sed -n "/\t$m8/p" /usr/local/etc/DMR_Hosts.txt |sed -E "s/[[:space:]]+/|/g" | head -1)
+#	m8=$( echo "$mt" | cut -d'|' -f1)
 #	sudo sed -i '/^\[/h;G;/Profile $pnum/s/\(Address=\).*/\1'"$m8"'/m;P;d'  /etc/mmdvmhost
 #fi
 
