@@ -7,11 +7,12 @@
 #  and returns a script duration time to the Screen 	#
 #  as a script completion flag				#
 #							#
-#  KF6S/VE3RD                               2020=02-09  #
+#  KF6S/VE3RD                               2020-06-01  #
 #########################################################
 # Use screen model from command $1
 # Valid Screen Names for EA7KDO - NX3224K024, NX4832K935
 # Valid Screen Names for VE3RD - NX3224K024
+
 declare -i tst
 
 if [ -z "$1" ]; then
@@ -73,10 +74,10 @@ function getve3rd
                         echo "Starting GetVe3rd Function"
                 fi
 	if [ "$scn" = "NX3224K024" ]; then	
-	if [ -d /home/pi-star/Nextion ]; then
-		rm -r /home/pi-star/Nextion
+	if [ -d /home/pi-star/Nextion_Temp ]; then
+		rm -r /home/pi-star/Nextion_Temp
 	fi
-  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion 
+  	  sudo git clone --depth 1 https://github.com/VE3RD/Nextion /home/pi-star/Nextion_Temp 
 	else
 		exitcode "Invalid VE3RD Screen Name $scn"
 	fi
@@ -116,13 +117,8 @@ if [ "$call" = "VE3RD" ]; then
 	fi
 fi
 
-if [ ! -d /home/pi-star/Nextion_Temp ]; then
-   sudo mkdir /home/pi-star/Nextion_Temp
-fi
-
 #Start Duration Timer
 start=$(date +%s.%N)
-
 
 #Disable all command feedback
 if [ ! "$fb" ]; then
@@ -166,14 +162,16 @@ fi
 if [ -d /usr/local/etc/Nextion_Support ]; then
 	sudo rm -r /usr/local/etc/Nextion_Support
                 if [ "$fb" ]; then
-                        echo "Removing Nextion_Support"
+                        echo "Removing Nextion_Support Directory"
                 fi
 	
 fi
+
 sudo mkdir /usr/local/etc/Nextion_Support
                 if [ "$fb" ]; then
-                        echo "Creating Nextion_Support"
+                        echo "Creating Nextion_Support Directory"
                 fi
+
 if [ "$fb" ]; then
     echo "Remove Existing $model$tft"
 fi
@@ -186,7 +184,12 @@ if [ "$calls" == "EA7KDO" ]; then
 	sudo chmod +x /home/pi-star/Nextion_Temp/*.sh
 	sudo rsync -avqru /home/pi-star/Nextion_Temp/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
 	sudo cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
-else
+                if [ "$fb" ]; then
+                        echo "New $model$tft Copied to /usr/local/etc/"
+                fi
+	
+fi
+if [ "$calls" == "VE3RD" ]; then
 	sudo chmod +x /home/pi-star/Nextion/*.sh
 	sudo rsync -avqru /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
 	if [ -f /home/pi-star/Nextion/profiles.txt ]; then
@@ -197,6 +200,10 @@ else
         		sudo cp  /home/pi-star/Nextion/profiles.txt /usr/local/etc/Nextion_Support/
 		fi
 	sudo cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
+                if [ "$fb" ]; then
+                        echo "New $model$tft Copied to /usr/local/etc/"
+                fi
+
 	fi
 	
 fi
