@@ -7,7 +7,7 @@
 #  and returns a script duration time to the Screen 	#
 #  as a script completion flag				#
 #							#
-#  KF6S/VE3RD                               2020-06-01  #
+#  KF6S/VE3RD                               2020=02-09  #
 #########################################################
 # Use screen model from command $1
 # Valid Screen Names for EA7KDO - NX3224K024, NX4832K935
