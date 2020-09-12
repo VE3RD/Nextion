@@ -6,7 +6,10 @@
 set -o errexit
 set -o pipefail
 sudo mount -o remount,rw /
+
+if [ -f user.csv ]; then
 rm user.csv
+fi
 wget https://database.radioid.net/static/user.csv
 
 
@@ -16,7 +19,7 @@ wget https://database.radioid.net/static/user.csv
 INPUT=user.csv
 OLDIFS=$IFS
 IFS=','
-cnt=0
+cnt=1
 cnt2=0
 
 [ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
@@ -25,14 +28,14 @@ if [ -f /usr/local/etc/stripped.csv ]; then
 	rm /usr/local/etc/stripped.csv 
 fi
 echo ""
-echo "Progress"
+echo "Progress - Converting File Format"
 while read id call n1 n2 city prov blank country
 do
-strlen=${id}
+	strlen=${id}
+	((cnt=cnt+1))
 
-	if [ cnt > 1 ] && [ strlen >5 ]; then
+	if [ cnt > 2 ] && [ strlen >5 ]; then
 		echo "$id,$n1 $n2,$city,$prov,,$country" >> /usr/local/etc/stripped.csv
-		((cnt=cnt+1))
 	fi
 	cnt2=cnt/2000
 	BAR='##################################################################################################'   # this is full bar, e.g. 100 chars
