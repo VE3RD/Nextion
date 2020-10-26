@@ -9,6 +9,7 @@ sudo mount -o remount,rw /
 
 if [ -f user.csv ]; then
 rm user.csv
+echo ""
 fi
 wget https://database.radioid.net/static/user.csv
 
@@ -19,8 +20,12 @@ wget https://database.radioid.net/static/user.csv
 INPUT=user.csv
 OLDIFS=$IFS
 IFS=','
-cnt=1
-cnt2=0
+declare -i cnt=0
+declare -i cnt2=0
+declare -i lc=0
+declare -i tmp=1
+
+lc=$(wc -l < user.csv)
 
 [ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
 
@@ -29,17 +34,21 @@ if [ -f /usr/local/etc/stripped.csv ]; then
 fi
 echo ""
 echo "Progress - Converting File Format"
+
 while read id call n1 n2 city prov blank country
 do
 	strlen=${id}
-	((cnt=cnt+1))
+	((cnt=cnt+1))	
 
-	if [ cnt > 2 ] && [ strlen >5 ]; then
-		echo "$id,$n1 $n2,$city,$prov,,$country" >> /usr/local/etc/stripped.csv
+	if [ $cnt > 1 ] && [ $strlen > 5 ]; then
+		echo "$id,$call,$n1 $n2,$city,$prov,,$country" >> /usr/local/etc/stripped.csv
 	fi
-	cnt2=cnt/2000
+
+	tmp=$((lc/100))
+	cnt2=$((cnt / tmp ))
+
 	BAR='##################################################################################################'   # this is full bar, e.g. 100 chars
-    	echo -ne "\r${BAR:0:$cnt2}" # print $i chars of $BAR from 0 position
+    	echo -ne "\r${BAR:0:$cnt2}" "$cnt2%"  # print $i chars of $BAR from 0 position
 done < $INPUT
 IFS=$OLDIFS
 echo ""
