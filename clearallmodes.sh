@@ -9,6 +9,12 @@ set -o pipefail
 sudo mount -o remount,rw /
 echo "Clearing All Modes - Started" >> /home/pi-star/ActivateProfile.txt
 cp /etc/mmdvmhost /etc/mmdvmhost.tmp
+catch()
+{
+j=1
+}
+
+
 
 #echo "D-Star"
         sudo sed -i '/\[D-Star\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
@@ -36,7 +42,6 @@ cp /etc/mmdvmhost /etc/mmdvmhost.tmp
 #echo  "NXDN"
          sudo sed -i '/\[NXDN\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
 	sudo sed -i '/\[NXDN Network\]/!b;n;cEnable=0' /etc/mmdvmhost.tmp
-	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/nxdn2dmr
 	sudo sed -i '/\[Enabled\]/!b;n;cEnabled=0' /etc/nxdngateway
 
 #echo "POCSAG"
@@ -87,11 +92,6 @@ cp /etc/mmdvmhost /etc/mmdvmhost.tmp
    if pgrep -x NXDNGateway > /dev/null
    then
      killall -9 NXDNGateway
-   fi
-
-   if pgrep -x NXDN2DMR > /dev/null
-   then
-     killall -9 NXDN2DMR
    fi
 
    if pgrep -x YSFGateway > /dev/null

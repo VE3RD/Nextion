@@ -1,0 +1,126 @@
+{Profile 0}
+/etc/mmdvmhost
+Name=Default
+RXOffset=-400
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=3020733
+ExtId=3023954
+Mode=DMR
+Address=tgif.network
+StartupDstId=31665
+Port=62031
+
+{Profile 1}
+/etc/mmdvmhost_t
+[General]
+Callsign=VE3RD
+Id=302073314
+[Info]
+RXFrequency=445100001
+TXFrequency=445100001
+[Modem]
+RXOffset=-401
+TXOffset=-401
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Network]
+Enable=1
+Address=tgif,network
+Port=62031
+Password=passw0rd
+///
+
+{Profile 2}
+/etc/mmdvmhost_t
+[General]
+Callsign=VE3RD
+Id=302073304
+[Info]
+RXFrequency=445100002
+TXFrequency=445100002
+[Modem]
+RXOffset=-402
+TXOffset=-402
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Neywork]
+Enable=1
+Address=tgif.network
+Port=62031
+Password=passw0rd
+///
+
+{Profile 23}
+/etc/mmdvmhost_t
+[General]
+Callsign=VE3RD
+Id=302073304
+[Info]
+RXFrequency=445100003
+TXFrequency=445100003
+[Modem]
+RXOffset=-403
+TXOffset=-403
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Neywork]
+Enable=1
+Address=tgif.network
+Port=62031
+Password=passw0rd
+///
+
+[Profile 4]
+/etc/mmdvmhost
+Mode=DMRGateway
+[General]
+Id=3023984
+Callsign=VE3RD
+[Info]
+RXFrequency=445100000
+TXFrequency=445100000
+[Modem]
+Address=127.0.0.1
+RXOffset=-400
+TXOffset=-400
+[DMR]
+Enable=1
+ColorCode=1
+Id=3023954
+[DMR Network]
+Enable=1
+/etc/dmrgateway
+[Info]
+RXFrequency=445100000
+TXFrequency=445100000
+[DMR Network 4]
+Enable=1
+///
+
+[Profile 6]
+/etc/mmdvmhost
+Name=DMR2YSF
+RXOffset=-400
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=302073304
+Mode=DMR2YSF
+Address=tgif.network
+StartupDstId=31665
+Port=62031
+Password="passw0rd"
+/etc/ysf2dmr
+/etc/ysfgateway
+
+

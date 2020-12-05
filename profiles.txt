@@ -6,17 +6,17 @@ RXFrequency=445100000
 TXFrequency=445100000
 Callsign=VE3RD
 Id=3020733
-ExtId=302073304
+ExtId=3023954
 Mode=DMR
 Address=tgif.network
 StartupDstId=31665
 Port=62031
 
 [Profile 1]
-Name=TGIF_Network
-RXOffset=-400
-TXOffset=-400
-RXFrequency=445100000
+Name=TGIF_Network2
+RXOffset=-401
+TXOffset=-401
+RXFrequency=445100100
 TXFrequency=445100000
 Callsign=VE3RD
 Id=302073304

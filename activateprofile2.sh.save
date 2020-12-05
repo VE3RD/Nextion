@@ -1,0 +1,120 @@
+#!/bin/bash
+############################################################
+#  Activate  Profile                                       #
+#  VE3RD                                      2019/11/18   #
+############################################################
+set -o errexit
+set -o pipefail
+sudo mount -o remount,rw /
+fmm="/etc/mmdvmhost_t"
+fgate="/etc/dmrgateway"
+fysf="/etc/ysfgateway"
+fy2d="/etc/ysf2dmr"
+fd2y="/etc/dmr2ysf"
+nsp="/usr/local/etc/Nextion_Support/profiles2.txt"
+pnum="$1"
+declare -i n=1
+section="tba"
+
+fname=tba
+profile="{Profile $1}"
+#echo "$profile"
+
+List1=$(grep "$profile" -A 20 "$nsp")
+
+function loopall
+{
+n=1
+i=1
+stat="false"
+
+while [[ "$stat"="false" ]]
+do
+
+#for n in {1..20}
+#do
+	ok=false
+	param=""	
+
+	var1=$(awk 'c&&!--c;/'"$profile"'/{c='$n'}' "$nsp")
+#	echo "$var1"
+
+	if [ ! "$var1" ]; then
+ 	   	exit
+	fi
+
+	if [[ ${var1:0:3} = "///" ]]; then
+#	#	exit
+#		echo "End"
+		stat="done"
+		var1=""
+	fi
+
+	if [[ ${var1:0:5} = "/etc/" ]]; then
+#		echo "File:$var1"
+		fname="$var1"
+		var1=""
+	fi
+
+
+	if [[ ${var1:0:1} = "[" ]]; then
+#		echo "Section: $var1"
+		section="$var1"
+		var1=""
+	fi
+	
+	param=$(echo "$var1" | cut -d'=' -f1)
+	pval=$(echo "$var1" | cut -d'=' -f2)
+
+## Get specialty Passwords	
+	if [[ "$pval" = "PRIMEPW" ]]; then
+		 pval=$(sudo sed -n '/'"prime"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g"  | cut -d'|' -f4)
+	fi
+
+	if [[ "$pval" = "MNETPW" ]]; then
+		 pval=$(sudo sed -n '/'"mnet"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g"  | cut -d'|' -f4)
+	fi
+
+	if [[ "$pval" = "BMPW" ]]; then
+		pval=$(sudo grep Password  /etc/dstar-radio.mmdvmhost | cut -d'=' -f2)
+	fi
+	if [[ "$param" = "Mode" ]]; then
+		param=""
+	fi
+
+
+
+	slen=${#param} 
+
+	if [ "$slen" != 0 ]; then
+#		 sudo sed -i '/^\[/h;G;/'"$section"'/s/\('"$param"'=\).*/\1'"$pval"'/m;P;d'  "$fname" 
+		 sudo sed -i '0/^\[/h;G;/'"Profile"'/,/'"$section"'/s/\('"$param"'=\).*/\1'"$pval"'/m;P;d'  "$fname" 
+	
+		sed -i "/<'"{Profile 2}"'>/,/<\/'"Profile 3"'>/ s/<'"$param"'>\+/<'"$pval"'>$a/" /root/output.txt
+awk '
+/{Section 2}/ {                  # If the line contains "<namenode>"
+    f=1}                        # do set flag `f` to `1` (true)
+f && /Enable/ {                 # If flag `f` is true and line contains "<port>"
+    $0="   Enable"1""  # change line to new data
+    f=0}                        # and reset flag `f`
+1                               # Do default action (print the line)
+' new=10 file                   # Read variable and the file
+
+awk '/<namenode>/,/<\/namenode>/ {if (/<port>/) $0="   <port>"new"</port>"}1' new="$a" file
+awk '/<namenode>/,/<\/namenode>/ {if (/<port>/) $0="   <port>"new"</port>"}1' new="$a" file
+awk '/<namenode>/,/<\/namenode>/ {if (/<port>/) $0="   <port>"new"</port>"}1' new="$a" file
+
+
+#sed -i "/<namenode>/,/<\/namenode>/ s/<port>[0-9]\+/<port>$a/" /root/output.txt
+#sed -i "/<namenode>/,/<\/namenode>/ s/<port>[0-9]\+/<port>$a/" /root/output.txt
+
+		echo "Setting $profile $section $param=$pval"
+	fi
+n=n+1
+done
+
+}
+
+prf="$1"
+loopall "$1" 
+

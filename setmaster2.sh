@@ -25,5 +25,17 @@ sudo /usr/local/etc/Nextion_Support/clearallmodes.sh
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(Port=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1'"$1"'/m;P;d'  /etc/mmdvmhost
 	sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$m6"'/m;P;d'  /etc/mmdvmhost
+        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Local=\).*/\162036/m;P;d'  /etc/mmdvmhost
+
+if [ "$1" = 'mnet.hopto.org'  ]; then
+                        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1mnet.hopto.org/m;P;d'  /etc/mmdvmhost
+                        pwd=$(sudo sed -n '/^[^#]*'"mnet"'/p' /root/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g"  | cut -d'|' -f4)
+                        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1'"$pwd"'/m;P;d'  /etc/mmdvmhost
+fi
+if [ "$1" = 'tgif.network' ]; then
+                        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Address=\).*/\1mnet.hopto.org/m;P;d'  /etc/mmdvmhost
+                        pwd=$(sudo sed -n '/^[^#]*'"prime"'/p' /root/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g"  | cut -d'|' -f4)
+                        sudo sed -i '/^\[/h;G;/DMR Network/s/\(Password=\).*/\1'"$pwd"'/m;P;d'  /etc/mmdvmhost
+fi
 
 	sudo /usr/local/sbin/mmdvmhost.service start > /dev/null

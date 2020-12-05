@@ -1,0 +1,235 @@
+{Profile 0}
+/etc/mmdvmhost
+Name=Default
+RXOffset=-400
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=3020733
+ExtId=3023954
+Mode=DMR
+Address=tgif.network
+StartupDstId=31665
+Port=62031
+
+{Profile 1}
+/etc/mmdvmhost_t
+Mode=TGIF
+[General]
+Callsign=VE3RD
+Id=302073314
+[Info]
+RXFrequency=445100001
+TXFrequency=445100001
+[Modem]
+RXOffset=-401
+TXOffset=-401
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Network]
+Enable=1
+Address=tgif,network
+Port=62031
+Password=passw0rd
+///
+
+{Profile 2}
+/etc/mmdvmhost_t
+Mode=PRIME
+[General]
+Callsign=VE3RD
+Id=302073304
+[Info]
+RXFrequency=445100002
+TXFrequency=445100002
+[Modem]
+RXOffset=-402
+TXOffset=-402
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Network]
+Enable=1
+Address=prime.tgif.network
+Port=62031
+Password=PRIMEPW
+///
+
+{Profile 3}
+/etc/mmdvmhost_t
+Mode=MNET
+[General]
+Callsign=VE3RD
+Id=302073304
+[Info]
+RXFrequency=445100003
+TXFrequency=445100003
+[Modem]
+RXOffset=-403
+TXOffset=-403
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Network]
+Enable=1
+Address=mnet.hopto.org
+Port=62031
+Password=MNETPW
+///
+
+[Profile 4]
+#Mode DMRGateway
+/etc/mmdvmhost_t
+[General]
+Callsign=VE3RD
+Id=302073304
+[Info]
+RXFrequency=445100003
+TXFrequency=445100003
+[Modem]
+RXOffset=-403
+TXOffset=-403
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Network]
+Address=127.0.0.1
+RXFrequency=445100000
+TXFrequency=445100000
+RXOffset=-400
+TXOffset=-400
+/etc/dmrgateway
+[Info]
+RXFrequency=445100003
+TXFrequency=445100003
+[DMR Network 4]
+Enable=1
+Name=TGIF_Network
+Address=tgif.network
+Password=passw0rd
+Port=62031
+///
+
+{Profile 5}
+/etc/mmdvmhost_t
+Mode=MNET
+[General]
+Callsign=VE3RD
+Id=302073304
+[Info]
+RXFrequency=445100003
+TXFrequency=445100003
+[Modem]
+RXOffset=-403
+TXOffset=-403
+[DMR]
+Enable=1
+ColorCode=1
+Id=3020733
+[DMR Network]
+Enable=1
+Name=BM_Canada_3021
+Address=158.69.203.89
+Port=62031
+Password=BMPW
+///
+
+
+[Profile 6]
+/etc/mmdvmhost
+#Mode=DMR2YSF
+[System Fusion
+Enable=1]
+[System Fusion Network]
+Enable=1
+[Info]
+RXFrequency=445100000
+TXFrequency=445100000
+/etc/ysf2dmr
+[Enabled]
+Enabled=0
+[YSF Network]
+Callsign=VE3RD
+Name=DMR2YSF
+EnableWiresX=1
+[DMR Network]
+StartupDstId=30232
+Address=tgif.network
+Password=passw0rd
+/etc/ysfgateway
+[General]
+Callsign=VE3RD
+Id=3023954
+[Info]
+RXFrequency=445100000
+TXFrequency=445100000
+[Network]
+Startup=30232
+///
+
+[Profile 7]
+-/etc/mmdvmhost
+Name=DMR2NXDN
+RXOffset=-400
+TXOffset=-400
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=302073304
+/etc/dmr2nxdn
+/etc/nxdngateway
+
+[Profile 8]
+/etc/mmdvmhost
+Name=YSF2DMR
+RXOffset=-225
+TXOffset=-225
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VEZ3RD
+Id=302048224
+Mode=YSF2DMR
+Address=prime.tgif.network
+StartupDstId=31665
+Port=62031
+Password="passw0rd"
+/etc/ysf2dmr
+/etc/ysfgateway
+
+[Profile 9]
+/etc/ysf2nxdn
+Name=YSF2NXDN
+RXOffset=-225
+TXOffset=-225
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=302073334
+Mode=YSF2NXDN
+Address=tgif.network
+StartupDstId=9990
+Port=62031
+Password="password"
+
+[Profile 10]
+/etc/mmdvmhost
+Name=YSF2P25
+RXOffset=-225
+TXOffset=-225
+RXFrequency=445100000
+TXFrequency=445100000
+Callsign=VE3RD
+Id=302073344
+Mode=YSF2P25
+Address=tgif.network
+StartupDstId=10
+Port=62031
+Password="passw0rd"
+/etc/ysf2p25
+/etc/p25gateway

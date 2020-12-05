@@ -150,10 +150,6 @@ preprocess
 echo "Starting readprofile0" >> /home/pi-star/ActivateProfile.txt
 readprofile0
 
-if [ "$m7" == 'NXDN2DMR' ]; then 
-	exit
-fi
-
 echo "Starting setdefaults" >> /home/pi-star/ActivateProfile.txt
 setdefaults
 
@@ -238,41 +234,7 @@ test+=32
 
                 sudo /usr/local/sbin/dmr2nxdn.service restart > /dev/null
                 sudo /usr/local/sbin/nxdngateweay.service restart  > /dev/null
-test+=32
-	fi
-	if [ "$m7" = 'NXDN2DMR' ]; then
-#		setdmr
-		echo " Under Construction - Script Aborted"
-exit
-		echo "Starting NXDN2DMR Process" >> /home/pi-star/ActivateProfile.txt
-		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Id=\).*/\1'"$m13"'/m;P;d' /etc/nxdn2dmr
-		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/nxdn2dmr
-		 sudo sed -i '/^\[/h;G;/Enabled/s/\(Enabled=\).*/\11/m;P;d' /etc/nxdngateway
-		 sudo sed -i '/^\[/h;G;/NXDN/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
-		 sudo sed -i '/^\[/h;G;/NXDN  Network/s/\(^Enable=\).*/\11/m;P;d' /etc/mmdvmhost.tmp
-
-		echo "NXDN2DMR Enables Complete" >>  /home/pi-star/ActivateProfile.txt
-
-		sudo sed -i '/^\[/h;G;/DMR Network/s/\(StartupDstId=\).*/\1'"$m9"'/m;P;d' /etc/nxdn2dmr
-                sudo sed -i '/\[DMR Network\]/!b;n;cEnabled='"1"'' /etc/nxdn2dmr
-		 sudo sed -i '/^\[/h;G;/Log/s/\(FileLevel=\).*/\12/m;P;d' /etc/nxdn2dmr
-
-		echo "NXDN2DMR Mid Process" >> /home/pi-star/ActivateProfile.txt             
-		 #sudo /usr/local/sbin/nxdngateweay.service restart  > /dev/null
-		
-		 echo " NXDN Enables Set" >> /home/pi-star/ActivateProfile.txt
-
-		sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Address=\).*/\1'"$m8"'/m;P;d' /etc/nxdn2dmr
-		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Port=\).*/\162031/m;P;d' /etc/nxdn2dmr
-		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Local=\).*/\162035/m;P;d' /etc/nxdn2dmr
-		 sudo sed -i '/^\[/h;G;/DMR Network/s/\(^Password=\).*/\1passw0rd/m;P;d' /etc/nxdn2dmr
-
-		echo "NXDN2DMR Process Complete" >> /home/pi-star/ActivateProfile.txt
-		
-                sudo /usr/local/sbin/nxdn2dmr.service restart 
-                sudo /usr/local/sbin/nxdngateweay.service restart  
-		echo "nxdn2dmr services started Complete" >> /home/pi-star/ActivateProfile.txt
-
+		test+=32
 	fi
 
 	if [ "$m7" = 'YSF2DMR' ]; then

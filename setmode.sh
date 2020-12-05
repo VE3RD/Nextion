@@ -27,6 +27,8 @@ if [ -z "$1" ]; then
         if [ "$1" = 3 ]; then 
                sudo sed -i '/^\[/h;G;/System Fusion/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
                sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(Enable=\).*/\1'"$2"'/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(LocalAddress=\).*/\174.91.125.81/m;P;d'  /etc/mmdvmhost
+               sudo sed -i '/^\[/h;G;/System Fusion Network/s/\(GatewayAddress=\).*/\174.91.125.81/m;P;d'  /etc/mmdvmhost
         fi
 
         if [ "$1" = 4 ]; then
