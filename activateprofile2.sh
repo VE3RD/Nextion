@@ -11,7 +11,7 @@ fgate="/etc/dmrgateway"
 fysf="/etc/ysfgateway"
 fy2d="/etc/ysf2dmr"
 fd2y="/etc/dmr2ysf"
-nsp="/usr/local/etc/Nextion_Support/profiles2.txt"
+nsp="./profiles2.txt"
 pnum="$1"
 declare -i n=1
 section=""
@@ -20,6 +20,10 @@ fname=tba
 profile="Profile $1"
 
 List1=$(grep "$profile" -A 20 "$nsp")
+
+./clearallmodes.sh
+
+sudo mount -o remount,rw /
 
 function loopall
 {
@@ -35,16 +39,11 @@ do
 	ok=false
 	param=""	
 
-	var1=$(awk 'c&&!--c;/'"$profile"'/{c='$n'}' "$nsp")
-#	echo "$var1"
+	var1=$(awk 'c&&!--c;/'"$profile"'}/{c='$n'}' "$nsp")
+#	echo "Using Profile $var1"
 
 	if [ ! "$var1" ]; then
  	   	exit
-	fi
-
-	if [[ ${var1:0:3} = "///" ]]; then
-		stat="done"
-		var1=""
 	fi
 
 	if [[ ${var1:0:5} = "/etc/" ]]; then
@@ -54,9 +53,15 @@ do
 	fi
 
 	if [[ ${var1:0:1} = "[" ]]; then
-		var1=${var1:1:-1}
-		section="$var1"
+		section=${var1:1}
 		var1=""
+	fi
+	if [[ ${var1:0:1} = "#" ]]; then
+		var1=""
+	fi
+	if [[ ${var1:0:1} = "#Mode=DMRGateway2" ]]; then
+		sudo cp /etc/dmrgateway.bak /etc/dmrgateway
+		sudo reboot
 	fi
 
 	pval=""
@@ -65,7 +70,7 @@ do
 	param=$(echo "$var1" | cut -d'=' -f1)
 	pval=$(echo "$var1" | cut -d'=' -f2)
 
-## Get specialty Passwords	
+	## Get specialty Passwords	
 	if [[ "$pval" = "PRIMEPW" ]]; then
 		 pval=$(sudo sed -n '/'"prime"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g"  | cut -d'|' -f4)
 	fi
@@ -82,17 +87,32 @@ do
 		pval=""
 	fi
 
+	if [[ ${var1:0:2} = "\\" ]]; then
+		Fn=${var1:3}
+		echo $Fn
+		sudo bash -c "$Fn"
+#		sudo sh -c 'echo "$Fn"'
+		var1=""
+		param=""
+	fi
+
+
+
 
 	slen=${#param} 
 
 	if [ "$slen" != 0 ]; then
-		sudo sed -i '/^\[/h;G;/^'"$section"'/s/\(^ModeHang=\).*/\125/m;P;d'  /etc/mmdvmhost_t
-		echo "Setting $profile [$section] $param=$pval"
+		sudo sed -i '/^\[/h;G;/'"$section"'/s/\('"^$param"'=\).*/\1'"$pval"'/m;P;d'  "$fname"
+		echo "Setting $profile [$section $param=$pval $fname"
+		param=""
+		pval=""
 	fi
-n=n+1
-done
-
+	n=n+1
+	done
+	
+	#sudo mmdvmhost.service restart
 }
 
 loopall "$1" 
+
 
