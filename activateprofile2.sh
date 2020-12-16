@@ -6,12 +6,12 @@
 set -o errexit
 set -o pipefail
 sudo mount -o remount,rw /
-fmm="/etc/mmdvmhost_t"
+fmm="/etc/mmdvmhost"
 fgate="/etc/dmrgateway"
 fysf="/etc/ysfgateway"
 fy2d="/etc/ysf2dmr"
 fd2y="/etc/dmr2ysf"
-nsp="./profiles2.txt"
+nsp="/usr/local/etc/Nextion_Support/profiles2.txt"
 pnum="$1"
 declare -i n=1
 section=""
@@ -20,6 +20,7 @@ fname=tba
 profile="Profile $1"
 
 List1=$(grep "$profile" -A 20 "$nsp")
+
 
 ./clearallmodes.sh
 
@@ -59,7 +60,7 @@ do
 	if [[ ${var1:0:1} = "#" ]]; then
 		var1=""
 	fi
-	if [[ ${var1:0:1} = "#Mode=DMRGateway2" ]]; then
+	if [[ ${var1:0:17} = "#Mode=DMRGateway2" ]]; then
 		sudo cp /etc/dmrgateway.bak /etc/dmrgateway
 		sudo reboot
 	fi
@@ -87,13 +88,15 @@ do
 		pval=""
 	fi
 
-	if [[ ${var1:0:2} = "\\" ]]; then
-		Fn=${var1:3}
+	if [[ ${var1:0:1} = "!" ]]; then
+		Fn=${var1:2}
 		echo $Fn
 		sudo bash -c "$Fn"
-#		sudo sh -c 'echo "$Fn"'
+		sudo sh -c 'echo "$Fn"'
 		var1=""
 		param=""
+		section=""
+		fnamw=""
 	fi
 
 
@@ -112,7 +115,6 @@ do
 	
 	#sudo mmdvmhost.service restart
 }
-
 loopall "$1" 
 
 

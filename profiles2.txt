@@ -4,11 +4,12 @@
 ## 4 DMRGateway
 ## 5 DMR2YSF
 ## 6 DMR2NXDN
-## 7
+## 7 YSF
 ## 8 YSF2DMR
-## 9
-## 10
-##
+## 9 YSF2NXDN
+## 10 BM3021
+## 11 DMRPlus
+
 {Profile 0}
 /etc/mmdvmhost
 Name=Default
@@ -49,9 +50,9 @@ Id=302395443
 Enable=1
 Address=tgif.network
 Port=62031
-Id=3023954443
+Id=302395443
 Password=passw0rd
-\\mmdvmhost.service restart
+!!mmdvmhost.service restart
 
 {Profile 2}
 /etc/mmdvmhost
@@ -59,7 +60,7 @@ Password=passw0rd
 ##
 [General]
 Callsign=VE3RD
-Id=3023954
+Id=302395443
 ##
 [Info]
 RXFrequency=445100002
@@ -81,7 +82,7 @@ Port=62031
 Id-302395405
 ## Fetch Prime Password with code PRIMEPW
 Password=PRIMEPW
-\\mmdvmhost.service restart
+!!mmdvmhost.service restart
 
 
 {Profile 3}
@@ -111,7 +112,7 @@ Address=mnet.hopto.org
 Id=302395443
 Port=62031
 Password=MNETPW
-\\mmdvmhost.service restart
+!!mmdvmhost.service restart
 
 
 {Profile 4}
@@ -142,12 +143,10 @@ Port62031
 Password=Passw0rd
 ##=====================
 /etc/dmrgateway
-[Info]
-RXFrequency=445100003
-TXFrequency=445100003
 ##
-\\dmrgateway.service restart
-\\mmdvmhost.service restart
+!!`cp /etc/dmrgateway.bak /etc/dmrgateway`
+!!dmrgateway.service restart
+!!mmdvmhost.service restart
 
 {Profile 5}
 /etc/mmdvmhost
@@ -180,13 +179,17 @@ TXFrequency=445100000
 Startup=AmericaLink
 [Log]
 FileLevel=2
+[YSF Network]
+Enable=1
+[FCS Network]
+Enable=1
 ##==========================
 /etc/dmr2ysf
 [Enabled]
 Enabled=1
-\\dmr2ysf.service restart
-\\ysfgateway.service restart
-\\mmdvmhost.service restart
+!!dmr2ysf.service restart
+!!ysfgateway.service restart
+!!mmdvmhost.service restart
 
 {Profile 6}
 /etc/mmdvmhost
@@ -242,23 +245,38 @@ Startup=AmericaLink
 RXFrequency=445100000
 TXFrequency=445100000
 ##
-\\dmrgateway.service restart
-\\mmdvmhost.service restart
-\\ysfgateway.service restart
+!!dmrgateway.service restart
+!!mmdvmhost.service restart
+!!ysfgateway.service restart
 
 {Profile 7}
 ##==============
 /etc/mmdvmhost
-Name=DMR2NXDN
-RXOffset=-400
-TXOffset=-400
-RXFrequency=445100000
-TXFrequency=445100000
+#Name=YSF
+[General]
 Callsign=VE3RD
 Id=302073304
-/etc/dmr2nxdn
-/etc/nxdngateway
-\\
+[Info]
+RXFrequency=445100000
+TXFrequency=445100000
+RXOffset=-400
+TXOffset=-400
+[Modem]
+RXOffset=-400
+TXOffset=-400
+[System Fusion]
+Enable=1
+[System Fusion Network]
+Enable=1
+/etc/ysfgateway
+[YSF Network]
+Enable=1
+[Network]
+Startup=AmericaLink
+[FCS Network]
+Enable=1
+!!ysfgateway.service restart
+!!mmdvmhost.service restart
 
 {Profile 8}
 /etc/mmdvmhost
@@ -323,9 +341,9 @@ Startup=YSF2DMR
 Enable=1
 [FCS Network]
 Enable=1
-\\ysf2dmr.service restart
-\\ysfgateway.service restart
-\\mmdvmhost.service restart
+!!ysf2dmr.service restart
+!!ysfgateway.service restart
+!!mmdvmhost.service restart
 
 {Profile 9}
 /etc/ysf2nxdn
@@ -341,26 +359,63 @@ Address=tgif.network
 StartupDstId=9990
 Port=62031
 Password="password"
-\\
+!!
 
 {Profile 10}
 /etc/mmdvmhost
-Name=YSF2P25
-RXOffset=-225
-TXOffset=-225
+#Mode=BM3021
+##
+[General]
+Callsign=VE3RD 
+Id=3023954 
+##
+[Info]
 RXFrequency=445100000
 TXFrequency=445100000
-Callsign=VE3RD
-Id=302073344
-Mode=YSF2P25
-Address=tgif.network
-StartupDstId=10
+##
+[Modem]
+RXOffset=-401 
+TXOffset=-401 
+##
+[DMR]
+Enable=1
+ColorCode=1
+Id=302395443
+##
+[DMR Network]
+Enable=1
+Address=209.226.17.178
 Port=62031
-Password="passw0rd"
-/etc/ysf2p25
-/etc/p25gateway
-\\
+Id=302073311
+Password=BMPW
+!!mmdvmhost.service restart
 
 {Profile 11}
-Mode=Dmrgateway2
-\\
+/etc/mmdvmhost
+#Mode=DMRPlus
+##
+[General]
+Callsign=VE3RD 
+Id=3023954 
+##
+[Info]
+RXFrequency=445100000
+TXFrequency=445100000
+##
+[Modem]
+RXOffset=-401 
+TXOffset=-401 
+##
+[DMR]
+Enable=1
+ColorCode=1
+Id=302395443
+##
+[DMR Network]
+Enable=1
+Address=209.226.17.178
+Port=55555
+Id=302395443
+Password="PASSWORD"
+#Options="StartRef=4000;RelinkTime=15;UserLink=1;TS1_1=9;TS2_1=505;"
+!!mmdvmhost.service restart
