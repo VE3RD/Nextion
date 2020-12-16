@@ -143,7 +143,8 @@ Password=Passw0rd
 /etc/dmrgateway
 ##
 !!`cp /etc/dmrgateway.bak /etc/dmrgateway`
-!!`dmrgateway.service restart ; mmdvmhost.service restart`
+!!dmrgateway.service restart
+!!mmdvmhost.service restart
 
 {Profile 5}
 /etc/mmdvmhost
@@ -251,18 +252,38 @@ Enable=1
 {Profile 8}
 #Mode=YSF2DMR
 /etc/mmdvmhost
-##
 [General]
 Callsign=VE3RD
 Id=3023954
 ##
-[Modem]
-RXOffset=-400
-TXOffset=-400
-##
 [Info]
 RXFrequency=445100003
 TXFrequency=445100003
+##
+[Modem]
+RXOffset=-403
+TXOffset=-403
+##
+[DMR]
+Enable=1
+ColorCode=1
+Id=302395465
+##
+[DMR Network]
+Address=127.0.0.2
+Port=62033
+Password="none"
+Enable=1
+Id=302395423
+##
+[YSF Network]
+Enable=1
+/etc/ysfgateway
+[Network]
+Startup=AmericaLink
+##=================
+!!ysfgateway.service restart
+!!mmdvmhost.service restart
 ##
 [System Fusion Network]
 Enable=1
@@ -332,16 +353,23 @@ TXFrequency=445100003
 RXOffset=-403
 TXOffset=-403
 ##
-[NXDN]
+[DMR]
 Enable=1
 ColorCode=1
 Id=302395465
 ##
-[NSDN Network]
+[DMR Network]
+Address=127.0.0.2
+Port=62033
+Password="none"
 Enable=1
-/etc/nxdngateway
+Id=302395423
+##
+[YSF Network]
+Enable=1
+/etc/ysfgateway
 [Network]
-Startup=65000
+Startup=AmericaLink
 ##=================
 !!ysfgateway.service restart
 !!mmdvmhost.service restart
