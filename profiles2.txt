@@ -7,8 +7,8 @@
 ## 7 YSF
 ## 8 YSF2DMR
 ## 9 YSF2NXDN
-## 10 BM3021
-## 11 DMRPlus
+## 10 DMRPlus
+## 11 BM3201
 
 {Profile 0}
 /etc/mmdvmhost
@@ -346,38 +346,7 @@ Startup=65000
 !!ysfgateway.service restart
 !!mmdvmhost.service restart
 
-
-
 {Profile 10}
-/etc/mmdvmhost
-#Mode=BM3021
-##
-[General]
-Callsign=VE3RD 
-Id=3023954 
-##
-[Info]
-RXFrequency=445100000
-TXFrequency=445100000
-##
-[Modem]
-RXOffset=-401 
-TXOffset=-401 
-##
-[DMR]
-Enable=1
-ColorCode=1
-Id=302395443
-##
-[DMR Network]
-Enable=1
-Address=209.226.17.178
-Port=62031
-Id=302073311
-Password=BMPW
-!!mmdvmhost.service restart
-
-{Profile 11}
 /etc/mmdvmhost
 #Mode=DMRPlus
 ##
@@ -406,3 +375,33 @@ Id=302395443
 Password="PASSWORD"
 #Options="StartRef=4000;RelinkTime=15;UserLink=1;TS1_1=9;TS2_1=505;"
 !!mmdvmhost.service restart
+
+{Profile 11}
+/etc/mmdvmhost
+#Mode=BM3021
+##
+[General]
+Callsign=VE3RD 
+Id=3023954 
+##
+[Info]
+RXFrequency=445100000
+TXFrequency=445100000
+##
+[Modem]
+RXOffset=-401 
+TXOffset=-401 
+##
+[DMR]
+Enable=1
+ColorCode=1
+Id=302395443
+##
+[DMR Network]
+Enable=1
+Address=209.226.17.178
+Port=62031
+Id=302073311
+Password=BMPW
+!!mmdvmhost.service restart
+
