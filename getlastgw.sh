@@ -7,7 +7,6 @@
 #################################################
 set -o errexit
 set -o pipefail
-sudo mount -o remount,rw /
 
 f1=$(ls -tr /var/log/pi-star/DMRG*)
 #echo "File: $f1"

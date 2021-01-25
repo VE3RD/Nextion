@@ -204,3 +204,4 @@ sudo /usr/local/sbin/mmdvmhost.service restart
 if [ "$1" = 31 ]; then 
 	sudo /usr/local/sbin/dmrgateway.service restart
 fi
+sudo mount -o remount,ro /

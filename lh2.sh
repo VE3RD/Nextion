@@ -203,3 +203,4 @@ if [ "$2" == "4" ]; then
 
 fi
 
+sudo mount -o remount,ro /

@@ -39,3 +39,5 @@ if [ "$1" = 'tgif.network' ]; then
 fi
 
 	sudo /usr/local/sbin/mmdvmhost.service start > /dev/null
+sudo mount -o remount,ro /
+

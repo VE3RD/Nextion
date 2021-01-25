@@ -53,3 +53,4 @@ done < $INPUT
 IFS=$OLDIFS
 echo ""
 echo "Processed $cnt Records"
+sudo mount -o remount,ro /

@@ -5,6 +5,5 @@
 ############################################################
 set -o errexit
 set -o pipefail
-sudo mount -o remount,rw /
 
 wget https://database.radioid.net/static/user.csv  --output-document=/usr/local/etc/stripped.csv

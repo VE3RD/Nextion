@@ -75,3 +75,4 @@ else
 echo "Supplicant file was not created!"
 fi
 fi
+sudo mount -o remount,ro /

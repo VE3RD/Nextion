@@ -66,3 +66,4 @@ if [ "$1" = "1" ]; then
 StartServices
 fi
 echo "Script Terminated without Error"
+sudo mount -o remount,ro /

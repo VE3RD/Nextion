@@ -26,7 +26,7 @@ echo "$dt $1 $2 $did" >>  /usr/local/etc/Nextion_Support/lastheardlogtmp.txt
 tac /usr/local/etc/Nextion_Support/lastheardlogtmp.txt > /usr/local/etc/Nextion_Support/lastheardlog.txt
 rm /usr/local/etc/Nextion_Support/lastheardlogtmp.txt
 
-
+sudo mount -o remount,ro /
 
 
 

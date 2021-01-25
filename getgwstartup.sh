@@ -16,7 +16,7 @@ set -o pipefail
  		 m1=$(sudo sed -n '/^[ \t]*\[General\]/,/\[/s/^[ \t]*StartNet[^#; \t]*=[ \t]*//p' /etc/dmrgateway)
 if [ -z "$m1" ]; then
 echo "Missing StartNet"
-sudo mount -o remount,rw /
+#sudo mount -o remount,rw /
 sed -i '/^\[General\]/,/^\[/ { x; /^$/ !{ x; H }; /^$/ { x; h; }; d; }; x; /^\[General\]/ { s/\(\n\+[^\n]*\)$/\nStartNet=4\1/; p; x; p; x; d }; x' /etc/dmrgateway
 fi 
  		 m1=$(sudo sed -n '/^[ \t]*\[General\]/,/\[/s/^[ \t]*StartNet[^#; \t]*=[ \t]*//p' /etc/dmrgateway)
@@ -33,4 +33,5 @@ fi
               echo "$mt"
 
 #fi;
+sudo mount -o remount,ro /
 

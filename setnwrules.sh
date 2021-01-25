@@ -22,3 +22,4 @@ if [ -z "$3" ]; then
            sudo sed -i '/^\[/h;G;/DMR Network '"$1"'/s/\('"$2"'=\).*/\1'"$3"'/m;P;d' /etc/dmrgateway
 
 fi;
+sudo mount -o remount,ro /

@@ -11,7 +11,6 @@ set -o pipefail
 ver="20200512"
 dirn=/usr/local/etc/Nextion_Support/profiles.txt
 declare -i pnum
-sudo mount -o remount,rw /
 
 if [ -z "$1" ]; then
         exit
@@ -27,11 +26,6 @@ pnum=$(echo $1 | sed 's/^0*//')
 		m7=$(sed -nr "/^\[Profile $pnum\]/ { :l /^StartupDstId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 		m8=$(sed -nr "/^\[Profile $pnum\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
 		m9=$(sed -nr "/^\[Profile $pnum\]/ { :l /^Mode[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $dirn)
-#	mt=$(sudo sed -n '/^[^#]*^$m8/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g")
-#	mt=$(sudo sed -n "/\t$m8/p" /usr/local/etc/DMR_Hosts.txt |sed -E "s/[[:space:]]+/|/g" | head -1)
-#	m8=$( echo "$mt" | cut -d'|' -f1)
-#	sudo sed -i '/^\[/h;G;/Profile $pnum/s/\(Address=\).*/\1'"$m8"'/m;P;d'  /etc/mmdvmhost
-#fi
 
                	mt="$m1|$m2|$m3|$m4|$m5|$m6|$m7|$m8|$m9"
 		echo "$mt"
