@@ -190,16 +190,16 @@ if [ "$calls" == "EA7KDO" ]; then
 	
 fi
 if [ "$calls" == "VE3RD" ]; then
-	sudo chmod +x /home/pi-star/Nextion_Temp/*.sh
-	sudo rsync -avqru /home/pi-star/Nextion_Temp/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
-	if [ -f /home/pi-star/Nextion_Temp/profiles.txt ]; then
+	sudo chmod +x /home/pi-star/Nextion/*.sh
+	sudo rsync -avqru /home/pi-star/Nextion/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
+	if [ -f /home/pi-star/Nextion/profiles.txt ]; then
 		if [ ! -f /usr/local/etc/Nextion_Support/profiles.txt ]; then
         		if [ "$fb" ]; then
                 		echo "Replacing Missing Profiles.txt"
         		fi
-        		sudo cp  /home/pi-star/Nextion_Temp/profiles.txt /usr/local/etc/Nextion_Support/
+        		sudo cp  /home/pi-star/Nextion/profiles.txt /usr/local/etc/Nextion_Support/
 		fi
-	sudo cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
+	sudo cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
                 if [ "$fb" ]; then
                         echo "New $model$tft Copied to /usr/local/etc/"
                 fi
