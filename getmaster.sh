@@ -38,7 +38,10 @@ if [ "$mtf" = 'DMRGateway' ]; then
         	nt=$(echo "$tt" | cut -d' ' -f5)
 #        	echo "$nt"
 	fi
+out="DMRG Net $nt"
+else
 
+out="$mtf: : "
 fi
-echo "$GW:$mtf:$nt"
-
+#echo "$GW:$mtf:$nt"
+echo "$out"
