@@ -8,10 +8,33 @@
 set -o errexit
 set -o pipefail
 
-f1=$(ls -tr /var/log/pi-star/DMRG*)
-#echo "File: $f1"
-tt=$(grep Name= $f1 | tail -n1)
-#echo "1:$tt"
+#f1=$(ls -tr /var/log/pi-star/DMRG*)
+f1=$(ls  /var/log/pi-star/DMRGateway* | tail -n1)
+
+#echo "$f1"
+NetType=$(sudo tail -n1 "$f1" | cut -d " " -f 4)
+#echo "$NetType"
+NetNum=$(sudo tail -n1 "$f1" | cut -d " " -f 6)
+#echo "$NetNum"
+
+#echo "$NetType: $NetNum"
+if [ "$NetType" = "RFRX" ]; then
+   echo "GW RF Net: $NetNum"
+else
+   echo "GW RX Net: $NetNum"
+fi
+
+
+exit
+
+tt1=$(sudo grep -i 'Network' "$f1" | tail -n5 | cut -d " " -f 7)
+echo "$tt1"
+
+if [ ! "$tt2" ]; then
+ 	tt2=$(sudo grep -i 'RF' "$f1" | tail -n5 | cut -d " " -f9)
+ 	echo "$tt2"
+fi
+exit
 tt0=$(echo "$tt" | cut -d' ' -f4)
 #echo "2:$tt0"
 
