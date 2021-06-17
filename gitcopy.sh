@@ -118,7 +118,7 @@ if [ "$call" = "VE3RD" ]; then
 fi
 
 sudo mount -o remount,rw /
-echo "Screen $model$tft for $calls" > /home/pi-star/GitCopyLog.txt
+echo "Screen $scn for $calls" > /home/pi-star/GitCopyLog.txt
 #Start Duration Timer
 start=$(date +%s.%N)
 
@@ -129,7 +129,9 @@ if [ ! "$fb" ]; then
 fi
 
 model="$scn"
-tft='.tft' gz='.gz'
+tft='.tft' 
+gz='.gz'
+
 #Put Pi-Star file system in RW mode
 
 sleep 1s
@@ -178,14 +180,14 @@ if [ "$fb" ]; then
     echo "Remove Existing $model$tft"
 fi
 
-if [ -f /usr/local/etc/$model$tft ]; then
-	sudo rm /usr/local/etc/$model$tft
+if [ -f /usr/local/etc/"$model$tft" ]; then
+	sudo rm /usr/local/etc/"$model$tft"
 fi
 
 if [ "$calls" == "EA7KDO" ]; then
 	sudo chmod +x /home/pi-star/Nextion_Temp/*.sh
 	sudo rsync -avqru /home/pi-star/Nextion_Temp/* /usr/local/etc/Nextion_Support/ --exclude=NX* --exclude=profiles.txt
-	sudo cp /home/pi-star/Nextion_Temp/$model$tft /usr/local/etc/
+	sudo cp /home/pi-star/Nextion_Temp/"$model$tft" /usr/local/etc/
                 if [ "$fb" ]; then
                         echo "New $model$tft Copied to /usr/local/etc/"
                 fi
@@ -202,7 +204,7 @@ if [ "$calls" == "VE3RD" ]; then
         		sudo cp  /home/pi-star/Nextion/profiles.txt /usr/local/etc/Nextion_Support/
 		fi
 		
-		sudo cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
+		sudo cp /home/pi-star/Nextion/"$model$tft" /usr/local/etc/
                 	
 		if [ "$fb" ]; then
                         echo "New $model$tft Copied to /usr/local/etc/"
@@ -212,7 +214,7 @@ if [ "$calls" == "VE3RD" ]; then
 	
 fi
 
- FILE=/usr/local/etc/$model$tft
+ FILE=/usr/local/etc/"$model$tft"
  if [ ! -f "$FILE" ]; then
         # Copy failed
       echo "No TFT File Available to Flash - Try Again"
