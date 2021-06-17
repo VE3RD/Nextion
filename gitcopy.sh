@@ -117,6 +117,8 @@ if [ "$call" = "VE3RD" ]; then
 	fi
 fi
 
+sudo mount -o remount,rw /
+echo "Screen $model$tft for $calls" > /home/pi-star/GitCopyLog.txt
 #Start Duration Timer
 start=$(date +%s.%N)
 
@@ -129,7 +131,7 @@ fi
 model="$scn"
 tft='.tft' gz='.gz'
 #Put Pi-Star file system in RW mode
-sudo mount -o remount,rw /
+
 sleep 1s
 
 #Stop the cron service
@@ -199,8 +201,10 @@ if [ "$calls" == "VE3RD" ]; then
         		fi
         		sudo cp  /home/pi-star/Nextion/profiles.txt /usr/local/etc/Nextion_Support/
 		fi
-	sudo cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
-                if [ "$fb" ]; then
+		
+		sudo cp /home/pi-star/Nextion/$model$tft /usr/local/etc/
+                	
+		if [ "$fb" ]; then
                         echo "New $model$tft Copied to /usr/local/etc/"
                 fi
 
