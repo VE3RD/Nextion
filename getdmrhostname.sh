@@ -9,31 +9,23 @@
 set -o errexit
 set -o pipefail
 # Use passed DMR Master name to lookup IP address
-declare LEN number
 
-fromfile=/usr/local/etc/Nextion_Support/profiles.txt
-       
+###################### New Script
 Addr=$(sed -nr "/^\[DMR Network\]/ { :l /^Address[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/mmdvmhost)
-#echo "Addr=$Addr"
+f1=$(ls  /var/log/pi-star/DMRGateway* | tail -n1)
 
-#Line="HB_US_TGIF_Network              0000    tgif.network                    passw0rd        62031"
-#sed "/$Line/d" /usr/local/etc/DMR_Hosts.txt
- 
-mt=$(sudo sed -n '/^[^#]*\t'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | head -1)
-#echo "$mt"
 
-mt1=$( echo "$mt" | cut -d'|' -f1)
-mt2=$( echo "$mt" | cut -d'|' -f2)
-mt3=$( echo "$mt" | cut -d'|' -f3)
-mt4=$( echo "$mt" | cut -d'|' -f4)
-mt5=$( echo "$mt" | cut -d'|' -f5)
+        if [ $Addr = "127.0.0.1" ]; then
+                #fn=$(ls /var/log/pi-star/DMRGateway* | tail -n1 )
+                NetType=$(sudo tail -n1 "$f1" | cut -d " " -f 4)
+      #          NetNum=$(sudo tail -n1 /var/log/pi-star/DMRG* | cut -d " " -f 6)
+                NetNum=$(sudo tail -n1 "$f1" | cut -d " " -f 6)
+                NName=$(sed -nr "/^\[DMR Network "${NetNum##*( )}"\]/ { :l /^Name[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/dmrgateway)
+                 echo "GW Net ""${NetNum##*( )}"" $NName"
 
-#mt2=$(sed -nr "/^\[Profile 0\]/ { :l /^ExtId[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $fromfile)
+        else
+                ms=$(sudo sed -n '/^[^#]*'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | cut -d'|' -f1)
+                echo "MS: $ms"
+        fi
 
-if [ -z "$mt" ]; then
-	echo "Nothing|Found|Try|Another|Search"
-else
-	echo "$mt1"
-#	echo "$mt"
-fi
 
