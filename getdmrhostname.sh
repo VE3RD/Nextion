@@ -21,7 +21,7 @@ f1=$(ls  /var/log/pi-star/DMRGateway* | tail -n1)
       #          NetNum=$(sudo tail -n1 /var/log/pi-star/DMRG* | cut -d " " -f 6)
                 NetNum=$(sudo tail -n1 "$f1" | cut -d " " -f 6)
                 NName=$(sed -nr "/^\[DMR Network "${NetNum##*( )}"\]/ { :l /^Name[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" /etc/dmrgateway)
-                 echo "GW Net ""${NetNum##*( )}"" $NName"
+                 echo "GW: N:""${NetNum##*( )}"" $NName"
 
         else
                 ms=$(sudo sed -n '/^[^#]*'"$Addr"'/p' /usr/local/etc/DMR_Hosts.txt | sed -E "s/[[:space:]]+/|/g" | cut -d'|' -f1)
